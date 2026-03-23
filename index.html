@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -1 42 50' fill='none'%3E%3Cpath d='M22 4A17 17 0 0122 44' stroke='%230d9488' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='17.5' y='0' width='3.5' height='48' rx='1.75' fill='%230f172a'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48' fill='none'%3E%3Cpath d='M26 4A17 17 0 0126 44' stroke='%230d9488' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='21' y='0' width='3.5' height='48' rx='1.75' fill='%230f172a'/%3E%3C/svg%3E">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -42,7 +42,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Layout ── */
         .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
 
         /* ── Header ── */
@@ -95,8 +94,7 @@
         }
         .hero-contact:hover { background: #1e293b; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,23,42,0.2); }
 
-        /* ── Divider line ── */
-        .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+        hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
         /* ── Pillars ── */
         .pillars { padding: 72px 0; }
@@ -114,11 +112,10 @@
         }
         .pillar:hover { border-color: var(--accent-border); box-shadow: 0 8px 32px rgba(13,148,136,0.08); transform: translateY(-3px); }
         .pillar-num {
-            font-size: 48px; font-weight: 800; color: var(--accent-bg);
+            font-size: 48px; font-weight: 800; color: rgba(13,148,136,0.06);
             position: absolute; top: 16px; right: 20px; line-height: 1;
-            font-variant-numeric: tabular-nums;
         }
-        .pillar h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.2px; }
+        .pillar h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
         .pillar p { font-size: 14px; color: var(--text-3); line-height: 1.65; }
 
         /* ── Vision ── */
@@ -146,7 +143,7 @@
             display: flex; align-items: center; justify-content: center;
             position: relative; min-height: 380px;
         }
-        .vision-phi { opacity: 0.08; }
+        .vision-phi { opacity: 0.1; }
         .vision-status {
             position: absolute; bottom: 32px;
             font-size: 13px; font-weight: 600; color: var(--accent);
@@ -159,23 +156,7 @@
             width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* ── Company ── */
-        .company { padding: 0 0 72px; }
-        .company-label {
-            font-size: 12px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 20px;
-        }
-        .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-        .company-card {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: 12px; padding: 20px; transition: border-color .2s;
-        }
-        .company-card:hover { border-color: var(--accent-border); }
-        .company-card .c-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 6px; }
-        .company-card .c-value { font-size: 15px; font-weight: 600; }
-        .company-card .c-sub { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* ── Footer ── */
         footer { border-top: 1px solid var(--border); background: var(--white); }
@@ -188,6 +169,37 @@
         .footer-right a { font-size: 13px; color: var(--text-3); text-decoration: none; transition: color .2s; }
         .footer-right a:hover { color: var(--accent); }
 
+        /* ── Legal Modal ── */
+        .legal-overlay {
+            display: none; position: fixed; inset: 0; z-index: 200;
+            background: rgba(15,23,42,0.4); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center;
+            animation: fadeIn .2s ease-out;
+        }
+        .legal-overlay.active { display: flex; }
+        .legal-modal {
+            background: var(--white); border-radius: 16px;
+            padding: 36px; max-width: 520px; width: 90%;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+            position: relative;
+            animation: slideUp .3s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .legal-modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+        .legal-close {
+            position: absolute; top: 16px; right: 16px;
+            background: none; border: none; cursor: pointer;
+            color: var(--text-3); padding: 4px; border-radius: 6px;
+            transition: background .2s;
+        }
+        .legal-close:hover { background: var(--bg); }
+        .legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .legal-item {}
+        .legal-item .l-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 4px; }
+        .legal-item .l-value { font-size: 14px; font-weight: 600; color: var(--text); }
+        .legal-item .l-sub { font-size: 13px; color: var(--text-3); }
+
         /* ── Responsive ── */
         @media (max-width: 768px) {
             .wrap { padding: 0 20px; }
@@ -196,11 +208,10 @@
             .vision-block { grid-template-columns: 1fr; }
             .vision-art { min-height: 200px; }
             .vision-content { padding: 28px; }
-            .company-grid { grid-template-columns: 1fr 1fr; }
             .pillars, .vision { padding: 48px 0; }
+            .legal-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
-            .company-grid { grid-template-columns: 1fr; }
             .footer-inner { flex-direction: column; text-align: center; }
         }
 
@@ -209,7 +220,6 @@
         .hero { animation: up .7s ease-out both; }
         .pillars { animation: up .7s .1s ease-out both; }
         .vision { animation: up .7s .2s ease-out both; }
-        .company { animation: up .7s .3s ease-out both; }
     </style>
 </head>
 <body>
@@ -218,18 +228,21 @@
     <div class="wrap">
         <div class="header-inner">
             <a href="/" class="logo">
-                <svg width="28" height="34" viewBox="-2 -1 42 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="4" y1="13" x2="7" y2="10.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="2" y1="18" x2="5" y2="16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="1" y1="23" x2="4" y2="22.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="2" y1="28" x2="5" y2="29.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="4" y1="33" x2="7" y2="35" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="7.5" y1="37" x2="10" y2="38.5" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="7" y1="7.5" x2="10" y2="6" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="11" y1="4" x2="14" y2="3.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
-                    <line x1="12" y1="40" x2="15" y2="40.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M 22 4 A 17 17 0 0 1 22 44" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <rect x="17.5" y="0" width="3.5" height="48" rx="1.75" fill="#0f172a"/>
+                <svg width="34" height="40" viewBox="-4 -3 48 54" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+                    <!-- Left: fragmented dashes (hyle — matter) -->
+                    <line x1="4" y1="13" x2="8" y2="10" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="2" y1="18" x2="6" y2="16" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="1" y1="24" x2="5" y2="23" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="2" y1="30" x2="6" y2="31.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="4" y1="35" x2="8" y2="37.5" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="8" y1="39.5" x2="12" y2="41" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="8" y1="7" x2="12" y2="5.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="13" y1="3.5" x2="16.5" y2="3" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="13" y1="44" x2="16.5" y2="44.5" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- Right: solid arc (morphe — form) -->
+                    <path d="M 24 3 A 18 18 0 0 1 24 45" stroke="#0d9488" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <!-- Center: vertical bar -->
+                    <rect x="19" y="-1" width="4" height="50" rx="2" fill="#0f172a"/>
                 </svg>
                 <span>Hyle Labs</span>
             </a>
@@ -267,7 +280,7 @@
             <div class="pillar">
                 <div class="pillar-num">01</div>
                 <h3>Capturer</h3>
-                <p>Nous captons les flux d'information non structurés — réunions, appels, entretiens — qui représentent jusqu'à 80% de la connaissance perdue en entreprise.</p>
+                <p>Nous captons les flux d'information non structurés — réunions, appels, entretiens — qui représentent jusqu'à 80 % de la connaissance perdue en entreprise.</p>
             </div>
             <div class="pillar">
                 <div class="pillar-num">02</div>
@@ -285,7 +298,7 @@
 
 <hr class="divider">
 
-<!-- Vision / Produit -->
+<!-- Vision -->
 <section class="vision">
     <div class="wrap">
         <div class="vision-block">
@@ -293,7 +306,7 @@
                 <div class="label">Notre vision</div>
                 <h2>La mémoire opérationnelle de l'entreprise</h2>
                 <p>
-                    Chaque jour, des heures d'échanges riches en décisions, idées et engagements 
+                    Chaque jour, des heures d'échanges riches en décisions, idées et engagements
                     disparaissent sans laisser de trace exploitable.
                 </p>
                 <p>
@@ -309,49 +322,20 @@
                 </div>
             </div>
             <div class="vision-art">
-                <svg class="vision-phi" width="180" height="220" viewBox="-2 -1 42 50" fill="none">
-                    <line x1="4" y1="13" x2="7" y2="10.5" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="2" y1="18" x2="5" y2="16" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="1" y1="23" x2="4" y2="22.5" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="2" y1="28" x2="5" y2="29.5" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="4" y1="33" x2="7" y2="35" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="7.5" y1="37" x2="10" y2="38.5" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="7" y1="7.5" x2="10" y2="6" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="11" y1="4" x2="14" y2="3.5" stroke="#0d9488" stroke-width="1.6" stroke-linecap="round"/>
-                    <line x1="12" y1="40" x2="15" y2="40.5" stroke="#0d9488" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M 22 4 A 17 17 0 0 1 22 44" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <rect x="17.5" y="0" width="3.5" height="48" rx="1.75" fill="#0d9488"/>
+                <svg class="vision-phi" width="200" height="240" viewBox="-4 -3 48 54" fill="none" style="overflow:visible">
+                    <line x1="4" y1="13" x2="8" y2="10" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="2" y1="18" x2="6" y2="16" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="1" y1="24" x2="5" y2="23" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="2" y1="30" x2="6" y2="31.5" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="4" y1="35" x2="8" y2="37.5" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="8" y1="39.5" x2="12" y2="41" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="8" y1="7" x2="12" y2="5.5" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="13" y1="3.5" x2="16.5" y2="3" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="13" y1="44" x2="16.5" y2="44.5" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M 24 3 A 18 18 0 0 1 24 45" stroke="#0d9488" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <rect x="19" y="-1" width="4" height="50" rx="2" fill="#0d9488"/>
                 </svg>
                 <div class="vision-status"><span class="pulse"></span> Produit en développement</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Company -->
-<section class="company">
-    <div class="wrap">
-        <div class="company-label">Informations légales</div>
-        <div class="company-grid">
-            <div class="company-card">
-                <div class="c-label">Raison sociale</div>
-                <div class="c-value">Hyle Labs</div>
-                <div class="c-sub">SASU au capital de 1 000 €</div>
-            </div>
-            <div class="company-card">
-                <div class="c-label">Siège social</div>
-                <div class="c-value">254 Rue Vendome</div>
-                <div class="c-sub">69003 Lyon, France</div>
-            </div>
-            <div class="company-card">
-                <div class="c-label">SIREN</div>
-                <div class="c-value">101 857 431</div>
-                <div class="c-sub">RCS Lyon</div>
-            </div>
-            <div class="company-card">
-                <div class="c-label">N° TVA Intracom.</div>
-                <div class="c-value">FR92101857431</div>
-                <div class="c-sub">Assujetti</div>
             </div>
         </div>
     </div>
@@ -360,13 +344,55 @@
 <footer>
     <div class="wrap">
         <div class="footer-inner">
-            <div class="footer-left">© 2026 Hyle Labs — SASU — Lyon, France</div>
+            <div class="footer-left">© 2026 Hyle Labs — Lyon, France</div>
             <div class="footer-right">
-                <a href="mailto:contact@hyle-labs.net">contact@hyle-labs.net</a>
+                <a href="mailto:contact@hyle-labs.net">Contact</a>
+                <a href="#" onclick="document.getElementById('legalModal').classList.add('active');return false;">Mentions légales</a>
             </div>
         </div>
     </div>
 </footer>
+
+<!-- Legal info modal -->
+<div class="legal-overlay" id="legalModal" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="legal-modal">
+        <button class="legal-close" onclick="document.getElementById('legalModal').classList.remove('active')" aria-label="Fermer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h3>Mentions légales</h3>
+        <div class="legal-grid">
+            <div class="legal-item">
+                <div class="l-label">Raison sociale</div>
+                <div class="l-value">Hyle Labs</div>
+                <div class="l-sub">SASU au capital de 1 000 €</div>
+            </div>
+            <div class="legal-item">
+                <div class="l-label">Siège social</div>
+                <div class="l-value">254 Rue Vendome</div>
+                <div class="l-sub">69003 Lyon, France</div>
+            </div>
+            <div class="legal-item">
+                <div class="l-label">SIREN</div>
+                <div class="l-value">101 857 431</div>
+                <div class="l-sub">RCS Lyon</div>
+            </div>
+            <div class="legal-item">
+                <div class="l-label">N° TVA Intracom.</div>
+                <div class="l-value">FR92101857431</div>
+            </div>
+            <div class="legal-item">
+                <div class="l-label">Directeur de publication</div>
+                <div class="l-value">Adryan Perez</div>
+                <div class="l-sub">Président</div>
+            </div>
+            <div class="legal-item">
+                <div class="l-label">Hébergement</div>
+                <div class="l-value">GitHub Pages</div>
+                <div class="l-sub">GitHub, Inc. — San Francisco, CA</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
