@@ -18,14 +18,14 @@
         }
 
         :root {
-            --color-bg: #0a0e17;
-            --color-surface: #111827;
-            --color-surface-2: #1a2332;
-            --color-accent: #4ecdc4;
-            --color-accent-dim: rgba(78, 205, 196, 0.15);
-            --color-text: #e8edf3;
-            --color-text-muted: #8b95a5;
-            --color-border: rgba(255, 255, 255, 0.06);
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-surface-2: #f1f5f9;
+            --color-accent: #0d9488;
+            --color-accent-dim: rgba(13, 148, 136, 0.08);
+            --color-text: #0f172a;
+            --color-text-muted: #64748b;
+            --color-border: rgba(0, 0, 0, 0.08);
             --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
@@ -44,7 +44,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle animated gradient background */
+        /* Subtle background */
         body::before {
             content: '';
             position: fixed;
@@ -53,8 +53,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(78, 205, 196, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(78, 205, 196, 0.03) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(13, 148, 136, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(13, 148, 136, 0.02) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -81,7 +81,7 @@
         .logo-mark {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, var(--color-accent), #38b2ac);
+            background: linear-gradient(135deg, var(--color-accent), #0f766e);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -116,7 +116,7 @@
         }
 
         h1 .accent {
-            background: linear-gradient(135deg, var(--color-accent), #38b2ac);
+            background: linear-gradient(135deg, var(--color-accent), #0f766e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -147,7 +147,7 @@
         }
 
         .info-card:hover {
-            border-color: rgba(78, 205, 196, 0.2);
+            border-color: rgba(13, 148, 136, 0.3);
             transform: translateY(-1px);
         }
 
