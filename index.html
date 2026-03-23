@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyle Labs — Éditeur de logiciels SaaS</title>
+    <meta name="description" content="Hyle Labs développe Engram, un logiciel SaaS de transcription, résumé et analyse de réunions pour les entreprises.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://hyle-labs.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0e17;
+            --color-surface: #111827;
+            --color-surface-2: #1a2332;
+            --color-accent: #4ecdc4;
+            --color-accent-dim: rgba(78, 205, 196, 0.15);
+            --color-text: #e8edf3;
+            --color-text-muted: #8b95a5;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Subtle animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(78, 205, 196, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(78, 205, 196, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 32px 0 0;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--color-accent), #38b2ac);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-bg);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        /* Main */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 60px;
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h1 .accent {
+            background: linear-gradient(135deg, var(--color-accent), #38b2ac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            color: var(--color-text-muted);
+            max-width: 560px;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .info-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .info-card:hover {
+            border-color: rgba(78, 205, 196, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .info-card .label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-accent);
+            margin-bottom: 6px;
+        }
+
+        .info-card .value {
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .info-card .value small {
+            display: block;
+            color: var(--color-text-muted);
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* Product section */
+        .product-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 48px;
+        }
+
+        .product-section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-badge {
+            font-size: 11px;
+            font-weight: 500;
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .product-section p {
+            font-size: 15px;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .feature-tag {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        /* Contact */
+        .contact-section {
+            padding: 24px 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-section h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .contact-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        .contact-link + .contact-link {
+            margin-left: 24px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 24px 0 32px;
+            border-top: 1px solid var(--color-border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .legal-info {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .legal-info span {
+            display: inline;
+        }
+
+        .legal-info span + span::before {
+            content: ' · ';
+        }
+
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 48px 0 40px;
+            }
+
+            .contact-link + .contact-link {
+                margin-left: 0;
+                display: block;
+                margin-top: 8px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-row">
+                <svg class="logo-svg" width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="barGrad" x1="18" y1="0" x2="18" y2="44" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#14b8a6"/>
+                            <stop offset="100%" stop-color="#0f172a"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Left half: fragmented dashes (hyle / raw matter) -->
+                    <line x1="3" y1="13" x2="5" y2="11" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="1" y1="17" x2="3.5" y2="15.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="0.5" y1="22" x2="3" y2="21.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="1" y1="27" x2="3.5" y2="28" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="3" y1="31" x2="5.5" y2="33" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="6" y1="35" x2="8" y2="36" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="5" y1="8.5" x2="7.5" y2="7.5" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="8.5" y1="5.5" x2="11" y2="5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
+                    <line x1="10" y1="38" x2="12.5" y2="38.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
+                    <!-- Right half: solid arc (morphe / structured form) -->
+                    <path d="M 20 5 A 15 15 0 0 1 20 39" stroke="#14b8a6" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <!-- Vertical bar (gradient: structure axis) -->
+                    <rect x="16" y="0" width="3.5" height="44" rx="1.75" fill="url(#barGrad)"/>
+                </svg>
+                <div class="logo-text">Hyle Labs</div>
+            </div>
+        </header>
+
+        <main>
+            <h1>Logiciels <span class="accent">d'intelligence opérationnelle</span> pour les entreprises</h1>
+            <p class="subtitle">
+                Hyle Labs est un éditeur de logiciels SaaS basé à Lyon. 
+                Nous concevons des solutions qui transforment les échanges professionnels 
+                en connaissances exploitables.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="label">Siège social</div>
+                    <div class="value">
+                        254 Rue Vendome
+                        <small>69003 Lyon, France</small>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Forme juridique</div>
+                    <div class="value">
+                        SASU
+                        <small>RCS Lyon</small>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="label">SIREN</div>
+                    <div class="value">101 857 431</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">N° TVA</div>
+                    <div class="value">FR92101857431</div>
+                </div>
+            </div>
+
+            <div class="product-section">
+                <h2>Engram <span class="product-badge">SaaS</span></h2>
+                <p>
+                    Engram est notre logiciel de transcription, de résumé et d'analyse de réunions 
+                    destiné aux entreprises. Les équipes importent leurs fichiers audio et vidéo 
+                    ou connectent leurs réunions pour obtenir des transcriptions, comptes rendus, 
+                    résumés et insights exploitables.
+                </p>
+                <div class="features">
+                    <span class="feature-tag">Transcription IA</span>
+                    <span class="feature-tag">Résumés automatiques</span>
+                    <span class="feature-tag">Comptes rendus</span>
+                    <span class="feature-tag">Insights</span>
+                    <span class="feature-tag">Intégrations</span>
+                    <span class="feature-tag">API</span>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>Contact</h2>
+                <a href="mailto:admin@hyle-labs.net" class="contact-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    admin@hyle-labs.net
+                </a>
+                <a href="mailto:contact@hyle-labs.net" class="contact-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    contact@hyle-labs.net
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="legal-info">
+                    <span>© 2026 Hyle Labs</span>
+                    <span>SASU au capital de 1 000 €</span>
+                    <span>SIREN 101 857 431</span>
+                    <span>254 Rue Vendome, 69003 Lyon</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
