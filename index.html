@@ -7,9 +7,14 @@
     <meta name="description" content="Hyle Labs développe Engram, un logiciel SaaS de transcription, résumé et analyse de réunions pour les entreprises.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hyle-labs.net">
+    <meta property="og:title" content="Hyle Labs — Éditeur de logiciels SaaS">
+    <meta property="og:description" content="Nous transformons les échanges professionnels en connaissances exploitables.">
+    <meta property="og:url" content="https://hyle-labs.net">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48' fill='none'%3E%3Cpath d='M22 4A16 16 0 0122 44' stroke='%230d9488' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='17' y='0' width='3.5' height='48' rx='1.75' fill='%230f172a'/%3E%3C/svg%3E">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -18,20 +23,28 @@
         }
 
         :root {
-            --color-bg: #ffffff;
-            --color-surface: #f8fafc;
+            --color-bg: #fafbfc;
+            --color-white: #ffffff;
+            --color-surface: #ffffff;
             --color-surface-2: #f1f5f9;
             --color-accent: #0d9488;
-            --color-accent-dim: rgba(13, 148, 136, 0.08);
+            --color-accent-light: #14b8a6;
+            --color-accent-dim: rgba(13, 148, 136, 0.06);
+            --color-accent-border: rgba(13, 148, 136, 0.15);
             --color-text: #0f172a;
+            --color-text-secondary: #334155;
             --color-text-muted: #64748b;
-            --color-border: rgba(0, 0, 0, 0.08);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --color-border: #e2e8f0;
+            --color-border-light: #f1f5f9;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+            --radius: 12px;
+            --radius-lg: 20px;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: var(--font);
@@ -39,80 +52,97 @@
             color: var(--color-text);
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Subtle background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(13, 148, 136, 0.03) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(13, 148, 136, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
+        /* ── Header ── */
         header {
-            padding: 32px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 251, 252, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .logo-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .logo-mark {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--color-accent), #0f766e);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--color-bg);
-            letter-spacing: -0.5px;
-        }
+        .logo-svg { flex-shrink: 0; }
 
         .logo-text {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: -0.3px;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: var(--color-text);
         }
 
-        /* Main */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 0 60px;
+        .header-contact {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-accent);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--color-accent-border);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .header-contact:hover {
+            background: var(--color-accent-dim);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 80px 32px 64px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 20px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-accent);
+            border-radius: 1px;
         }
 
         h1 {
-            font-size: clamp(28px, 5vw, 40px);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            margin-bottom: 20px;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            max-width: 700px;
+            margin-bottom: 24px;
         }
 
         h1 .accent {
@@ -122,146 +152,265 @@
             background-clip: text;
         }
 
-        .subtitle {
-            font-size: 17px;
-            color: var(--color-text-muted);
+        .hero-description {
+            font-size: 18px;
+            color: var(--color-text-secondary);
             max-width: 560px;
-            margin-bottom: 48px;
             line-height: 1.7;
+            margin-bottom: 40px;
         }
 
-        /* Cards */
-        .info-grid {
+        .hero-cta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
+        }
+
+        .cta-primary:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--color-text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .cta-secondary:hover { color: var(--color-accent); }
+
+        /* ── Section wrapper ── */
+        .section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px 80px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* ── Value proposition cards ── */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .value-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            transition: all 0.25s ease;
+        }
+
+        .value-card:hover {
+            border-color: var(--color-accent-border);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .value-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-accent-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--color-accent);
+        }
+
+        .value-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.2px;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Product section ── */
+        .product-block {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 48px;
+            gap: 40px;
+            align-items: center;
         }
 
-        .info-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 20px;
-            transition: border-color 0.3s ease, transform 0.2s ease;
+        .product-content h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
-        .info-card:hover {
-            border-color: rgba(13, 148, 136, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .info-card .label {
-            font-size: 12px;
-            font-weight: 500;
+        .product-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+            padding: 3px 10px;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .product-content p {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .features-list li {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .product-visual {
+            background: linear-gradient(135deg, #f0fdfa, #e0f7f5);
+            border: 1px solid var(--color-accent-border);
+            border-radius: var(--radius);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-visual-phi {
+            opacity: 0.12;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .product-coming {
+            position: relative;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-accent);
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            border: 1px solid var(--color-accent-border);
+        }
+
+        /* ── Company info ── */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .company-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .company-card:hover {
+            border-color: var(--color-accent-border);
+        }
+
+        .company-card .label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
             color: var(--color-accent);
             margin-bottom: 6px;
         }
 
-        .info-card .value {
-            font-size: 14px;
+        .company-card .value {
+            font-size: 15px;
+            font-weight: 600;
             color: var(--color-text);
         }
 
-        .info-card .value small {
-            display: block;
+        .company-card .sub {
+            font-size: 13px;
             color: var(--color-text-muted);
-            font-size: 12px;
             margin-top: 2px;
         }
 
-        /* Product section */
-        .product-section {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 48px;
-        }
-
-        .product-section h2 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .product-badge {
-            font-size: 11px;
-            font-weight: 500;
-            background: var(--color-accent-dim);
-            color: var(--color-accent);
-            padding: 2px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .product-section p {
-            font-size: 15px;
-            color: var(--color-text-muted);
-            line-height: 1.7;
-        }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .feature-tag {
-            font-size: 12px;
-            color: var(--color-text-muted);
-            background: var(--color-surface-2);
-            border: 1px solid var(--color-border);
-            padding: 4px 12px;
-            border-radius: 6px;
-        }
-
-        /* Contact */
-        .contact-section {
-            padding: 24px 0;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .contact-section h2 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .contact-link {
-            color: var(--color-accent);
-            text-decoration: none;
-            font-size: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: opacity 0.2s;
-        }
-
-        .contact-link:hover {
-            opacity: 0.8;
-        }
-
-        .contact-link + .contact-link {
-            margin-left: 24px;
-        }
-
-        /* Footer */
+        /* ── Footer ── */
         footer {
-            padding: 24px 0 32px;
             border-top: 1px solid var(--color-border);
-            position: relative;
-            z-index: 1;
+            background: var(--color-white);
         }
 
-        .footer-content {
+        .footer-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -269,146 +418,205 @@
             gap: 12px;
         }
 
-        .legal-info {
-            font-size: 12px;
+        .footer-left {
+            font-size: 13px;
             color: var(--color-text-muted);
-            line-height: 1.6;
         }
 
-        .legal-info span {
-            display: inline;
+        .footer-links {
+            display: flex;
+            gap: 20px;
         }
 
-        .legal-info span + span::before {
-            content: ' · ';
+        .footer-links a {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
-        @media (max-width: 600px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
+        .footer-links a:hover { color: var(--color-accent); }
 
-            main {
-                padding: 48px 0 40px;
-            }
-
-            .contact-link + .contact-link {
-                margin-left: 0;
-                display: block;
-                margin-top: 8px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .value-grid { grid-template-columns: 1fr; }
+            .product-block { grid-template-columns: 1fr; }
+            .company-grid { grid-template-columns: 1fr 1fr; }
+            .hero { padding: 48px 20px 40px; }
+            .section { padding: 0 20px 48px; }
+            .header-inner { padding: 14px 20px; }
+            .footer-inner { padding: 20px; flex-direction: column; text-align: center; }
+            .product-block { padding: 24px; }
         }
+
+        @media (max-width: 480px) {
+            .company-grid { grid-template-columns: 1fr; }
+            .header-contact { display: none; }
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero, .section { animation: fadeUp 0.6s ease-out both; }
+        .section:nth-child(3) { animation-delay: 0.1s; }
+        .section:nth-child(4) { animation-delay: 0.2s; }
+        .section:nth-child(5) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-row">
-                <svg class="logo-svg" width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="barGrad" x1="18" y1="0" x2="18" y2="44" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#14b8a6"/>
-                            <stop offset="100%" stop-color="#0f172a"/>
-                        </linearGradient>
-                    </defs>
-                    <!-- Left half: fragmented dashes (hyle / raw matter) -->
-                    <line x1="3" y1="13" x2="5" y2="11" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="1" y1="17" x2="3.5" y2="15.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="0.5" y1="22" x2="3" y2="21.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="1" y1="27" x2="3.5" y2="28" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="3" y1="31" x2="5.5" y2="33" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="6" y1="35" x2="8" y2="36" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="5" y1="8.5" x2="7.5" y2="7.5" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="8.5" y1="5.5" x2="11" y2="5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
-                    <line x1="10" y1="38" x2="12.5" y2="38.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
-                    <!-- Right half: solid arc (morphe / structured form) -->
-                    <path d="M 20 5 A 15 15 0 0 1 20 39" stroke="#14b8a6" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <!-- Vertical bar (gradient: structure axis) -->
-                    <rect x="16" y="0" width="3.5" height="44" rx="1.75" fill="url(#barGrad)"/>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo-row">
+                <svg class="logo-svg" width="32" height="38" viewBox="-2 -1 42 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Left: fragmented dashes (hyle — raw matter) -->
+                    <line x1="4" y1="13" x2="7" y2="10.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="2" y1="18" x2="5" y2="16" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="1" y1="23" x2="4" y2="22.5" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="2" y1="28" x2="5" y2="29.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4" y1="33" x2="7" y2="35" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="7.5" y1="37" x2="10" y2="38.5" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="7" y1="7.5" x2="10" y2="6" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="11" y1="4" x2="14" y2="3.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
+                    <line x1="12" y1="40" x2="15" y2="40.5" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round"/>
+                    <!-- Right: solid arc (morphe — structured form) -->
+                    <path d="M 22 4 A 17 17 0 0 1 22 44" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <!-- Center: vertical bar (axis of transformation) -->
+                    <rect x="17.5" y="0" width="3.5" height="48" rx="1.75" fill="#0f172a"/>
                 </svg>
-                <div class="logo-text">Hyle Labs</div>
+                <span class="logo-text">Hyle Labs</span>
+            </a>
+            <a href="mailto:contact@hyle-labs.net" class="header-contact">Nous contacter</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-eyebrow">Éditeur de logiciels · Lyon</div>
+        <h1>De la donnée brute à la <span class="accent">connaissance exploitable</span></h1>
+        <p class="hero-description">
+            Hyle Labs conçoit des logiciels SaaS qui transforment les échanges non structurés
+            — réunions, appels, entretiens — en actifs informationnels à forte valeur ajoutée.
+        </p>
+        <div class="hero-cta-row">
+            <a href="mailto:contact@hyle-labs.net" class="cta-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Prendre contact
+            </a>
+            <a href="#produit" class="cta-secondary">
+                Découvrir Engram →
+            </a>
+        </div>
+    </section>
+
+    <!-- Value propositions -->
+    <section class="section">
+        <div class="section-label">Notre approche</div>
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
+                </div>
+                <h3>Transcription IA</h3>
+                <p>Des modèles de pointe pour convertir l'audio en texte structuré avec identification des interlocuteurs.</p>
             </div>
-        </header>
-
-        <main>
-            <h1>Logiciels <span class="accent">d'intelligence opérationnelle</span> pour les entreprises</h1>
-            <p class="subtitle">
-                Hyle Labs est un éditeur de logiciels SaaS basé à Lyon. 
-                Nous concevons des solutions qui transforment les échanges professionnels 
-                en connaissances exploitables.
-            </p>
-
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="label">Siège social</div>
-                    <div class="value">
-                        254 Rue Vendome
-                        <small>69003 Lyon, France</small>
-                    </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
                 </div>
-                <div class="info-card">
-                    <div class="label">Forme juridique</div>
-                    <div class="value">
-                        SASU
-                        <small>RCS Lyon</small>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="label">SIREN</div>
-                    <div class="value">101 857 431</div>
-                </div>
-                <div class="info-card">
-                    <div class="label">N° TVA</div>
-                    <div class="value">FR92101857431</div>
-                </div>
+                <h3>Analyse sémantique</h3>
+                <p>Extraction automatisée de décisions, actions, risques et thèmes à partir du contenu de réunion.</p>
             </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                </div>
+                <h3>Souveraineté & RGPD</h3>
+                <p>Infrastructure européenne, chiffrement de bout en bout. Vos données restent sous votre contrôle.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="product-section">
-                <h2>Engram <span class="product-badge">SaaS</span></h2>
+    <!-- Product -->
+    <section class="section" id="produit">
+        <div class="section-label">Produit</div>
+        <div class="product-block">
+            <div class="product-content">
+                <h2>Engram</h2>
+                <div class="product-badge">SaaS · B2B</div>
                 <p>
-                    Engram est notre logiciel de transcription, de résumé et d'analyse de réunions 
-                    destiné aux entreprises. Les équipes importent leurs fichiers audio et vidéo 
-                    ou connectent leurs réunions pour obtenir des transcriptions, comptes rendus, 
-                    résumés et insights exploitables.
+                    La mémoire opérationnelle de votre entreprise. Engram capture, transcrit,
+                    résume et indexe l'ensemble de vos échanges professionnels pour que
+                    rien ne se perde et tout soit retrouvable.
                 </p>
-                <div class="features">
-                    <span class="feature-tag">Transcription IA</span>
-                    <span class="feature-tag">Résumés automatiques</span>
-                    <span class="feature-tag">Comptes rendus</span>
-                    <span class="feature-tag">Insights</span>
-                    <span class="feature-tag">Intégrations</span>
-                    <span class="feature-tag">API</span>
-                </div>
+                <ul class="features-list">
+                    <li>Transcription multi-langues en temps réel</li>
+                    <li>Résumés et comptes rendus automatiques</li>
+                    <li>Extraction de décisions et actions</li>
+                    <li>Intégrations calendrier & visioconférence</li>
+                    <li>API ouverte et webhooks</li>
+                </ul>
             </div>
+            <div class="product-visual">
+                <svg class="product-visual-phi" width="200" height="240" viewBox="-2 -1 42 50" fill="none">
+                    <line x1="4" y1="13" x2="7" y2="10.5" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="2" y1="18" x2="5" y2="16" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="1" y1="23" x2="4" y2="22.5" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="2" y1="28" x2="5" y2="29.5" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4" y1="33" x2="7" y2="35" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="7.5" y1="37" x2="10" y2="38.5" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="7" y1="7.5" x2="10" y2="6" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="11" y1="4" x2="14" y2="3.5" stroke="#0d9488" stroke-width="1.6" stroke-linecap="round"/>
+                    <line x1="12" y1="40" x2="15" y2="40.5" stroke="#0d9488" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M 22 4 A 17 17 0 0 1 22 44" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <rect x="17.5" y="0" width="3.5" height="48" rx="1.75" fill="#0d9488"/>
+                </svg>
+                <div class="product-coming">Lancement prochain</div>
+            </div>
+        </div>
+    </section>
 
-            <div class="contact-section">
-                <h2>Contact</h2>
-                <a href="mailto:admin@hyle-labs.net" class="contact-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    admin@hyle-labs.net
-                </a>
-                <a href="mailto:contact@hyle-labs.net" class="contact-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    contact@hyle-labs.net
-                </a>
+    <!-- Company info -->
+    <section class="section">
+        <div class="section-label">Informations légales</div>
+        <div class="company-grid">
+            <div class="company-card">
+                <div class="label">Raison sociale</div>
+                <div class="value">Hyle Labs</div>
+                <div class="sub">SASU au capital de 1 000 €</div>
             </div>
-        </main>
+            <div class="company-card">
+                <div class="label">Siège social</div>
+                <div class="value">254 Rue Vendome</div>
+                <div class="sub">69003 Lyon, France</div>
+            </div>
+            <div class="company-card">
+                <div class="label">SIREN</div>
+                <div class="value">101 857 431</div>
+                <div class="sub">RCS Lyon</div>
+            </div>
+            <div class="company-card">
+                <div class="label">N° TVA</div>
+                <div class="value">FR92101857431</div>
+                <div class="sub">Intracommunautaire</div>
+            </div>
+        </div>
+    </section>
 
-        <footer>
-            <div class="footer-content">
-                <div class="legal-info">
-                    <span>© 2026 Hyle Labs</span>
-                    <span>SASU au capital de 1 000 €</span>
-                    <span>SIREN 101 857 431</span>
-                    <span>254 Rue Vendome, 69003 Lyon</span>
-                </div>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">
+                © 2026 Hyle Labs · SASU · Lyon, France
             </div>
-        </footer>
-    </div>
+            <div class="footer-links">
+                <a href="mailto:contact@hyle-labs.net">contact@hyle-labs.net</a>
+                <a href="mailto:admin@hyle-labs.net">admin@hyle-labs.net</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
