@@ -28,7 +28,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="assets/taveni-tco-product.webp" imagesrcset="assets/taveni-tco-product.webp" fetchpriority="high">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -10 60 70' fill='none'%3E%3Cpath d='M24 3A18 18 0 0124 45' stroke='%230f766e' stroke-width='4' stroke-linecap='round'/%3E%3Crect x='19' y='-1' width='4' height='50' rx='2' fill='%23111418'/%3E%3C/svg%3E">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,6 +42,7 @@
           "name": "Hyle Labs",
           "legalName": "HYLE LABS",
           "url": "https://hyle-labs.net",
+          "logo": "https://hyle-labs.net/assets/hyle-labs-mark.svg",
           "email": "contact@hyle-labs.net",
           "foundingLocation": { "@type": "Place", "name": "Rhône, France" },
           "identifier": {
@@ -173,9 +177,14 @@
                 font-weight: 800;
             }
 
-            .logo svg,
-            .company-mark svg {
-                overflow: visible;
+            .logo img,
+            .company-mark img {
+                display: block;
+            }
+
+            .logo img {
+                width: 42px;
+                height: 42px;
             }
 
             .nav {
@@ -1036,9 +1045,9 @@
                     #ffffff;
             }
 
-            .company-mark svg {
+            .company-mark img {
                 width: min(240px, 54vw);
-                opacity: 0.9;
+                opacity: 0.95;
             }
 
             .company-copy p {
@@ -1340,17 +1349,7 @@
     <header>
         <div class="wrap header-inner">
             <a class="logo" href="/" aria-label="Hyle Labs — accueil">
-                <svg width="38" height="42" viewBox="-8 -10 60 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <line x1="4" y1="13" x2="8" y2="10" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                    <line x1="2" y1="18" x2="6" y2="16" stroke="#111418" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="1" y1="24" x2="5" y2="23" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                    <line x1="2" y1="30" x2="6" y2="31.5" stroke="#111418" stroke-width="2.2" stroke-linecap="round"/>
-                    <line x1="4" y1="35" x2="8" y2="37.5" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                    <line x1="8" y1="39.5" x2="12" y2="41" stroke="#111418" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="8" y1="7" x2="12" y2="5.5" stroke="#111418" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M 24 3 A 18 18 0 0 1 24 45" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/>
-                    <rect x="19" y="-1" width="4" height="50" rx="2" fill="#111418"/>
-                </svg>
+                <img src="/assets/hyle-labs-mark.svg" alt="" width="42" height="42" aria-hidden="true">
                 <span>Hyle Labs</span>
             </a>
             <nav class="nav" aria-label="Navigation principale">
@@ -1775,19 +1774,7 @@
         <section class="company" id="hyle-labs" aria-labelledby="company-title">
             <div class="wrap company-layout">
                 <div class="company-mark" aria-hidden="true">
-                    <svg viewBox="-8 -10 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="4" y1="13" x2="8" y2="10" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                        <line x1="2" y1="18" x2="6" y2="16" stroke="#111418" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="1" y1="24" x2="5" y2="23" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                        <line x1="2" y1="30" x2="6" y2="31.5" stroke="#111418" stroke-width="2.2" stroke-linecap="round"/>
-                        <line x1="4" y1="35" x2="8" y2="37.5" stroke="#111418" stroke-width="2.4" stroke-linecap="round"/>
-                        <line x1="8" y1="39.5" x2="12" y2="41" stroke="#111418" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="8" y1="7" x2="12" y2="5.5" stroke="#111418" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="13" y1="3.5" x2="16.5" y2="3" stroke="#111418" stroke-width="1.8" stroke-linecap="round"/>
-                        <line x1="13" y1="44" x2="16.5" y2="44.5" stroke="#111418" stroke-width="1.8" stroke-linecap="round"/>
-                        <path d="M 24 3 A 18 18 0 0 1 24 45" stroke="#0f766e" stroke-width="4" stroke-linecap="round"/>
-                        <rect x="19" y="-1" width="4" height="50" rx="2" fill="#111418"/>
-                    </svg>
+                    <img src="/assets/hyle-labs-mark.svg" alt="">
                 </div>
                 <div class="company-copy">
                     <div class="section-kicker">Hyle Labs</div>
