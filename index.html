@@ -3,7 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f7f8f3">
+    <meta name="theme-color" id="theme-color-meta" content="#f7f8f3">
+    <script>
+        /* Thème : applique avant le premier rendu (anti-FOUC). Défaut = préférence OS,
+           puis mémorise le choix manuel. Tolère localStorage indisponible (file://, privé). */
+        (function () {
+            var root = document.documentElement;
+            var saved = null;
+            try { saved = localStorage.getItem("theme"); } catch (e) {}
+            var theme = (saved === "light" || saved === "dark")
+                ? saved
+                : (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            root.dataset.theme = theme;
+            var meta = document.getElementById("theme-color-meta");
+            if (meta) meta.setAttribute("content", theme === "dark" ? "#0b1113" : "#f7f8f3");
+            window.__setTheme = function (next) {
+                root.dataset.theme = next;
+                try { localStorage.setItem("theme", next); } catch (e) {}
+                if (meta) meta.setAttribute("content", next === "dark" ? "#0b1113" : "#f7f8f3");
+                var btn = document.querySelector(".theme-toggle");
+                if (btn) btn.setAttribute("aria-pressed", String(next === "dark"));
+            };
+            document.addEventListener("DOMContentLoaded", function () {
+                var btn = document.querySelector(".theme-toggle");
+                if (!btn) return;
+                btn.setAttribute("aria-pressed", String(root.dataset.theme === "dark"));
+                btn.addEventListener("click", function () {
+                    window.__setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+                });
+            });
+        })();
+    </script>
     <title>Hyle Labs — Taveni, le Capital Token de vos réunions</title>
     <meta name="description" content="Hyle Labs édite Taveni, une plateforme qui transforme la mémoire orale des réunions en décisions sourcées, actions qualifiées et Capital Token souverain.">
     <meta name="robots" content="index, follow">
@@ -24,13 +54,13 @@
     <meta property="og:site_name" content="Hyle Labs">
     <meta property="og:image" content="https://hyle-labs.net/assets/taveni-tco-product.webp">
     <meta property="og:image:alt" content="Interface Taveni montrant l'ajout de contexte avant une transcription.">
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-latin.woff2" crossorigin>
     <link rel="preload" as="image" href="assets/taveni-tco-product.webp" imagesrcset="assets/taveni-tco-product.webp" fetchpriority="high">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -78,7 +108,7 @@
             font-style: normal;
             font-weight: 400 800;
             font-display: swap;
-            src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+            src: url("assets/fonts/inter-latin.woff2") format("woff2");
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
         @font-face {
@@ -86,7 +116,7 @@
             font-style: normal;
             font-weight: 400 800;
             font-display: swap;
-            src: url("/assets/fonts/inter-latin-ext.woff2") format("woff2");
+            src: url("assets/fonts/inter-latin-ext.woff2") format("woff2");
             unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
         @font-face {
@@ -94,7 +124,7 @@
             font-style: normal;
             font-weight: 500 800;
             font-display: swap;
-            src: url("/assets/fonts/outfit-latin.woff2") format("woff2");
+            src: url("assets/fonts/outfit-latin.woff2") format("woff2");
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
         @font-face {
@@ -102,7 +132,7 @@
             font-style: normal;
             font-weight: 500 800;
             font-display: swap;
-            src: url("/assets/fonts/outfit-latin-ext.woff2") format("woff2");
+            src: url("assets/fonts/outfit-latin-ext.woff2") format("woff2");
             unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
 
@@ -132,7 +162,10 @@
                 --deep: #0d1416;
                 --deep-2: #142024;
                 --radius: 8px;
+                --radius-card: 14px;
+                --radius-lg: 18px;
                 --shadow: 0 24px 70px rgba(17, 20, 24, 0.12);
+                --shadow-card: 0 1px 2px rgba(17, 20, 24, 0.04), 0 14px 32px -20px rgba(17, 20, 24, 0.22);
                 --wrap: 1160px;
                 --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
                 --font-display: "Outfit", var(--font-body);
@@ -305,8 +338,8 @@
                 inset: 0;
                 z-index: -3;
                 background:
-                    linear-gradient(90deg, rgba(247, 248, 243, 1) 0%, rgba(247, 248, 243, 0.99) 36%, rgba(247, 248, 243, 0.76) 58%, rgba(247, 248, 243, 0.18) 100%),
-                    url("assets/taveni-tco-product.webp") right -80px center / min(960px, 68vw) auto no-repeat;
+                    radial-gradient(72% 90% at 94% 4%, rgba(15, 118, 110, 0.12), transparent 58%),
+                    radial-gradient(60% 80% at -4% 104%, rgba(52, 88, 212, 0.07), transparent 56%);
             }
 
             .hero::after {
@@ -320,12 +353,54 @@
 
             .hero-grid {
                 display: grid;
-                gap: 34px;
-                padding: 58px 0 42px;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+                grid-template-areas:
+                    "copy shot"
+                    "proof proof";
+                column-gap: 44px;
+                row-gap: 32px;
+                align-items: center;
+                padding: 60px 0 44px;
             }
 
             .hero-copy {
+                grid-area: copy;
                 max-width: 690px;
+            }
+
+            .hero-shot {
+                grid-area: shot;
+                border: 1px solid var(--line);
+                border-radius: var(--radius-lg);
+                background: var(--surface);
+                box-shadow: 0 34px 80px -42px rgba(17, 20, 24, 0.5), 0 2px 6px rgba(17, 20, 24, 0.05);
+                overflow: hidden;
+            }
+
+            .hero-shot-bar {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                padding: 11px 14px;
+                border-bottom: 1px solid var(--line);
+                background: #fbfcf9;
+            }
+
+            .hero-shot-bar span {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--line);
+            }
+
+            .hero-shot-bar span:nth-child(1) { background: var(--coral); }
+            .hero-shot-bar span:nth-child(2) { background: var(--amber); }
+            .hero-shot-bar span:nth-child(3) { background: var(--teal); }
+
+            .hero-shot img {
+                width: 100%;
+                height: auto;
+                display: block;
             }
 
             .eyebrow {
@@ -1259,12 +1334,16 @@
                 .hero {
                     min-height: auto;
                 }
-                .hero::before {
-                    background:
-                        linear-gradient(180deg, rgba(247, 248, 243, 1) 0%, rgba(247, 248, 243, 1) 58%, rgba(247, 248, 243, 0.94) 78%, rgba(247, 248, 243, 0.72) 100%),
-                        url("assets/taveni-tco-product.webp") center bottom -44px / 760px auto no-repeat;
+                .hero-grid {
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "copy"
+                        "shot"
+                        "proof";
+                    column-gap: 0;
+                    padding: 48px 0 40px;
                 }
-                .hero-grid { padding: 58px 0 250px; }
+                .hero-shot { width: min(640px, 100%); }
                 .intro-grid,
                 .difference-layout,
                 .tco-layout,
@@ -1301,8 +1380,8 @@
                     font-size: 13px;
                 }
                 .hero-grid {
-                    gap: 24px;
-                    padding: 34px 0 112px;
+                    row-gap: 24px;
+                    padding: 30px 0 32px;
                 }
                 .hero-proof {
                     gap: 8px;
@@ -1371,13 +1450,8 @@
 
             @media (max-width: 430px) {
                 .nav .nav-cta { display: none; }
-                .hero-grid { padding: 30px 0 86px; }
+                .hero-grid { padding: 26px 0 28px; }
                 .hero-actions .button { width: 100%; }
-                .hero::before {
-                    background:
-                        linear-gradient(180deg, rgba(247, 248, 243, 1) 0%, rgba(247, 248, 243, 1) 76%, rgba(247, 248, 243, 0.94) 90%, rgba(247, 248, 243, 0.72) 100%),
-                        url("assets/taveni-tco-product.webp") center bottom -48px / 530px auto no-repeat;
-                }
             }
 
             @media (prefers-reduced-motion: reduce) {
@@ -1496,15 +1570,203 @@
                 .semantic-board, .ledger, .company-mark, .contact-box {
                     animation: rise-in linear both;
                     animation-timeline: view();
-                    animation-range: entry 4% cover 30%;
+                    animation-range: entry 2% cover 24%;
                 }
                 /* Cascade dans les grilles — ignoré proprement si sibling-index() absent */
                 .truth-grid > *, .audience-grid > *, .capability-grid > *,
                 .pipeline-steps > *, .signal-list > *, .company-facts > *,
                 .arch-points > * {
-                    animation-range: entry calc(3% + (sibling-index() - 1) * 3.5%) cover 30%;
+                    animation-range: entry calc(2% + (sibling-index() - 1) * 2.4%) cover 24%;
                 }
             }
+        }
+
+        /* ===== Surfaces : rayons plus doux + élévation portée (soft skeuomorphism 2026) ===== */
+        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
+        .proof-item, .difference-board, .tco-panel, .signal, .arch-point,
+        .meaning-layer, .company-mark, .contact-box, .semantic-board, .ledger,
+        .difference-row.header {
+            border-radius: var(--radius-card);
+        }
+
+        /* Élévation au repos sur les cartes des sections claires (moins « fil de fer ») */
+        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
+        .proof-item, .difference-board, .tco-panel {
+            box-shadow: var(--shadow-card);
+        }
+
+        /* Accent corail récurrent : un tiret avant chaque kicker de section claire */
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-kicker::before {
+            content: "";
+            width: 22px;
+            height: 2px;
+            background: var(--coral);
+            border-radius: 2px;
+        }
+        /* Sur les sections sombres, le tiret reprend l'accent cyan déjà en place */
+        .ontology .section-kicker::before,
+        .architecture .section-kicker::before {
+            background: #7ee7d8;
+        }
+
+        /* Glow d'accent au survol des cartes sombres */
+        .signal:hover, .meaning-layer:hover, .arch-point:hover {
+            box-shadow: 0 18px 44px -22px rgba(126, 231, 216, 0.45);
+        }
+
+        /* ===== CTA mobile persistant (thumb zone) ===== */
+        .mobile-cta { display: none; }
+        @media (max-width: 700px) {
+            .mobile-cta {
+                position: fixed;
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                z-index: 60;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 9px;
+                min-height: 52px;
+                padding: 0 18px;
+                background: var(--teal-2);
+                color: #fff;
+                text-decoration: none;
+                font-family: var(--font-display);
+                font-size: 15px;
+                font-weight: 800;
+                border-radius: 14px;
+                box-shadow: 0 14px 34px -8px rgba(15, 118, 110, 0.5);
+            }
+            .mobile-cta svg { width: 18px; height: 18px; }
+            body { padding-bottom: 84px; }
+        }
+
+        /* ===== Sélecteur de thème ===== */
+        .theme-toggle {
+            min-width: 40px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+            padding: 0 9px;
+            border: 1px solid rgba(17, 20, 24, 0.12);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.62);
+            color: var(--ink-2);
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+        }
+        .theme-toggle:hover {
+            border-color: rgba(15, 118, 110, 0.38);
+            color: var(--teal-2);
+        }
+        .theme-toggle:active { transform: scale(0.96); }
+        /* Icône = action disponible : lune en clair (passe au sombre), soleil en sombre (passe au clair) */
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+        /* ===== Mode sombre — piloté par [data-theme="dark"] (script anti-FOUC + bouton) =====
+           Défaut = préférence OS au 1er chargement, puis choix manuel mémorisé. Rythme clair/sombre préservé. */
+        [data-theme="dark"] {
+            & {
+                --paper: #0b1113;
+                --paper-2: #0e1517;
+                --surface: #121a1d;
+                --ink: #eef2ef;
+                --ink-2: #c2ccca;
+                --muted: #8b9794;
+                --line: #25302f;
+                --deep: #070d0e;
+                --deep-2: #0b1314;
+                --shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+                --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 36px -22px rgba(0, 0, 0, 0.7);
+            }
+
+            body { background: var(--paper); color: var(--ink); }
+
+            /* Header translucide sombre */
+            header {
+                background: rgba(11, 17, 19, 0.82);
+                border-bottom-color: rgba(255, 255, 255, 0.08);
+            }
+            .nav a { color: var(--ink-2); }
+            .nav a:hover { background: rgba(126, 231, 216, 0.12); color: #7ee7d8; }
+            .nav .nav-cta { background: #7ee7d8; color: #06201d; }
+            .nav .nav-cta:hover { background: #a9f0e5; color: #06201d; }
+            .language-switcher { border-color: rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05); }
+            .theme-toggle { border-color: rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05); color: var(--ink-2); }
+            .theme-toggle:hover { border-color: rgba(126, 231, 216, 0.4); color: #7ee7d8; }
+            .language-button { color: var(--muted); }
+            .language-button:hover,
+            .language-button[aria-pressed="true"] { background: #7ee7d8; color: #06201d; }
+
+            /* Surfaces claires repensées en cartes sombres lisibles */
+            .hero-shot,
+            .truth-card, .audience-card, .capability, .step, .fact, .market-note,
+            .proof-item, .difference-board, .tco-panel, .company-mark {
+                background: var(--surface);
+                border-color: var(--line);
+            }
+            .hero-shot-bar,
+            .panel-topbar,
+            .difference-row.header,
+            .result-cell { background: #0e1517; }
+            .difference-row { border-bottom-color: var(--line); }
+            .tco-result { background: var(--line); }
+            .tco-object { color: #cdd8d5; }
+            .audience-card, .step { background: #0f1719; }
+
+            /* Boutons */
+            .button-primary { background: #15938a; color: #04211e; box-shadow: 0 14px 36px rgba(20, 180, 165, 0.18); }
+            .button-primary:hover { background: #7ee7d8; }
+            .button-secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.16); color: var(--ink); }
+            .button-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(126, 231, 216, 0.4); }
+
+            /* Section claires « truth/audience/etc. » : tokens déjà repris, on harmonise les fonds explicites */
+            .audiences, .pipeline { background: var(--paper-2); }
+            .truth-section, .difference, .company, .tco-section { background: var(--paper); }
+            .capabilities { background: #0e1517; }
+            .contact { background: var(--paper-2); }
+            .contact-box { background: linear-gradient(120deg, rgba(20, 180, 165, 0.12), transparent 42%), var(--surface); }
+            .tco-section { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+            .company-mark { background: linear-gradient(135deg, rgba(20, 180, 165, 0.14), transparent 50%), var(--surface); }
+
+            /* Sections « feature » sombres : un cran plus profond pour garder le contraste de rythme */
+            .intro-band, .ontology, .architecture { background: var(--deep); }
+
+            /* Accent kicker sur les sections claires (désormais sombres) : passe au cyan pour rester lisible */
+            .truth-section .section-kicker,
+            .audiences .section-kicker,
+            .difference .section-kicker,
+            .tco-section .section-kicker,
+            .capabilities .section-kicker,
+            .company .section-kicker,
+            .contact .section-kicker { color: #7ee7d8; }
+            .section-kicker::before { background: #7ee7d8; }
+
+            /* Focus + sélection */
+            ::selection { background: rgba(126, 231, 216, 0.22); }
+
+            /* Dialog */
+            dialog { background: var(--surface); color: var(--ink); }
+            .legal-content { background: var(--surface); }
+            .legal-item { border-color: var(--line); }
+            .legal-item span { color: var(--ink-2); }
+
+            /* CTA mobile */
+            .mobile-cta { background: #15938a; color: #04211e; }
+
+            /* Theme-color suit le fond sombre via le rendu, l'image hero garde son cadre clair interne */
+            .hero-shot-bar { border-bottom-color: var(--line); }
         }
     </style>
 </head>
@@ -1514,7 +1776,7 @@
     <header>
         <div class="wrap header-inner">
             <a class="logo" href="/" aria-label="Hyle Labs — accueil">
-                <img src="/assets/hyle-labs-mark.svg" alt="" width="42" height="42" aria-hidden="true">
+                <img src="assets/hyle-labs-mark.svg" alt="" width="42" height="42" aria-hidden="true">
                 <span>Hyle Labs</span>
             </a>
             <nav class="nav" aria-label="Navigation principale">
@@ -1524,6 +1786,10 @@
                 <a href="#tco">Coût IA</a>
                 <a href="#architecture">Souveraineté</a>
                 <a class="nav-cta" href="#contact">Évaluer Taveni</a>
+                <button class="theme-toggle" type="button" aria-label="Basculer le thème clair ou sombre" aria-pressed="false" title="Thème clair / sombre">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.36 6.36 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
                 <div class="language-switcher" role="group" aria-label="Choisir la langue">
                     <button class="language-button" type="button" data-lang="fr" aria-pressed="true">FR</button>
                     <button class="language-button" type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -1533,6 +1799,11 @@
             </nav>
         </div>
     </header>
+
+    <a class="mobile-cta" href="#contact" aria-label="Évaluer Taveni">
+        <span>Évaluer Taveni</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
 
     <main id="contenu">
         <section class="hero" aria-labelledby="hero-title">
@@ -1556,6 +1827,10 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         </a>
                     </div>
+                </div>
+                <div class="hero-shot" aria-hidden="true">
+                    <div class="hero-shot-bar"><span></span><span></span><span></span></div>
+                    <img src="assets/taveni-tco-product.webp" width="1280" height="720" alt="" fetchpriority="high" decoding="async">
                 </div>
                 <div class="hero-proof" aria-label="Points clés Taveni">
                     <div class="proof-item">
@@ -1946,7 +2221,7 @@
         <section class="company" id="hyle-labs" aria-labelledby="company-title">
             <div class="wrap company-layout">
                 <div class="company-mark" aria-hidden="true">
-                    <img src="/assets/hyle-labs-mark.svg" alt="">
+                    <img src="assets/hyle-labs-mark.svg" alt="">
                 </div>
                 <div class="company-copy">
                     <div class="section-kicker">Hyle Labs</div>
