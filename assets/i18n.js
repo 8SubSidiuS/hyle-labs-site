@@ -1199,9 +1199,17 @@
         sourceValues[key] = readBinding(getElement(selector), type);
     });
 
+    const prefersReducedMotion = () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     document.querySelectorAll(".language-button").forEach((button) => {
         button.addEventListener("click", () => {
-            applyLanguage(button.dataset.lang, { persist: true, updateUrl: true });
+            const run = () => applyLanguage(button.dataset.lang, { persist: true, updateUrl: true });
+            if (typeof document.startViewTransition === "function" && !prefersReducedMotion()) {
+                document.startViewTransition(run);
+            } else {
+                run();
+            }
         });
     });
 

@@ -24,9 +24,8 @@
     <meta property="og:site_name" content="Hyle Labs">
     <meta property="og:image" content="https://hyle-labs.net/assets/taveni-tco-product.webp">
     <meta property="og:image:alt" content="Interface Taveni montrant l'ajout de contexte avant une transcription.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-latin.woff2" crossorigin>
     <link rel="preload" as="image" href="assets/taveni-tco-product.webp" imagesrcset="assets/taveni-tco-product.webp" fetchpriority="high">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -73,6 +72,40 @@
     <style>
         @layer reset, base, components, utilities;
 
+        /* Polices auto-hébergées (variables, woff2) — aucune requête tierce (cohérence RGPD) */
+        @font-face {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400 800;
+            font-display: swap;
+            src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400 800;
+            font-display: swap;
+            src: url("/assets/fonts/inter-latin-ext.woff2") format("woff2");
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: "Outfit";
+            font-style: normal;
+            font-weight: 500 800;
+            font-display: swap;
+            src: url("/assets/fonts/outfit-latin.woff2") format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: "Outfit";
+            font-style: normal;
+            font-weight: 500 800;
+            font-display: swap;
+            src: url("/assets/fonts/outfit-latin-ext.woff2") format("woff2");
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
         @layer reset {
             *, *::before, *::after { box-sizing: border-box; }
             * { margin: 0; }
@@ -116,6 +149,9 @@
             }
 
             a { color: inherit; }
+
+            h1, h2, h3, .section-title, .contact-box h2 { text-wrap: balance; }
+            p, li, .section-lead, .hero-copy p { text-wrap: pretty; }
 
             .wrap {
                 width: min(var(--wrap), calc(100% - 40px));
@@ -1268,7 +1304,19 @@
                     gap: 24px;
                     padding: 34px 0 112px;
                 }
-                .hero-proof { display: none; }
+                .hero-proof {
+                    gap: 8px;
+                    margin-top: 4px;
+                }
+                .proof-item {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 10px;
+                    min-height: 0;
+                    padding: 11px 14px;
+                }
+                .proof-item b { font-size: 17px; }
+                .proof-item span { margin-top: 0; }
                 h1 { font-size: clamp(38px, 13vw, 54px); }
                 .hero-copy p { font-size: 17px; }
                 .hero-proof,
@@ -1338,6 +1386,123 @@
                     animation-iteration-count: 1 !important;
                     scroll-behavior: auto !important;
                     transition-duration: 0.01ms !important;
+                }
+            }
+        }
+
+        /* ===== Finition 2026 : motion, micro-interactions, profondeur =====
+           Tout en CSS pur / progressive enhancement — compatible GitHub Pages. */
+
+        /* Micro-interactions — surfaces claires */
+        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
+        .difference-board, .tco-panel, .proof-item, .button, .nav a,
+        .language-button, .header-inner, .logo img {
+            transition: transform .22s cubic-bezier(.2, .6, .2, 1),
+                        border-color .22s ease, background .22s ease,
+                        box-shadow .22s ease, color .18s ease, min-height .2s ease,
+                        width .2s ease, height .2s ease;
+        }
+
+        .truth-card:hover, .audience-card:hover, .capability:hover,
+        .step:hover, .fact:hover, .market-note:hover {
+            transform: translateY(-3px);
+            border-color: rgba(15, 118, 110, 0.32);
+            box-shadow: 0 18px 40px rgba(17, 20, 24, 0.09);
+        }
+
+        .difference-board:hover, .tco-panel:hover { transform: translateY(-2px); }
+
+        .proof-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(15, 118, 110, 0.3);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .button-primary:hover { box-shadow: 0 18px 42px rgba(15, 118, 110, 0.3); }
+
+        /* Micro-interactions — surfaces sombres */
+        .signal, .meaning-layer, .arch-point {
+            transition: transform .22s cubic-bezier(.2, .6, .2, 1),
+                        border-color .22s ease, background .22s ease;
+        }
+
+        .signal:hover, .meaning-layer:hover, .arch-point:hover {
+            transform: translateY(-2px);
+            border-color: rgba(126, 231, 216, 0.42);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Profondeur — halos lumineux sur les sections sombres */
+        .intro-band, .ontology, .architecture {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        .intro-band::after, .ontology::before, .architecture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(58% 80% at 8% -10%, rgba(126, 231, 216, 0.12), transparent 60%),
+                radial-gradient(52% 74% at 104% 110%, rgba(52, 88, 212, 0.14), transparent 62%);
+        }
+
+        /* Header condensé une fois épinglé (scroll-state container query) */
+        @supports (container-type: scroll-state) {
+            header { container-type: scroll-state; }
+            @container scroll-state(stuck: top) {
+                .header-inner { min-height: 56px; }
+                .logo img { width: 34px; height: 34px; }
+            }
+        }
+
+        /* Transition de vue — changement de langue */
+        @media (prefers-reduced-motion: no-preference) {
+            ::view-transition-old(root),
+            ::view-transition-new(root) { animation-duration: .32s; }
+        }
+
+        /* Animations d'entrée */
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes rise-in {
+                from { opacity: 0; transform: translateY(26px); }
+                to   { opacity: 1; transform: none; }
+            }
+            @keyframes hero-rise {
+                from { opacity: 0; transform: translateY(20px); }
+                to   { opacity: 1; transform: none; }
+            }
+
+            /* Hero — entrée au chargement */
+            .hero-copy > *, .hero-proof .proof-item {
+                animation: hero-rise .7s cubic-bezier(.2, .6, .2, 1) both;
+            }
+            .hero-copy .eyebrow { animation-delay: .04s; }
+            .hero-copy h1       { animation-delay: .10s; }
+            .hero-copy > p      { animation-delay: .18s; }
+            .hero-actions       { animation-delay: .26s; }
+            .hero-proof .proof-item:nth-child(1) { animation-delay: .30s; }
+            .hero-proof .proof-item:nth-child(2) { animation-delay: .36s; }
+            .hero-proof .proof-item:nth-child(3) { animation-delay: .42s; }
+
+            /* Reveals au scroll (compositor-friendly, sans JS) */
+            @supports (animation-timeline: view()) {
+                .section-kicker, .section-title, .section-lead, .truth-note, .ontology-note,
+                .truth-card, .audience-card, .capability, .step, .signal, .meaning-layer,
+                .arch-point, .fact, .market-note, .difference-board, .tco-panel,
+                .semantic-board, .ledger, .company-mark, .contact-box {
+                    animation: rise-in linear both;
+                    animation-timeline: view();
+                    animation-range: entry 4% cover 30%;
+                }
+                /* Cascade dans les grilles — ignoré proprement si sibling-index() absent */
+                .truth-grid > *, .audience-grid > *, .capability-grid > *,
+                .pipeline-steps > *, .signal-list > *, .company-facts > *,
+                .arch-points > * {
+                    animation-range: entry calc(3% + (sibling-index() - 1) * 3.5%) cover 30%;
                 }
             }
         }
