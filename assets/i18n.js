@@ -272,33 +272,33 @@
     const pageMeta = {
         fr: {
             title: "Taveni — vos réunions transformées en décisions et actions suivies | Hyle Labs",
-            description: "Taveni capte vos réunions, retrouve les décisions prises et les transforme en actions claires (qui, quoi, pour quand) envoyées dans vos outils — CRM, support, gestion de projet. Édité par Hyle Labs, en France.",
+            description: "Taveni capte vos réunions, retrouve les décisions prises et les transforme en actions claires (qui, quoi, pour quand), prêtes à rejoindre vos outils — CRM, support, gestion de projet — après validation par vos équipes. Édité par Hyle Labs, en France.",
             ogTitle: "Taveni — de la réunion à l'action, sans rien perdre",
-            ogDescription: "Taveni retrouve les décisions de vos réunions et les transforme en actions claires, envoyées dans vos outils. Vos équipes valident, rien ne se perd.",
+            ogDescription: "Taveni retrouve les décisions de vos réunions et les transforme en actions claires, prêtes à rejoindre vos outils après validation par vos équipes. Rien ne se perd.",
             ogImageAlt: "Interface Taveni montrant l'ajout de contexte avant une transcription.",
             schemaDescription: "Taveni transforme vos réunions en décisions retrouvables et actions claires (responsable, échéance, destination), envoyées dans vos outils après validation par vos équipes."
         },
         en: {
             title: "Taveni — turn your meetings into decisions and tracked actions | Hyle Labs",
-            description: "Taveni captures your meetings, recovers the decisions made, and turns them into clear actions (who, what, by when) sent into your tools — CRM, support, project management. Built by Hyle Labs, in France.",
+            description: "Taveni captures your meetings, recovers the decisions made, and turns them into clear actions (who, what, by when), ready to flow into your tools — CRM, support, project management — after your teams validate. Built by Hyle Labs, in France.",
             ogTitle: "Taveni — from meeting to action, with nothing lost",
-            ogDescription: "Taveni recovers the decisions from your meetings and turns them into clear actions, sent into your tools. Your teams validate, nothing gets lost.",
+            ogDescription: "Taveni recovers the decisions from your meetings and turns them into clear actions, ready to flow into your tools after your teams validate. Nothing gets lost.",
             ogImageAlt: "Taveni interface showing context added before a transcription.",
             schemaDescription: "Taveni turns your meetings into recoverable decisions and clear actions (owner, deadline, destination), sent into your tools after your teams validate."
         },
         es: {
             title: "Taveni — convierte tus reuniones en decisiones y acciones con seguimiento | Hyle Labs",
-            description: "Taveni capta tus reuniones, recupera las decisiones tomadas y las convierte en acciones claras (quién, qué, para cuándo) enviadas a tus herramientas — CRM, soporte, gestión de proyectos. Desarrollado por Hyle Labs, en Francia.",
+            description: "Taveni capta tus reuniones, recupera las decisiones tomadas y las convierte en acciones claras (quién, qué, para cuándo), listas para llegar a tus herramientas — CRM, soporte, gestión de proyectos — tras la validación de tus equipos. Desarrollado por Hyle Labs, en Francia.",
             ogTitle: "Taveni — de la reunión a la acción, sin perder nada",
-            ogDescription: "Taveni recupera las decisiones de tus reuniones y las convierte en acciones claras, enviadas a tus herramientas. Tus equipos validan, nada se pierde.",
+            ogDescription: "Taveni recupera las decisiones de tus reuniones y las convierte en acciones claras, listas para llegar a tus herramientas tras la validación de tus equipos. Nada se pierde.",
             ogImageAlt: "Interfaz de Taveni mostrando la incorporación de contexto antes de una transcripción.",
             schemaDescription: "Taveni convierte tus reuniones en decisiones recuperables y acciones claras (responsable, plazo, destino), enviadas a tus herramientas tras la validación de tus equipos."
         },
         zh: {
             title: "Taveni — 将会议转化为决策与可追踪任务 | Hyle Labs",
-            description: "Taveni 精准捕捉会议内容，提取已敲定的决策，并将其转化为明确的待办任务（包含负责人、具体事项与截止时间），自动同步至您的 CRM、客服及项目管理等业务系统。由法国 Hyle Labs 出品。",
+            description: "Taveni 精准捕捉会议内容，提取已敲定的决策，并将其转化为明确的待办任务（包含负责人、具体事项与截止时间），经团队确认后同步至您的 CRM、客服及项目管理等业务系统。由法国 Hyle Labs 出品。",
             ogTitle: "Taveni — 从会议到执行，决策零遗漏",
-            ogDescription: "Taveni 提取会议决策并转化为清晰的任务，同步至您的业务工具。经团队确认，确保每个决策都能落地。",
+            ogDescription: "Taveni 提取会议决策并转化为清晰的任务，经团队确认后同步至您的业务工具，确保每个决策都能落地。",
             ogImageAlt: "Taveni 界面：展示在语音转写前注入业务上下文的过程。",
             schemaDescription: "Taveni 将您的会议转化为可追溯的决策与清晰任务（包含负责人、截止日期与目标系统），经团队确认后自动同步至您的业务工具。"
         }
