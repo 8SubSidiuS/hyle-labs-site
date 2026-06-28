@@ -1326,7 +1326,6 @@
         }
 
         @layer utilities {
-            .accent-coral { color: var(--coral); }
             .accent-teal { color: var(--teal-2); }
 
             @media (max-width: 980px) {
@@ -1765,8 +1764,10 @@
             /* CTA mobile */
             .mobile-cta { background: #15938a; color: #04211e; }
 
-            /* Theme-color suit le fond sombre via le rendu, l'image hero garde son cadre clair interne */
+            /* Theme-color suit le fond sombre via le rendu ; l'image hero (UI claire) est légèrement
+               adoucie pour ne pas former un bloc trop lumineux sur le fond sombre. */
             .hero-shot-bar { border-bottom-color: var(--line); }
+            .hero-shot img { filter: brightness(0.94) saturate(0.98); }
         }
 
         /* ===== Blocs dépliables « pour aller plus loin » (progressive disclosure) ===== */
@@ -1831,7 +1832,7 @@
             </a>
             <nav class="nav" aria-label="Navigation principale">
                 <a href="#taveni">Taveni</a>
-                <a href="#preuve">Valeur</a>
+                <a href="#preuve">Le problème</a>
                 <a href="#difference">Différence</a>
                 <a href="#tco">Coût IA</a>
                 <a href="#architecture">Souveraineté</a>
@@ -2083,7 +2084,7 @@
                 <div class="tco-panel" aria-label="Exemple de contexte métier">
                     <div class="panel-topbar">
                         <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-                        <code>contexte.traitement.json</code>
+                        <code>processing.context.json</code>
                     </div>
                     <pre class="tco-object"><code>{
   <span class="key">"meeting_title"</span>: <span class="str">"Revue commerciale Q3"</span>,
@@ -2157,7 +2158,7 @@
         <section class="pipeline" id="parcours">
             <div class="wrap">
                 <div class="section-kicker">Flux</div>
-                <h2 class="section-title">Capture > Qualifie > Relit > Synchronise.</h2>
+                <h2 class="section-title">Capture › Qualifie › Relit › Synchronise.</h2>
                 <p class="section-lead">
                     À chaque étape, vous voyez ce qui a été dit, filtré, validé par vos équipes
                     et envoyé vers un outil métier. La mémoire orale devient une base de travail.
@@ -2165,19 +2166,19 @@
 
                 <div class="pipeline-steps">
                     <article class="step" data-step="1">
-                        <h3>Capturer</h3>
+                        <h3>Capturer.</h3>
                         <p>Captez une réunion, un appel ou une source existante sans perdre le contexte oral.</p>
                     </article>
                     <article class="step" data-step="2">
-                        <h3>Qualifier</h3>
+                        <h3>Qualifier.</h3>
                         <p>Ajoutez rôles, projets, vocabulaire, règles d'accès, preuve et destination attendue.</p>
                     </article>
                     <article class="step" data-step="3">
-                        <h3>Relire</h3>
+                        <h3>Relire.</h3>
                         <p>Confirmez les décisions et actions importantes ou gardez les éléments incomplets en attente.</p>
                     </article>
                     <article class="step" data-step="4">
-                        <h3>Synchroniser</h3>
+                        <h3>Synchroniser.</h3>
                         <p>Envoyez les actions validées vers les outils métier, puis suivez leur état.</p>
                     </article>
                 </div>
@@ -2206,37 +2207,37 @@
                 <div class="capability-grid">
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
-                        <h3>Processus ciblé</h3>
+                        <h3>Processus ciblé.</h3>
                         <p>Choisissez un type de réunion, un outil cible et quelques critères de réussite avant de parler d'automatisation large.</p>
                         <span class="meta">cadrage</span>
                     </article>
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                        <h3>Décisions sourcées</h3>
+                        <h3>Décisions sourcées.</h3>
                         <p>Vérifiez si les arbitrages importants ressortent avec l'extrait, le contexte et le statut de relecture.</p>
                         <span class="meta">preuve</span>
                     </article>
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="5" cy="8" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="5" cy="16" r="2"/><circle cx="19" cy="16" r="2"/></svg>
-                        <h3>Actions qualifiées</h3>
+                        <h3>Actions qualifiées.</h3>
                         <p>Mesurez combien d'actions ont un responsable, une prochaine étape, une destination et un statut clair.</p>
                         <span class="meta">exécution</span>
                     </article>
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8"/><path d="M8 13h5"/><path d="M21 12c0 4.4-4 8-9 8a10.7 10.7 0 0 1-4-.8L3 20l1.3-3.4A7.2 7.2 0 0 1 3 12c0-4.4 4-8 9-8s9 3.6 9 8Z"/></svg>
-                        <h3>Connecteur utile</h3>
+                        <h3>Connecteur utile.</h3>
                         <p>Testez un premier flux vers le CRM, le support ou l'outil projet avant d'élargir le périmètre.</p>
                         <span class="meta">intégration</span>
                     </article>
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
-                        <h3>Règles d'accès</h3>
+                        <h3>Règles d'accès.</h3>
                         <p>Identifiez les sujets sensibles, les personnes autorisées et les informations qui ne doivent pas alimenter un assistant.</p>
                         <span class="meta">contrôle</span>
                     </article>
                     <article class="capability">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1v7Z"/><path d="m9 12 2 2 4-4"/></svg>
-                        <h3>Mesure de valeur</h3>
+                        <h3>Mesure de valeur.</h3>
                         <p>Comparez temps de recherche, ressaisie évitée, risques contrôlés et volume de contexte envoyé aux modèles.</p>
                         <span class="meta">ROI</span>
                     </article>
@@ -2263,19 +2264,19 @@
                     </div>
                     <div class="arch-points">
                         <article class="arch-point">
-                            <h3>Décisions sourcées</h3>
+                            <h3>Décisions sourcées.</h3>
                             <p>Les arbitrages critiques restent reliés à leur preuve avant partage ou synchronisation.</p>
                         </article>
                         <article class="arch-point">
-                            <h3>Partager le minimum utile</h3>
+                            <h3>Partager le minimum utile.</h3>
                             <p>Les outils et assistants reçoivent uniquement les informations prévues pour eux.</p>
                         </article>
                         <article class="arch-point">
-                            <h3>Données sensibles</h3>
+                            <h3>Données sensibles.</h3>
                             <p>Les droits d'accès sont vérifiés avant qu'une information n'alimente un assistant.</p>
                         </article>
                         <article class="arch-point">
-                            <h3>Boucle d'apprentissage</h3>
+                            <h3>Boucle d'apprentissage.</h3>
                             <p>Vos validations, rejets et corrections rendent les prochaines propositions plus proches du fonctionnement réel de l'équipe.</p>
                         </article>
                     </div>
