@@ -165,10 +165,12 @@
                 --radius-card: 14px;
                 --radius-lg: 18px;
                 --shadow: 0 24px 70px rgba(17, 20, 24, 0.12);
-                --shadow-card: 0 1px 2px rgba(17, 20, 24, 0.04), 0 14px 32px -20px rgba(17, 20, 24, 0.22);
+                --shadow-card: 0 1px 2px rgba(17, 20, 24, 0.06), 0 2px 5px rgba(17, 20, 24, 0.04), 0 20px 42px -24px rgba(17, 20, 24, 0.30);
                 --wrap: 1160px;
                 --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
                 --font-display: "Outfit", var(--font-body);
+                color-scheme: light;
+                accent-color: var(--teal);
             }
 
             body {
@@ -405,6 +407,9 @@
                 width: 100%;
                 height: auto;
                 display: block;
+                aspect-ratio: 3 / 2;
+                object-fit: cover;
+                object-position: center;
             }
 
             .eyebrow {
@@ -524,7 +529,7 @@
             }
 
             section {
-                padding: 86px 0;
+                padding: clamp(56px, 8vw, 90px) 0;
                 scroll-margin-top: 82px;
             }
 
@@ -1203,7 +1208,7 @@
             }
 
             .contact {
-                padding: 84px 0;
+                padding: clamp(56px, 8vw, 90px) 0;
                 background: var(--surface);
             }
 
@@ -1415,7 +1420,6 @@
                 .legal-grid {
                     grid-template-columns: 1fr;
                 }
-                section { padding: 62px 0; }
                 .intro-band { padding: 28px 0; }
                 .tco-object {
                     font-size: 12px;
@@ -1684,6 +1688,7 @@
            Défaut = préférence OS au 1er chargement, puis choix manuel mémorisé. Rythme clair/sombre préservé. */
         [data-theme="dark"] {
             & {
+                color-scheme: dark;
                 --paper: #0b1113;
                 --paper-2: #0e1517;
                 --surface: #121a1d;
@@ -1787,6 +1792,24 @@
                adoucie pour ne pas former un bloc trop lumineux sur le fond sombre. */
             .hero-shot-bar { border-bottom-color: var(--line); }
             .hero-shot img { filter: brightness(0.94) saturate(0.98); }
+        }
+
+        /* ===== Couleur élargie (juin 2026) : accents en OKLCH sur écrans wide-gamut =====
+           Même palette teal / ink / corail. Sur display-p3 (écrans modernes), les accents
+           gagnent un cran de vivacité, à luminosité et teinte constantes (fidélité de marque).
+           Le fallback hex (défini en @layer base) reste actif sur sRGB. CSS pur / statique.
+           Tokens non redéfinis par le thème sombre → s'applique aux deux modes. */
+        @media (color-gamut: p3) {
+            @supports (color: oklch(0 0 0)) {
+                :root {
+                    --teal:   oklch(0.515 0.115 186);
+                    --teal-2: oklch(0.442 0.098 187);
+                    --cyan:   oklch(0.663 0.143 209);
+                    --coral:  oklch(0.678 0.210 35);
+                    --amber:  oklch(0.665 0.165 68);
+                    --blue:   oklch(0.515 0.235 267);
+                }
+            }
         }
 
         /* ===== Blocs dépliables « pour aller plus loin » (progressive disclosure) ===== */
