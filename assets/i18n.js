@@ -1154,17 +1154,26 @@
         if (year) year.textContent = String(new Date().getFullYear());
     };
 
+    // Purge le choix de langue persistant historique (localStorage) : il écrasait la
+    // détection du navigateur entre les visites. La langue suit désormais le navigateur,
+    // un changement manuel ne valant que pour la session en cours (sessionStorage).
+    try {
+        localStorage.removeItem("hyle-labs-language");
+    } catch {
+        // Ignore private browsing or blocked storage.
+    }
+
     const safeStorage = {
         get() {
             try {
-                return localStorage.getItem("hyle-labs-language");
+                return sessionStorage.getItem("hyle-labs-language");
             } catch {
                 return null;
             }
         },
         set(value) {
             try {
-                localStorage.setItem("hyle-labs-language", value);
+                sessionStorage.setItem("hyle-labs-language", value);
             } catch {
                 // Ignore private browsing or blocked storage.
             }
