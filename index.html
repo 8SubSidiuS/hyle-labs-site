@@ -1819,6 +1819,57 @@
         }
         [data-theme="dark"] .ontology .more,
         [data-theme="dark"] .architecture .more { background: rgba(255, 255, 255, 0.05); }
+
+        /* ===== Raffinements typographiques & matière (juin 2026) =====
+           CSS pur, non layeré (prioritaire), 100% statique / compatible GitHub Pages. */
+
+        /* 1. Tracking sur le microtexte en capitales — lisibilité + finition premium */
+        .eyebrow, .section-kicker, .truth-card .index, .audience-card .role,
+        .difference-row.header, .capability .meta, .legal-item b {
+            letter-spacing: .06em;
+        }
+
+        /* 2. Resserrage optique des très grands titres display (Outfit) */
+        h1, .section-title { letter-spacing: -.015em; }
+
+        /* 3. Cartes « cas d'usage » : l'espace bas devient intentionnel,
+              ancré par un accent corail (couleur d'appui poussée d'un cran) */
+        .audience-card { position: relative; padding-bottom: 38px; }
+        .audience-card::after {
+            content: "";
+            position: absolute;
+            left: 24px;
+            bottom: 22px;
+            width: 34px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--coral);
+        }
+
+        /* 4. Filet corail discret en tête des 3 KPI du hero */
+        .proof-item { position: relative; overflow: hidden; }
+        .proof-item::after {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: var(--coral);
+            opacity: .85;
+        }
+
+        /* 5. Grain tactile sur les bandes sombres — profondeur « matière » 2026,
+              SVG inline (zéro requête réseau). Pseudo-éléments libres pour ne pas
+              écraser les halos existants (::after intro, ::before ontology/architecture). */
+        .intro-band::before, .ontology::after, .architecture::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: .05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
     </style>
 </head>
 <body>
