@@ -373,7 +373,11 @@
                 border: 1px solid var(--line);
                 border-radius: var(--radius-lg);
                 background: var(--surface);
-                box-shadow: 0 34px 80px -42px rgba(17, 20, 24, 0.5), 0 2px 6px rgba(17, 20, 24, 0.05);
+                box-shadow:
+                    0 0 0 1px rgba(17, 20, 24, 0.05),
+                    0 40px 90px -45px rgba(17, 20, 24, 0.5),
+                    0 36px 84px -52px rgba(15, 118, 110, 0.28),
+                    0 2px 6px rgba(17, 20, 24, 0.05);
                 overflow: hidden;
             }
 
@@ -427,7 +431,7 @@
 
             h1 {
                 margin-top: 16px;
-                font-size: clamp(40px, 5.4vw, 66px);
+                font-size: clamp(40px, 5vw, 60px);
                 font-weight: 800;
                 max-width: 760px;
             }
@@ -1755,6 +1759,18 @@
             .contact .section-kicker { color: #7ee7d8; }
             .section-kicker::before { background: #7ee7d8; }
 
+            /* Mot-accent du titre : le teal foncé tombe à 2,5:1 sur le fond sombre.
+               On reprend le cyan déjà utilisé partout en sombre (≈ 13:1, AAA). */
+            .accent-teal { color: #7ee7d8; }
+
+            /* Visuel produit : halo cyan discret pour détacher le bloc clair du fond sombre */
+            .hero-shot {
+                box-shadow:
+                    0 0 0 1px rgba(126, 231, 216, 0.1),
+                    0 40px 90px -45px rgba(0, 0, 0, 0.7),
+                    0 36px 84px -52px rgba(126, 231, 216, 0.22);
+            }
+
             /* Focus + sélection */
             ::selection { background: rgba(126, 231, 216, 0.22); }
 
@@ -1872,6 +1888,20 @@
             opacity: .05;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px 200px;
+        }
+
+        /* 6. Dépliables « pour aller plus loin » : ouverture/fermeture animée vers
+              height:auto — nouveauté CSS 2026 (interpolate-size + ::details-content).
+              Enhancement progressif : sans support, le bloc s'ouvre instantanément.
+              Le reset prefers-reduced-motion (ci-dessus) neutralise la transition. */
+        @supports (interpolate-size: allow-keywords) {
+            :root { interpolate-size: allow-keywords; }
+            .more::details-content {
+                block-size: 0;
+                overflow: clip;
+                transition: block-size .3s ease, content-visibility .3s allow-discrete;
+            }
+            .more[open]::details-content { block-size: auto; }
         }
     </style>
 </head>
