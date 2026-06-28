@@ -34,8 +34,8 @@
             });
         })();
     </script>
-    <title>Hyle Labs — Taveni, le Capital Token de vos réunions</title>
-    <meta name="description" content="Hyle Labs édite Taveni, une plateforme qui transforme la mémoire orale des réunions en décisions sourcées, actions qualifiées et Capital Token souverain.">
+    <title>Taveni — vos réunions transformées en décisions et actions suivies | Hyle Labs</title>
+    <meta name="description" content="Taveni capte vos réunions, retrouve les décisions prises et les transforme en actions claires (qui, quoi, pour quand) envoyées dans vos outils — CRM, support, gestion de projet. Édité par Hyle Labs, en France.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hyle-labs.net">
     <link rel="alternate" hreflang="fr" href="https://hyle-labs.net/?lang=fr">
@@ -43,8 +43,8 @@
     <link rel="alternate" hreflang="es" href="https://hyle-labs.net/?lang=es">
     <link rel="alternate" hreflang="zh-Hans" href="https://hyle-labs.net/?lang=zh">
     <link rel="alternate" hreflang="x-default" href="https://hyle-labs.net">
-    <meta property="og:title" content="Hyle Labs — Éditeur de Taveni">
-    <meta property="og:description" content="Taveni filtre la mémoire orale, qualifie décisions et actions, puis synchronise seulement le minimum utile dans vos outils.">
+    <meta property="og:title" content="Taveni — de la réunion à l'action, sans rien perdre">
+    <meta property="og:description" content="Taveni retrouve les décisions de vos réunions et les transforme en actions claires, envoyées dans vos outils. Vos équipes valident, rien ne se perd.">
     <meta property="og:url" content="https://hyle-labs.net">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
@@ -92,7 +92,7 @@
           "name": "Taveni",
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "Web",
-          "description": "Plateforme pour transformer la mémoire orale des réunions en décisions sourcées, actions qualifiées et Capital Token souverain.",
+          "description": "Taveni transforme vos réunions en décisions retrouvables et actions claires (responsable, échéance, destination), envoyées dans vos outils après validation par vos équipes.",
           "publisher": { "@id": "https://hyle-labs.net#org" },
           "offers": { "@type": "Offer", "availability": "https://schema.org/PreOrder" }
         }
@@ -427,9 +427,9 @@
 
             h1 {
                 margin-top: 16px;
-                font-size: clamp(48px, 8vw, 92px);
+                font-size: clamp(40px, 5.4vw, 66px);
                 font-weight: 800;
-                max-width: 700px;
+                max-width: 760px;
             }
 
             .hero-copy p {
@@ -1396,7 +1396,7 @@
                 }
                 .proof-item b { font-size: 17px; }
                 .proof-item span { margin-top: 0; }
-                h1 { font-size: clamp(38px, 13vw, 54px); }
+                h1 { font-size: clamp(33px, 9vw, 44px); }
                 .hero-copy p { font-size: 17px; }
                 .hero-proof,
                 .signal-list,
@@ -1768,6 +1768,56 @@
             /* Theme-color suit le fond sombre via le rendu, l'image hero garde son cadre clair interne */
             .hero-shot-bar { border-bottom-color: var(--line); }
         }
+
+        /* ===== Blocs dépliables « pour aller plus loin » (progressive disclosure) ===== */
+        .more {
+            margin-top: 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-card);
+            background: color-mix(in srgb, var(--surface) 70%, transparent);
+        }
+        .more > summary {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            list-style: none;
+            cursor: pointer;
+            color: var(--teal-2);
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .more > summary::-webkit-details-marker { display: none; }
+        .more > summary::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform .2s ease;
+        }
+        .more[open] > summary::before { transform: rotate(45deg); }
+        .more > summary:hover { color: var(--ink); }
+        .more > p {
+            margin: 0;
+            padding: 0 16px 16px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.65;
+        }
+        .more-list {
+            margin: 0;
+            padding: 2px 18px 16px 34px;
+            display: grid;
+            gap: 9px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        [data-theme="dark"] .ontology .more,
+        [data-theme="dark"] .architecture .more { background: rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body>
@@ -1809,13 +1859,13 @@
         <section class="hero" aria-labelledby="hero-title">
             <div class="wrap hero-grid">
                 <div class="hero-copy">
-                    <div class="eyebrow">Éditeur logiciel · Rhône, France</div>
-                    <h1 id="hero-title">Hyle Labs construit <span class="accent-teal">Taveni</span></h1>
+                    <div class="eyebrow">Logiciel français · édité par Hyle Labs</div>
+                    <h1 id="hero-title"><span class="accent-teal">Taveni</span> transforme vos réunions en décisions et actions suivies</h1>
                     <p>
-                        Chaque réunion produit de l'intelligence économique. La plupart des outils la
-                        transforment en résumés que personne ne relit. Taveni la convertit en
-                        <strong>décisions sourcées, actions exploitables et preuves vérifiables</strong>.
-                        L'IA prépare ; vos équipes valident ce qui devient capital.
+                        Après une réunion, l'essentiel se perd : qui a décidé quoi, pour quand, dans quel outil.
+                        <strong>Taveni capte vos échanges, retrouve les décisions et les transforme en actions
+                        claires</strong>, envoyées directement dans vos outils — CRM, support, gestion de projet.
+                        Vos équipes valident d'un coup d'œil, et rien ne tombe entre les mailles.
                     </p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="#parcours">
@@ -1835,15 +1885,15 @@
                 <div class="hero-proof" aria-label="Points clés Taveni">
                     <div class="proof-item">
                         <b>Décisions</b>
-                        <span>Arbitrage relié à sa preuve orale</span>
+                        <span>Reliées au moment exact où elles ont été prises</span>
                     </div>
                     <div class="proof-item">
                         <b>Actions</b>
-                        <span>Responsable, échéance et destination</span>
+                        <span>Qui fait quoi, pour quand, dans quel outil</span>
                     </div>
                     <div class="proof-item">
-                        <b>Minimum utile</b>
-                        <span>Moins de bruit, moins de tokens</span>
+                        <b>L'essentiel</b>
+                        <span>Le superflu filtré, l'utile dans vos outils</span>
                     </div>
                 </div>
             </div>
@@ -1852,26 +1902,27 @@
         <section class="intro-band" id="taveni" aria-label="Ce que Taveni permet">
             <div class="wrap intro-grid">
                 <p>
-                    Une synthèse automatique est une dépense. Une décision qualifiée est du capital.
-                    Taveni capture la mémoire orale, filtre le bruit et ne synchronise que ce qui peut
-                    servir : preuve, responsable, destination, droit d'accès et coût d'inférence.
+                    Un résumé de réunion, personne ne le rouvre. Une décision avec un responsable et une
+                    échéance, ça se suit et ça s'exécute. Taveni écoute vos réunions, repère ce qui compte
+                    vraiment et n'envoie dans vos outils que l'utile : la décision, sa preuve, le responsable,
+                    la destination — et qui a le droit de la voir.
                 </p>
                 <div class="signal-list">
                     <div class="signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M2 12h20"/></svg>
-                        <div><strong>Capital Token</strong><span>Transformez l'arbitrage oral en actif retrouvé, relu et réutilisable.</span></div>
+                        <div><strong>Rien ne s'oublie</strong><span>Chaque décision reste retrouvable, avec le moment précis où elle a été prise.</span></div>
                     </div>
                     <div class="signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-                        <div><strong>Actions exploitables</strong><span>Identifiez responsable, échéance, sujet et destination.</span></div>
+                        <div><strong>Des actions, pas des notes</strong><span>Qui fait quoi, pour quand et dans quel outil — prêt à l'emploi.</span></div>
                     </div>
                     <div class="signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="m4 7 8 4 8-4"/><path d="M12 11v10"/></svg>
-                        <div><strong>Filtre anti-Jevons</strong><span>N'envoyez au modèle que l'information qualifiée.</span></div>
+                        <div><strong>Moins de coût IA inutile</strong><span>On n'envoie à l'IA que l'information utile, pas tout le verbatim.</span></div>
                     </div>
                     <div class="signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10"/><path d="M7 12h7"/><path d="M7 16h4"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
-                        <div><strong>Mémoire souveraine</strong><span>Chaque correction nourrit une boucle d'apprentissage qui reste chez vous.</span></div>
+                        <div><strong>Vos données restent chez vous</strong><span>Chaque correction améliore votre système, sans jamais partir ailleurs.</span></div>
                     </div>
                 </div>
             </div>
@@ -1879,19 +1930,19 @@
 
         <section class="truth-section" id="preuve" aria-labelledby="preuve-title">
             <div class="wrap">
-                <div class="section-kicker">Manifeste</div>
-                <h2 class="section-title" id="preuve-title">L'IA n'est pas une dépense. C'est votre prochain capital.</h2>
+                <div class="section-kicker">Le problème</div>
+                <h2 class="section-title" id="preuve-title">Vos meilleures décisions se prennent à l'oral. Puis elles disparaissent.</h2>
                 <p class="section-lead">
-                    Le résumé automatique est devenu une commodité. Il remplit des espaces de stockage,
-                    crée de nouveaux PDF oubliés et consomme des tokens pour produire du bruit. La valeur
-                    commence dans les arbitrages oraux que vos équipes assument, relisent et réutilisent.
+                    Les outils de résumé produisent des comptes rendus que personne ne rouvre. La vraie
+                    valeur est ailleurs : dans les décisions que vos équipes prennent à l'oral, assument,
+                    et doivent pouvoir retrouver, relire et exécuter.
                 </p>
 
                 <div class="truth-grid">
                     <article class="truth-card">
                         <span class="index">Mémoire orale</span>
                         <h3>La décision s'évapore.</h3>
-                        <p>Budget, priorité, exception client : l'arbitrage est validé à l'oral, puis disparaît dans une transcription.</p>
+                        <p>Budget, priorité, exception accordée à un client : la décision est prise à l'oral, puis se perd dans une longue transcription.</p>
                         <ul>
                             <li>décision</li>
                             <li>extrait</li>
@@ -1910,8 +1961,8 @@
                     </article>
                     <article class="truth-card">
                         <span class="index">Outil</span>
-                        <h3>Le capital reste hors processus.</h3>
-                        <p>Le compte rendu existe, mais l'action ne rejoint ni CRM, ni support, ni calendrier, ni outil projet.</p>
+                        <h3>Rien n'arrive jusqu'aux outils.</h3>
+                        <p>Le compte rendu existe, mais l'action ne rejoint ni le CRM, ni le support, ni le calendrier, ni l'outil de projet.</p>
                         <ul>
                             <li>destination</li>
                             <li>format utile</li>
@@ -1930,8 +1981,8 @@
                     </article>
                     <article class="truth-card">
                         <span class="index">Coût</span>
-                        <h3>L'effet rebond frappe les budgets IA.</h3>
-                        <p>Plus le token baisse, plus on l'envoie sans tri. Les agents amplifient alors la facture.</p>
+                        <h3>La facture d'IA grimpe vite.</h3>
+                        <p>Moins l'IA coûte cher, plus on lui envoie tout sans trier. Résultat : on paie beaucoup pour du bruit.</p>
                         <ul>
                             <li>à relire</li>
                             <li>validé</li>
@@ -1940,9 +1991,9 @@
                     </article>
                 </div>
                 <p class="truth-note">
-                    Chaque réunion produit de l'intelligence. Taveni empêche qu'elle s'évapore dans la
-                    mémoire des collaborateurs ou dans des PDF oubliés. Elle devient Capital Token :
-                    une donnée qualifiée, vérifiable et prête à rejoindre vos outils.
+                    Chaque réunion produit de la valeur. Taveni l'empêche de se perdre dans les têtes ou dans
+                    des PDF oubliés : chaque décision devient un actif fiable, sourcé et prêt à rejoindre vos
+                    outils — ce que nous appelons le Capital Token.
                 </p>
             </div>
         </section>
@@ -1980,23 +2031,27 @@
                 <div class="section-kicker">Positionnement</div>
                 <h2 class="section-title" id="difference-title">Taveni commence là où la note automatique s'arrête.</h2>
                 <p class="section-lead">
-                    La note automatique raconte ce qui a été dit. Taveni qualifie ce qui doit produire
-                    un effet dans le système d'information : source, responsable, statut, droits,
-                    destination et coût d'inférence.
+                    La note automatique raconte ce qui a été dit. Taveni identifie ce qui doit produire un
+                    effet concret : la source, le responsable, le statut, les droits d'accès et la destination
+                    dans vos outils.
                 </p>
 
                 <div class="difference-layout">
                     <article class="market-note">
-                        <h3>Le filtre anti-Jevons.</h3>
+                        <h3>Pourquoi tout envoyer à l'IA coûte cher.</h3>
                         <p>
-                            Plus l'inférence devient bon marché, plus les organisations transcrivent,
-                            résument et stockent sans discipline. Avec des agents qui raisonnent en continu,
-                            la transcription brute devient un mauvais arbitrage financier.
+                            Plus l'IA devient bon marché, plus on lui envoie tout sans trier. Avec des agents
+                            qui travaillent en continu, transmettre des transcriptions brutes revient vite cher
+                            pour peu de valeur.
                         </p>
                         <p>
-                            Taveni applique la qualification avant envoi. L'agent ne reçoit que le minimum
-                            utile, validé pour créer une action, une preuve ou une décision réutilisable.
+                            Taveni trie avant d'envoyer : l'IA ne reçoit que l'information utile et validée —
+                            de quoi créer une action, une preuve ou une décision réutilisable, sans payer pour le reste.
                         </p>
+                        <details class="more">
+                            <summary>Le paradoxe de Jevons, en deux mots</summary>
+                            <p>Quand une ressource devient moins chère, on en consomme davantage — pas moins. Pour l'IA : plus le coût par requête baisse, plus on multiplie les appels, et la dépense totale augmente. Taveni applique l'effet inverse en ne traitant que l'utile.</p>
+                        </details>
                     </article>
 
                     <div class="difference-board" aria-label="Positionnement Taveni face aux outils de prise de notes IA">
@@ -2013,15 +2068,15 @@
         <section class="tco-section" id="tco">
             <div class="wrap tco-layout">
                 <div class="tco-copy">
-                    <div class="section-kicker">Coût agentique</div>
-                    <h2 class="section-title">Le minimum utile est une règle financière.</h2>
+                    <div class="section-kicker">Le coût de l'IA</div>
+                    <h2 class="section-title">Tout envoyer à l'IA coûte cher. Taveni n'envoie que l'utile.</h2>
                     <p class="section-lead">
-                        Un agent qui raisonne en continu consomme bien plus qu'un chatbot. Lui transmettre
-                        une transcription brute revient à faire payer l'entreprise pour du contexte non qualifié.
+                        Une IA qui travaille en continu coûte bien plus qu'un simple chatbot. Lui transmettre
+                        une transcription brute, c'est payer pour du contexte inutile.
                     </p>
                     <p class="section-lead">
-                        Ce qui n'a pas de source, de responsable, de droit ou de destination ne part pas.
-                        C'est le filtre anti-Jevons appliqué aux flux de réunion.
+                        Ce qui n'a ni source, ni responsable, ni droit d'accès, ni destination ne part pas.
+                        Vous ne payez que pour l'information qui sert vraiment.
                     </p>
                 </div>
 
@@ -2058,15 +2113,15 @@
                 <div class="section-kicker">Boucle de décision</div>
                 <h2 class="section-title">On délègue la tâche, pas l'apprentissage.</h2>
                 <p class="section-lead">
-                    Une proposition IA n'a de valeur qu'après validation. Quand vos équipes corrigent,
-                    confirment ou rejettent, elles construisent une boucle d'apprentissage propriétaire
-                    que vous gardez même si le modèle change.
+                    Une proposition de l'IA n'a de valeur qu'une fois validée par un humain. Chaque fois que
+                    vos équipes corrigent, confirment ou rejettent, elles apprennent vos règles au système —
+                    et ce savoir vous appartient, même si vous changez d'IA demain.
                 </p>
 
                 <div class="ontology-grid">
                     <div class="meaning-stack" aria-label="Règles de validation Taveni">
                         <div class="meaning-layer">
-                            <b>Boucle propriétaire</b>
+                            <b>Un système qui vous appartient</b>
                             <span>Chaque correction enseigne vos règles à votre propre système.</span>
                         </div>
                         <div class="meaning-layer">
@@ -2126,6 +2181,16 @@
                         <p>Envoyez les actions validées vers les outils métier, puis suivez leur état.</p>
                     </article>
                 </div>
+
+                <details class="more pipeline-more">
+                    <summary>Voir le fonctionnement en détail</summary>
+                    <ul class="more-list">
+                        <li>Capture — l'audio de la réunion (ou un fichier existant) est transcrit et horodaté, pour relier chaque passage au moment exact où il a été dit.</li>
+                        <li>Qualification — Taveni repère décisions, actions et risques, puis leur attache un responsable, une échéance, des droits d'accès et l'outil de destination.</li>
+                        <li>Relecture — vos équipes confirment, complètent ou rejettent en un clic ; rien ne part tant que ce n'est pas validé.</li>
+                        <li>Synchronisation — seules les actions validées rejoignent vos outils (CRM, support, projet), et leur statut reste suivi.</li>
+                    </ul>
+                </details>
             </div>
         </section>
 
@@ -2134,8 +2199,8 @@
                 <div class="section-kicker">Évaluation</div>
                 <h2 class="section-title">Mesurer la valeur, pas la hype.</h2>
                 <p class="section-lead">
-                    Une évaluation Taveni ne promet pas l'automatisation totale. Elle mesure la réduction
-                    du temps de recherche, des ressaisies, des risques et du coût d'inférence sur un processus réel.
+                    Une évaluation Taveni ne promet pas l'automatisation totale. Elle mesure, sur un processus
+                    réel, le temps de recherche gagné, les ressaisies évitées, les risques réduits et le coût d'IA maîtrisé.
                 </p>
 
                 <div class="capability-grid">
@@ -2182,11 +2247,11 @@
         <section class="architecture" id="architecture">
             <div class="wrap">
                 <div class="section-kicker">Souveraineté</div>
-                <h2 class="section-title">Votre mémoire opérationnelle ne doit pas dépendre d'un modèle tiers.</h2>
+                <h2 class="section-title">Vos décisions restent à vous, quelle que soit l'IA que vous utilisez.</h2>
                 <p class="section-lead">
-                    Chaque décision validée, chaque correction et chaque règle d'accès enrichit votre capital
-                    de décisions. Taveni conserve la preuve, l'état de relecture, les droits et le minimum
-                    utile partagé avec vos outils ou assistants.
+                    Chaque décision validée, chaque correction et chaque règle d'accès enrichit votre patrimoine
+                    de décisions. Taveni conserve la preuve, le statut de relecture, les droits d'accès et la
+                    part d'information partagée avec vos outils ou vos assistants IA.
                 </p>
 
                 <div class="arch-grid">
@@ -2253,8 +2318,8 @@
                     <h2>Mesurer Taveni sur un processus réel ?</h2>
                     <p>
                         Envoyez-nous votre contexte : type de réunion, outil cible, contraintes RGPD et
-                        critères de réussite. Nous vous répondrons avec un périmètre d'évaluation relié à
-                        des métriques de recherche, ressaisie, risque et coût d'inférence.
+                        critères de réussite. Nous vous répondrons avec un périmètre d'évaluation chiffré
+                        sur le temps de recherche, les ressaisies, les risques et le coût d'IA.
                     </p>
                 </div>
                 <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=%C3%89change%20Taveni&body=Bonjour%20Hyle%20Labs%2C%0A%0AContexte%20%2F%20besoin%20%3A%0AOutils%20%C3%A0%20connecter%20%3A%0AContraintes%20RGPD%20%2F%20s%C3%A9curit%C3%A9%20%3A%0A%0AMerci%2C">
