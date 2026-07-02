@@ -69,8 +69,7 @@
     <meta property="og:image" content="https://hyle-labs.net/assets/taveni-tco-product.webp">
     <meta property="og:image:alt" content="Interface Taveni montrant l'ajout de contexte avant une transcription.">
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-latin.woff2" crossorigin>
-    <link rel="preload" as="image" href="assets/taveni-tco-product.webp" imagesrcset="assets/taveni-tco-product.webp" fetchpriority="high">
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-latin.woff2" crossorigin>
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -95,9 +94,9 @@
           },
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "254 Rue Vendôme",
-            "postalCode": "69003",
-            "addressLocality": "Lyon",
+            "streetAddress": "1 C Rue Gérard Neyrin",
+            "postalCode": "69630",
+            "addressLocality": "Chaponost",
             "addressCountry": "FR"
           }
         },
@@ -109,6 +108,36 @@
           "description": "Taveni transforme vos réunions en décisions retrouvables et actions claires (responsable, échéance, destination), envoyées dans vos outils après validation par vos équipes.",
           "publisher": { "@id": "https://hyle-labs.net#org" },
           "offers": { "@type": "Offer", "availability": "https://schema.org/PreOrder" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Faut-il changer d'outils pour utiliser Taveni ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Non. Taveni s'ajoute à l'existant : il pousse des actions validées vers le CRM, le support ou l'outil projet que vous utilisez déjà. On commence par un premier connecteur, puis on élargit si la valeur est démontrée." }
+            },
+            {
+              "@type": "Question",
+              "name": "Où vont les données ? (RGPD)",
+              "acceptedAnswer": { "@type": "Answer", "text": "Hyle Labs est une société française : consentement, sécurité et contraintes de déploiement sont traités dès la conception. Les droits d'accès sont vérifiés avant qu'une information n'alimente un assistant, et vos corrections ne servent pas à entraîner des modèles tiers." }
+            },
+            {
+              "@type": "Question",
+              "name": "Que se passe-t-il si nous changeons de modèle d'IA ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Vos décisions qualifiées, vos corrections et vos règles d'accès restent votre capital, indépendamment du modèle utilisé. Changer d'IA ne vous fait pas repartir de zéro." }
+            },
+            {
+              "@type": "Question",
+              "name": "Combien ça coûte ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Taveni est en phase d'évaluation cadrée : nous chiffrons d'abord, sur un de vos processus réels, le temps de recherche gagné, les ressaisies évitées, les risques réduits et le coût d'IA maîtrisé. Vous décidez ensuite en connaissance de cause." }
+            },
+            {
+              "@type": "Question",
+              "name": "Quels outils connectez-vous ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Les premiers flux visent le CRM, le support et la gestion de projet. Dites-nous quels outils comptent pour vous : le périmètre d'évaluation se construit autour d'un premier connecteur utile." }
+            }
+          ]
         }
       ]
     }
@@ -134,20 +163,30 @@
             unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
         @font-face {
-            font-family: "Outfit";
+            font-family: "Bricolage Grotesque";
             font-style: normal;
-            font-weight: 500 800;
+            font-weight: 200 800;
+            font-stretch: 75% 100%;
             font-display: swap;
-            src: url("assets/fonts/outfit-latin.woff2") format("woff2");
+            src: url("assets/fonts/bricolage-latin.woff2") format("woff2");
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
         @font-face {
-            font-family: "Outfit";
+            font-family: "Bricolage Grotesque";
             font-style: normal;
-            font-weight: 500 800;
+            font-weight: 200 800;
+            font-stretch: 75% 100%;
             font-display: swap;
-            src: url("assets/fonts/outfit-latin-ext.woff2") format("woff2");
+            src: url("assets/fonts/bricolage-latin-ext.woff2") format("woff2");
             unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+            src: url("assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
 
         @layer reset {
@@ -165,7 +204,7 @@
                 --surface: #ffffff;
                 --ink: #111418;
                 --ink-2: #2f3a3f;
-                --muted: #667275;
+                --muted: #5d696c;
                 --line: #d9dfdc;
                 --teal: #0f766e;
                 --teal-2: #0b5f59;
@@ -175,14 +214,30 @@
                 --blue: #3458d4;
                 --deep: #0d1416;
                 --deep-2: #142024;
+                /* Fil rouge « décision » : seul usage autorisé du corail (tampons,
+                   surlignage, puces d'artefacts). Jamais en texte < 18px, jamais sur un CTA. */
+                --decision: var(--coral);
+                --decision-wash: color-mix(in srgb, var(--coral) 13%, transparent);
                 --radius: 8px;
-                --radius-card: 14px;
-                --radius-lg: 18px;
+                --radius-card: 12px;
+                --radius-lg: 16px;
                 --shadow: 0 24px 70px rgba(17, 20, 24, 0.12);
                 --shadow-card: 0 1px 2px rgba(17, 20, 24, 0.06), 0 2px 5px rgba(17, 20, 24, 0.04), 0 20px 42px -24px rgba(17, 20, 24, 0.30);
                 --wrap: 1160px;
                 --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-                --font-display: "Outfit", var(--font-body);
+                --font-display: "Bricolage Grotesque", var(--font-body);
+                --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+                /* Échelle typographique fluide — pyramide : le H1 est seul à sa taille,
+                   deux titres « chapitre » max, les autres sections descendent d'un cran. */
+                --text-sm: 0.875rem;
+                --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+                --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+                --text-h3: clamp(1.1875rem, 1.1rem + 0.5vw, 1.375rem);
+                --text-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+                --text-h2-major: clamp(2.125rem, 1.6rem + 2.6vw, 3.25rem);
+                --text-h1: clamp(2.5rem, 1.9rem + 3.2vw, 3.75rem);
+                --space-section: clamp(64px, 9vw, 120px);
+                --space-block: clamp(28px, 4vw, 48px);
                 color-scheme: light;
                 accent-color: var(--teal);
             }
@@ -192,12 +247,15 @@
                 background: var(--paper);
                 color: var(--ink);
                 font-family: var(--font-body);
+                font-size: var(--text-base);
                 line-height: 1.55;
                 -webkit-font-smoothing: antialiased;
                 text-rendering: optimizeLegibility;
             }
 
             a { color: inherit; }
+
+            code, pre { font-family: var(--font-mono); }
 
             h1, h2, h3, .section-title, .contact-box h2 { text-wrap: balance; }
             p, li, .section-lead, .hero-copy p { text-wrap: pretty; }
@@ -337,6 +395,71 @@
                 color: white;
             }
 
+            /* Menu mobile — <details> natif, zéro JS obligatoire */
+            .nav-menu {
+                display: none;
+                position: relative;
+                margin-left: 4px;
+            }
+
+            .nav-menu > summary {
+                list-style: none;
+                cursor: pointer;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                padding: 0 14px;
+                border: 1px solid rgba(17, 20, 24, 0.12);
+                border-radius: var(--radius);
+                background: rgba(255, 255, 255, 0.62);
+                color: var(--ink-2);
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .nav-menu > summary::-webkit-details-marker { display: none; }
+
+            .nav-menu[open] > summary {
+                background: var(--ink);
+                color: white;
+            }
+
+            .nav-menu-panel {
+                position: absolute;
+                right: 0;
+                top: calc(100% + 10px);
+                min-width: 240px;
+                display: grid;
+                gap: 2px;
+                padding: 8px;
+                border: 1px solid var(--line);
+                border-radius: var(--radius-card);
+                background: var(--surface);
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu-panel a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                padding: 0 12px;
+                border-radius: 6px;
+                color: var(--ink-2);
+                text-decoration: none;
+                font-size: 14.5px;
+                font-weight: 600;
+            }
+
+            .nav-menu-panel a:hover {
+                background: rgba(15, 118, 110, 0.08);
+                color: var(--teal-2);
+            }
+
+            .nav-menu-panel a:last-child {
+                color: var(--teal-2);
+                font-weight: 700;
+            }
+
             .hero {
                 min-height: min(720px, calc(100svh - 112px));
                 position: relative;
@@ -384,46 +507,128 @@
                 max-width: 690px;
             }
 
-            .hero-shot {
+            /* ===== Fiche de décision — l'artefact que le produit fabrique ===== */
+            .hero-artifact {
                 grid-area: shot;
+                position: relative;
+                margin: 0;
+                justify-self: end;
+                width: min(440px, 100%);
+            }
+
+            .decision-card {
+                position: relative;
+                z-index: 1;
+                padding: 22px 24px;
                 border: 1px solid var(--line);
-                border-radius: var(--radius-lg);
+                border-radius: var(--radius-card);
                 background: var(--surface);
                 box-shadow:
-                    0 0 0 1px rgba(17, 20, 24, 0.05),
-                    0 40px 90px -45px rgba(17, 20, 24, 0.5),
-                    0 36px 84px -52px rgba(15, 118, 110, 0.28),
-                    0 2px 6px rgba(17, 20, 24, 0.05);
-                overflow: hidden;
+                    0 1px 2px rgba(17, 20, 24, 0.05),
+                    0 34px 80px -42px rgba(17, 20, 24, 0.45),
+                    0 30px 70px -48px rgba(15, 118, 110, 0.30);
             }
 
-            .hero-shot-bar {
+            /* Fiche fantôme décalée derrière : profondeur, zéro contenu */
+            .decision-card--ghost {
+                position: absolute;
+                z-index: 0;
+                inset: 30px -26px auto auto;
+                width: 88%;
+                height: 82%;
+                box-shadow: none;
+                opacity: 0.55;
+            }
+
+            .dc-skeleton {
+                height: 100%;
+                min-height: 120px;
+                background:
+                    repeating-linear-gradient(180deg,
+                        var(--paper-2) 0 10px, transparent 10px 26px);
+                border-radius: 4px;
+                opacity: 0.6;
+            }
+
+            .dc-top {
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                font-family: var(--font-mono);
+                font-size: 12px;
+                color: var(--muted);
+            }
+
+            .dc-stamp {
+                display: inline-flex;
+                align-items: center;
                 gap: 7px;
-                padding: 11px 14px;
-                border-bottom: 1px solid var(--line);
-                background: #fbfcf9;
-            }
-
-            .hero-shot-bar span {
-                width: 10px;
-                height: 10px;
+                min-height: 24px;
+                padding: 0 10px;
                 border-radius: 999px;
-                background: var(--line);
+                background: var(--decision-wash);
+                color: var(--ink);
+                font-weight: 700;
             }
 
-            .hero-shot-bar span:nth-child(1) { background: var(--coral); }
-            .hero-shot-bar span:nth-child(2) { background: var(--amber); }
-            .hero-shot-bar span:nth-child(3) { background: var(--teal); }
+            .dc-stamp::before {
+                content: "";
+                width: 7px;
+                height: 7px;
+                border-radius: 2px;
+                background: var(--decision);
+            }
 
-            .hero-shot img {
-                width: 100%;
-                height: auto;
-                display: block;
-                aspect-ratio: 3 / 2;
-                object-fit: cover;
-                object-position: center;
+            .dc-quote {
+                margin: 16px 0 10px;
+                font-family: var(--font-display);
+                font-size: clamp(19px, 1.6vw, 23px);
+                font-weight: 600;
+                line-height: 1.3;
+                text-wrap: balance;
+            }
+
+            .dc-mark {
+                background: linear-gradient(transparent 62%, var(--decision-wash) 62%);
+                color: inherit;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+            }
+
+            .dc-source {
+                font-family: var(--font-mono);
+                font-size: 12.5px;
+                color: var(--muted);
+            }
+
+            .dc-action {
+                margin-top: 18px;
+                padding-top: 15px;
+                border-top: 1px dashed var(--line);
+            }
+
+            .dc-action-label {
+                display: inline-block;
+                font-family: var(--font-mono);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: .07em;
+                text-transform: uppercase;
+                color: var(--teal-2);
+            }
+
+            .dc-action-text {
+                margin-top: 6px;
+                font-weight: 700;
+                font-size: 15.5px;
+            }
+
+            .dc-action-meta {
+                margin-top: 4px;
+                font-family: var(--font-mono);
+                font-size: 12.5px;
+                color: var(--muted);
             }
 
             .eyebrow {
@@ -445,13 +650,13 @@
 
             h1, h2, h3 {
                 font-family: var(--font-display);
-                line-height: 1.02;
+                line-height: 1.06;
             }
 
             h1 {
                 margin-top: 16px;
-                font-size: clamp(40px, 5vw, 60px);
-                font-weight: 800;
+                font-size: var(--text-h1);
+                font-weight: 700;
                 max-width: 760px;
             }
 
@@ -511,39 +716,49 @@
                 background: white;
             }
 
-            .hero-proof {
-                width: min(820px, 100%);
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 10px;
-            }
-
-            .proof-item {
-                min-height: 82px;
-                padding: 14px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.68);
-                backdrop-filter: blur(16px);
-            }
-
-            .proof-item b {
-                display: block;
-                font-family: var(--font-display);
-                font-size: 24px;
-                line-height: 1;
-            }
-
-            .proof-item span {
-                display: block;
-                margin-top: 8px;
+            /* Ligne de preuve : trois fragments, pas un gabarit de statistiques */
+            .hero-copy p.hero-keyline {
+                margin-top: 26px;
+                max-width: 560px;
                 color: var(--muted);
-                font-size: 13px;
+                font-size: var(--text-sm);
+                font-weight: 600;
+                line-height: 1.7;
+            }
+
+            /* Deux signaux différenciants sous le hero */
+            .hero-signals {
+                grid-area: proof;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px 36px;
+                padding-top: 24px;
+                border-top: 1px solid rgba(17, 20, 24, 0.1);
+            }
+
+            .hero-signal {
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+                margin: 0;
+                color: var(--ink-2);
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .hero-signal svg {
+                flex: 0 0 auto;
+                margin-top: 3px;
+                color: var(--teal-2);
+            }
+
+            .hero-signal strong {
+                color: var(--ink);
                 font-weight: 700;
             }
 
             section {
-                padding: clamp(56px, 8vw, 90px) 0;
+                padding: var(--space-section) 0;
                 scroll-margin-top: 82px;
             }
 
@@ -561,124 +776,63 @@
             .section-title {
                 margin-top: 12px;
                 max-width: 820px;
-                font-size: clamp(34px, 5vw, 58px);
-                font-weight: 800;
+                font-size: var(--text-h2);
+                font-weight: 700;
+            }
+
+            /* Deux titres « chapitre » max sur la page (Problème, Souveraineté) */
+            .section-title--major {
+                font-size: var(--text-h2-major);
             }
 
             .section-lead {
                 margin-top: 18px;
-                max-width: 720px;
+                max-width: 62ch;
                 color: var(--ink-2);
-                font-size: 18px;
-                line-height: 1.75;
-            }
-
-            .intro-band {
-                padding: 34px 0;
-                background: var(--deep);
-                color: white;
-            }
-
-            .intro-grid {
-                display: grid;
-                grid-template-columns: 1.05fr 1fr;
-                gap: 28px;
-                align-items: center;
-            }
-
-            .intro-grid p {
-                color: rgba(255, 255, 255, 0.76);
-                font-size: 17px;
-                line-height: 1.7;
-            }
-
-            .signal-list {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-            }
-
-            .signal {
-                display: flex;
-                gap: 11px;
-                align-items: flex-start;
-                min-height: 72px;
-                padding: 14px;
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.04);
-            }
-
-            .signal svg {
-                flex: 0 0 auto;
-                color: var(--cyan);
-            }
-
-            .signal strong {
-                display: block;
-                font-size: 14px;
-                line-height: 1.25;
-            }
-
-            .signal span {
-                display: block;
-                margin-top: 4px;
-                color: rgba(255, 255, 255, 0.62);
-                font-size: 13px;
+                font-size: var(--text-lead);
+                line-height: 1.65;
             }
 
             .truth-section {
                 background: var(--paper);
             }
 
-            .truth-grid {
+            /* Le problème — récit numéroté, pas une grille de cartes */
+            .problem-list {
+                margin: var(--space-block) 0 0;
+                padding: 0;
+                list-style: none;
+                max-width: 860px;
+            }
+
+            .problem-item {
                 display: grid;
-                grid-template-columns: repeat(5, minmax(0, 1fr));
-                gap: 12px;
-                margin-top: 38px;
+                grid-template-columns: 64px 1fr;
+                gap: 20px;
+                padding: 26px 0;
+                border-top: 1px solid var(--line);
             }
 
-            .truth-card {
-                min-height: 270px;
-                padding: 20px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.78);
-            }
+            .problem-item:last-child { border-bottom: 1px solid var(--line); }
 
-            .truth-card .index {
-                display: inline-flex;
-                min-height: 28px;
-                align-items: center;
-                padding: 0 10px;
-                border: 1px solid rgba(15, 118, 110, 0.18);
-                border-radius: 999px;
-                color: var(--teal-2);
-                font-size: 12px;
-                font-weight: 800;
-                text-transform: uppercase;
-            }
-
-            .truth-card h3 {
-                margin-top: 18px;
-                font-size: 21px;
-                font-weight: 800;
-            }
-
-            .truth-card p {
-                margin-top: 10px;
-                color: var(--ink-2);
+            .pi-num {
+                padding-top: 5px;
+                font-family: var(--font-mono);
                 font-size: 15px;
+                font-weight: 600;
+                color: var(--muted);
             }
 
-            .truth-card ul {
-                display: grid;
-                gap: 8px;
-                margin-top: 16px;
-                padding-left: 18px;
-                color: var(--muted);
-                font-size: 14px;
+            .problem-item h3 { font-size: var(--text-h3); }
+
+            .problem-item p {
+                margin-top: 8px;
+                max-width: 62ch;
+                color: var(--ink-2);
+                font-size: 16px;
             }
+
+            .problem-more { max-width: 860px; }
 
             .truth-note {
                 margin-top: 18px;
@@ -686,50 +840,6 @@
                 color: var(--muted);
                 font-size: 15px;
                 line-height: 1.7;
-            }
-
-            .audiences {
-                background: var(--surface);
-            }
-
-            .audience-grid {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 14px;
-                margin-top: 34px;
-            }
-
-            .audience-card {
-                min-height: 250px;
-                padding: 24px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: #fbfcf9;
-            }
-
-            .audience-card .role {
-                display: inline-flex;
-                min-height: 28px;
-                align-items: center;
-                padding: 0 10px;
-                border: 1px solid rgba(15, 118, 110, 0.18);
-                border-radius: 999px;
-                color: var(--teal-2);
-                font-size: 12px;
-                font-weight: 800;
-                text-transform: uppercase;
-            }
-
-            .audience-card h3 {
-                margin-top: 22px;
-                font-size: 26px;
-                font-weight: 800;
-            }
-
-            .audience-card p {
-                margin-top: 12px;
-                color: var(--ink-2);
-                font-size: 16px;
             }
 
             .difference {
@@ -767,7 +877,7 @@
                 border: 1px solid rgba(17, 20, 24, 0.12);
                 border-radius: var(--radius);
                 background: var(--surface);
-                box-shadow: var(--shadow);
+                box-shadow: var(--shadow-card);
                 overflow: hidden;
             }
 
@@ -784,10 +894,12 @@
 
             .difference-row.header {
                 background: #fbfcf9;
-                font-size: 13px;
-                font-weight: 800;
-                text-transform: uppercase;
                 color: var(--teal-2);
+                font-family: var(--font-mono);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .06em;
+                text-transform: uppercase;
             }
 
             .difference-row b {
@@ -830,38 +942,20 @@
             .panel-topbar {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                gap: 12px;
-                padding: 13px 14px;
+                padding: 12px 16px;
                 border-bottom: 1px solid var(--line);
                 background: #fbfcf9;
             }
 
-            .traffic {
-                display: flex;
-                gap: 7px;
-            }
-
-            .traffic span {
-                width: 10px;
-                height: 10px;
-                border-radius: 999px;
-                background: var(--line);
-            }
-
-            .traffic span:nth-child(1) { background: var(--coral); }
-            .traffic span:nth-child(2) { background: var(--amber); }
-            .traffic span:nth-child(3) { background: var(--teal); }
-
             .panel-topbar code {
                 color: var(--muted);
                 font-size: 12px;
-                font-weight: 800;
+                font-weight: 600;
             }
 
             .tco-object {
                 padding: 24px;
-                font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+                font-family: var(--font-mono);
                 font-size: 14px;
                 line-height: 1.8;
                 color: #233035;
@@ -874,33 +968,35 @@
             .tco-object .str { color: var(--blue); }
             .tco-object .note { color: var(--muted); }
 
+            /* Pied de document : trois mentions sobres, pas des cellules-cartes */
             .tco-result {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 1px;
-                background: var(--line);
                 border-top: 1px solid var(--line);
             }
 
             .result-cell {
-                padding: 18px;
-                background: #fbfcf9;
+                padding: 16px 18px;
             }
+
+            .result-cell + .result-cell { border-left: 1px solid var(--line); }
 
             .result-cell b {
                 display: block;
-                font-family: var(--font-display);
-                font-size: 28px;
+                font-family: var(--font-mono);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .06em;
+                text-transform: uppercase;
                 color: var(--teal-2);
-                line-height: 1;
             }
 
             .result-cell span {
                 display: block;
-                margin-top: 8px;
+                margin-top: 6px;
                 color: var(--muted);
-                font-size: 13px;
-                font-weight: 700;
+                font-size: 13.5px;
+                font-weight: 600;
             }
 
             .ontology {
@@ -913,36 +1009,56 @@
 
             .ontology-grid {
                 display: grid;
-                grid-template-columns: minmax(0, 0.88fr) minmax(440px, 1.12fr);
+                grid-template-columns: minmax(440px, 1.12fr) minmax(0, 0.88fr);
                 gap: 42px;
-                margin-top: 42px;
+                margin-top: var(--space-block);
                 align-items: start;
             }
 
-            .meaning-stack {
+            /* Garanties de confiance — liste compacte, pas des cartes */
+            .trust-list {
+                margin: 26px 0 0;
+                padding: 0;
+                list-style: none;
                 display: grid;
-                gap: 12px;
             }
 
-            .meaning-layer {
-                display: grid;
-                grid-template-columns: 126px 1fr;
-                gap: 18px;
-                padding: 18px;
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.045);
-            }
-
-            .meaning-layer b {
-                color: #7ee7d8;
-                font-family: var(--font-display);
-                font-size: 20px;
-            }
-
-            .meaning-layer span {
-                color: rgba(255, 255, 255, 0.72);
+            .trust-list li {
+                padding: 14px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
                 font-size: 15px;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.66);
+            }
+
+            .trust-list strong {
+                color: white;
+                font-weight: 700;
+            }
+
+            /* Conclusion : la mesure avant la hype */
+            .measure-note {
+                margin-top: var(--space-block);
+                padding-top: 26px;
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
+                max-width: 760px;
+            }
+
+            .measure-note h3 {
+                font-size: var(--text-h3);
+                color: white;
+            }
+
+            .measure-note p {
+                margin-top: 10px;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 16px;
+            }
+
+            .measure-note .measure-criteria {
+                font-family: var(--font-mono);
+                font-size: 13.5px;
+                color: #7ee7d8;
             }
 
             .semantic-board {
@@ -1000,117 +1116,129 @@
                 background: var(--surface);
             }
 
+            /* Frise du fonctionnement — un rail continu, des jalons mono */
             .pipeline-steps {
+                position: relative;
                 display: grid;
                 grid-template-columns: repeat(4, minmax(0, 1fr));
-                gap: 12px;
-                margin-top: 42px;
+                gap: 28px;
+                margin-top: var(--space-block);
+            }
+
+            .pipeline-steps::before {
+                content: "";
+                position: absolute;
+                top: 8px;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--line);
             }
 
             .step {
                 position: relative;
-                min-height: 232px;
-                padding: 22px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: #fbfcf9;
+                padding: 34px 12px 0 0;
             }
 
             .step::before {
-                content: attr(data-step);
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 34px;
-                height: 34px;
-                margin-bottom: 28px;
-                border-radius: 999px;
-                background: var(--deep);
-                color: white;
-                font-size: 13px;
-                font-weight: 800;
+                content: "0" attr(data-step);
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding-right: 12px;
+                background: var(--surface);
+                color: var(--teal-2);
+                font-family: var(--font-mono);
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 1.3;
             }
 
-            .step:nth-child(2)::before { background: var(--teal-2); }
-            .step:nth-child(3)::before { background: var(--amber); }
-            .step:nth-child(4)::before { background: var(--blue); }
-
             .step h3 {
-                font-size: 22px;
-                font-weight: 800;
+                font-size: 20px;
             }
 
             .step p {
-                margin-top: 12px;
+                margin-top: 10px;
                 color: var(--muted);
                 font-size: 15px;
             }
 
-            .capabilities {
-                background: var(--paper-2);
-            }
-
-            .capability-grid {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 14px;
-                margin-top: 42px;
-            }
-
-            .capability {
-                min-height: 240px;
-                padding: 24px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.74);
-            }
-
-            .capability svg {
-                color: var(--teal-2);
-                margin-bottom: 22px;
-            }
-
-            .capability:nth-child(2) svg { color: var(--cyan); }
-            .capability:nth-child(3) svg { color: var(--amber); }
-            .capability:nth-child(4) svg { color: var(--blue); }
-            .capability:nth-child(5) svg { color: var(--coral); }
-
-            .capability h3 {
-                font-size: 22px;
-                font-weight: 800;
-            }
-
-            .capability p {
-                margin-top: 12px;
-                color: var(--ink-2);
-                font-size: 15px;
-            }
-
-            .capability .meta {
-                display: inline-flex;
-                margin-top: 18px;
-                color: var(--muted);
-                font-size: 12px;
-                font-weight: 800;
-                text-transform: uppercase;
-            }
-
-            .architecture {
-                background: var(--deep);
-                color: white;
+            /* Cadre document neutre pour le visuel produit */
+            .doc-frame {
+                margin: var(--space-block) 0 0;
+                max-width: 900px;
+                border: 1px solid var(--line);
+                border-radius: var(--radius-card);
+                background: var(--surface);
+                box-shadow: var(--shadow-card);
                 overflow: hidden;
             }
 
-            .architecture .section-kicker { color: #7ee7d8; }
-            .architecture .section-lead { color: rgba(255, 255, 255, 0.72); }
-
-            .arch-grid {
-                display: grid;
-                grid-template-columns: 0.95fr 1.05fr;
-                gap: 40px;
-                margin-top: 42px;
-                align-items: start;
+            .doc-frame img {
+                width: 100%;
+                height: auto;
             }
+
+            .doc-frame-label {
+                display: flex;
+                padding: 10px 16px;
+                border-top: 1px solid var(--line);
+                color: var(--muted);
+                font-family: var(--font-mono);
+                font-size: 12px;
+            }
+
+            /* Où commencer — un tableau, pas trois cartes */
+            .start-block { margin-top: var(--space-block); }
+
+            .start-title {
+                font-size: var(--text-h3);
+            }
+
+            .start-table {
+                margin-top: 18px;
+                border: 1px solid var(--line);
+                border-radius: var(--radius-card);
+                background: var(--surface);
+                box-shadow: var(--shadow-card);
+                overflow: hidden;
+            }
+
+            .start-row {
+                display: grid;
+                grid-template-columns: 0.55fr 0.75fr 1.7fr;
+                gap: 16px;
+                align-items: start;
+                padding: 16px 20px;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .start-row:last-child { border-bottom: 0; }
+
+            .start-row.header {
+                background: #fbfcf9;
+                color: var(--teal-2);
+                font-family: var(--font-mono);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .06em;
+                text-transform: uppercase;
+            }
+
+            .start-row b {
+                font-family: var(--font-display);
+                font-size: 17px;
+                line-height: 1.25;
+            }
+
+            .start-row span {
+                color: var(--muted);
+                font-size: 14px;
+                line-height: 1.55;
+            }
+
+            .start-row.header span { color: inherit; font-size: inherit; }
 
             .ledger {
                 border: 1px solid rgba(255, 255, 255, 0.14);
@@ -1137,88 +1265,69 @@
 
             .ledger-row:last-child { border-bottom: 0; }
 
-            .arch-points {
-                display: grid;
-                gap: 12px;
-            }
-
-            .arch-point {
-                padding: 20px;
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.04);
-            }
-
-            .arch-point h3 {
-                font-size: 21px;
-                color: white;
-            }
-
-            .arch-point p {
-                margin-top: 8px;
-                color: rgba(255, 255, 255, 0.66);
-            }
-
             .company {
                 background: var(--paper);
             }
 
             .company-layout {
                 display: grid;
-                grid-template-columns: 0.8fr 1.2fr;
-                gap: 46px;
+                grid-template-columns: 96px minmax(0, 1fr);
+                gap: 36px;
                 align-items: start;
             }
 
             .company-mark {
-                min-height: 360px;
                 display: grid;
                 place-items: center;
+                padding: 16px;
                 border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
+                border-radius: var(--radius-card);
                 background:
-                    linear-gradient(135deg, rgba(15,118,110,0.1), transparent 50%),
-                    #ffffff;
+                    linear-gradient(135deg, rgba(15,118,110,0.1), transparent 60%),
+                    var(--surface);
             }
 
             .company-mark img {
-                width: min(240px, 54vw);
+                width: 64px;
                 opacity: 0.95;
             }
 
             .company-copy p {
                 margin-top: 18px;
+                max-width: 66ch;
                 color: var(--ink-2);
                 font-size: 17px;
                 line-height: 1.75;
             }
 
-            .company-facts {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
-                margin-top: 28px;
+            /* Mot du fondateur — la preuve humaine d'un produit pré-commercialisation */
+            .founder-note {
+                margin: 28px 0 0;
+                padding: 4px 0 4px 22px;
+                border-left: 3px solid var(--decision);
             }
 
-            .fact {
-                padding: 18px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background: rgba(255, 255, 255, 0.74);
-            }
-
-            .fact b {
-                display: block;
+            .founder-note .founder-quote {
+                margin: 0;
+                max-width: 60ch;
                 font-family: var(--font-display);
-                font-size: 20px;
+                font-size: 18.5px;
+                font-weight: 500;
+                line-height: 1.5;
+                color: var(--ink);
             }
 
-            .fact span {
-                display: block;
-                margin-top: 6px;
-                color: var(--muted);
+            .founder-note .founder-sig {
+                margin-top: 12px;
+                font-family: var(--font-mono);
                 font-size: 13px;
-                font-weight: 700;
+                color: var(--muted);
+            }
+
+            .company-facts-line {
+                font-family: var(--font-mono);
+                font-size: 13px;
+                color: var(--muted);
             }
 
             .contact {
@@ -1240,8 +1349,8 @@
             }
 
             .contact-box h2 {
-                font-size: clamp(30px, 5vw, 52px);
-                font-weight: 800;
+                font-size: var(--text-h2);
+                font-weight: 700;
             }
 
             .contact-box p {
@@ -1250,6 +1359,25 @@
                 color: var(--ink-2);
                 font-size: 17px;
             }
+
+            .contact-box .contact-meta {
+                font-family: var(--font-mono);
+                font-size: 13px;
+                color: var(--muted);
+            }
+
+            /* Questions directes — réutilise le composant dépliable */
+            .faq {
+                margin-top: var(--space-block);
+                max-width: 860px;
+            }
+
+            .faq-title {
+                font-size: var(--text-h3);
+            }
+
+            .faq .more { margin-top: 12px; }
+            .faq .more > p { max-width: 72ch; }
 
             footer {
                 border-top: 1px solid rgba(17, 20, 24, 0.1);
@@ -1266,11 +1394,39 @@
                 font-size: 13px;
             }
 
+            .footer-note {
+                display: inline-block;
+                margin-top: 6px;
+                color: var(--muted);
+            }
+
+            .footer-right {
+                display: grid;
+                gap: 8px;
+                justify-items: end;
+            }
+
             .footer-links {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: flex-end;
                 gap: 14px;
+            }
+
+            .footer-langs {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 12px;
+            }
+
+            .footer-langs a {
+                display: inline-flex;
+                align-items: center;
+                min-height: 32px;
+                color: var(--muted);
+                font-size: 12.5px;
+                font-weight: 600;
             }
 
             .footer-links a,
@@ -1356,6 +1512,7 @@
 
             @media (max-width: 980px) {
                 .nav a:not(.nav-cta) { display: none; }
+                .nav-menu { display: block; }
                 .hero {
                     min-height: auto;
                 }
@@ -1368,22 +1525,27 @@
                     column-gap: 0;
                     padding: 48px 0 40px;
                 }
-                .hero-shot { width: min(640px, 100%); }
-                .intro-grid,
+                .hero-artifact { justify-self: start; width: min(460px, 100%); }
                 .difference-layout,
                 .tco-layout,
                 .ontology-grid,
-                .arch-grid,
-                .company-layout,
                 .contact-box {
                     grid-template-columns: 1fr;
                 }
                 .tco-copy { position: static; }
-                .pipeline-steps,
-                .audience-grid,
-                .capability-grid,
-                .truth-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                /* Frise verticale : le rail horizontal n'a plus de sens empilé */
+                .pipeline-steps { grid-template-columns: 1fr; gap: 0; }
+                .pipeline-steps::before { display: none; }
+                .step {
+                    padding: 18px 0 18px;
+                    border-top: 1px solid var(--line);
+                }
+                .step::before {
+                    position: static;
+                    display: block;
+                    margin-bottom: 8px;
+                    padding: 0;
+                    background: transparent;
                 }
             }
 
@@ -1408,33 +1570,28 @@
                     row-gap: 24px;
                     padding: 30px 0 32px;
                 }
-                .hero-proof {
-                    gap: 8px;
-                    margin-top: 4px;
-                }
-                .proof-item {
-                    display: flex;
-                    align-items: baseline;
-                    gap: 10px;
-                    min-height: 0;
-                    padding: 11px 14px;
-                }
-                .proof-item b { font-size: 17px; }
-                .proof-item span { margin-top: 0; }
                 h1 { font-size: clamp(33px, 9vw, 44px); }
                 .hero-copy p { font-size: 17px; }
-                .hero-proof,
-                .signal-list,
-                .truth-grid,
-                .audience-grid,
-                .pipeline-steps,
-                .capability-grid,
-                .company-facts,
+                .hero-copy p.hero-keyline { font-size: 13.5px; }
+                .hero-signals,
                 .tco-result,
                 .legal-grid {
                     grid-template-columns: 1fr;
                 }
-                .intro-band { padding: 28px 0; }
+                .problem-item { grid-template-columns: 42px 1fr; gap: 14px; }
+                .result-cell + .result-cell {
+                    border-left: 0;
+                    border-top: 1px solid var(--line);
+                }
+                .start-row { grid-template-columns: 1fr; gap: 6px; }
+                .start-row.header { display: none; }
+                .start-row .start-meeting {
+                    color: var(--teal-2);
+                    font-size: 12px;
+                    font-weight: 700;
+                    letter-spacing: .06em;
+                    text-transform: uppercase;
+                }
                 .tco-object {
                     font-size: 12px;
                     padding: 18px;
@@ -1443,7 +1600,6 @@
                     grid-template-columns: 1fr;
                     gap: 4px;
                 }
-                .meaning-layer,
                 .difference-row,
                 .semantic-row {
                     grid-template-columns: 1fr;
@@ -1467,9 +1623,13 @@
                 .footer-inner {
                     grid-template-columns: 1fr;
                 }
-                .footer-links {
+                .footer-links,
+                .footer-langs {
                     justify-content: flex-start;
                 }
+                .footer-right { justify-items: start; }
+                .company-layout { grid-template-columns: 1fr; gap: 20px; }
+                .company-mark { justify-self: start; }
             }
 
             @media (max-width: 430px) {
@@ -1492,8 +1652,8 @@
            Tout en CSS pur / progressive enhancement — compatible GitHub Pages. */
 
         /* Micro-interactions — surfaces claires */
-        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
-        .difference-board, .tco-panel, .proof-item, .button, .nav a,
+        .market-note,
+        .difference-board, .tco-panel, .button, .nav a,
         .language-button, .header-inner, .logo img {
             transition: transform .22s cubic-bezier(.2, .6, .2, 1),
                         border-color .22s ease, background .22s ease,
@@ -1501,43 +1661,23 @@
                         width .2s ease, height .2s ease;
         }
 
-        .truth-card:hover, .audience-card:hover, .capability:hover,
-        .step:hover, .fact:hover, .market-note:hover {
-            transform: translateY(-3px);
+        /* L'ombre et la bordure suffisent : pas de soulèvement des artefacts (ce ne sont
+           pas des boutons) — le hover signale, il ne déplace pas. */
+        .market-note:hover {
             border-color: rgba(15, 118, 110, 0.32);
             box-shadow: 0 18px 40px rgba(17, 20, 24, 0.09);
         }
 
-        .difference-board:hover, .tco-panel:hover { transform: translateY(-2px); }
-
-        .proof-item:hover {
-            transform: translateY(-2px);
-            border-color: rgba(15, 118, 110, 0.3);
-            background: rgba(255, 255, 255, 0.85);
-        }
-
         .button-primary:hover { box-shadow: 0 18px 42px rgba(15, 118, 110, 0.3); }
 
-        /* Micro-interactions — surfaces sombres */
-        .signal, .meaning-layer, .arch-point {
-            transition: transform .22s cubic-bezier(.2, .6, .2, 1),
-                        border-color .22s ease, background .22s ease;
-        }
-
-        .signal:hover, .meaning-layer:hover, .arch-point:hover {
-            transform: translateY(-2px);
-            border-color: rgba(126, 231, 216, 0.42);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
         /* Profondeur — halos lumineux sur les sections sombres */
-        .intro-band, .ontology, .architecture {
+        .ontology {
             position: relative;
             isolation: isolate;
             overflow: hidden;
         }
 
-        .intro-band::after, .ontology::before, .architecture::before {
+        .ontology::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -1566,56 +1706,58 @@
         /* Animations d'entrée */
         @media (prefers-reduced-motion: no-preference) {
             @keyframes rise-in {
-                from { opacity: 0; transform: translateY(26px); }
+                from { opacity: 0; transform: translateY(12px); }
                 to   { opacity: 1; transform: none; }
             }
             @keyframes hero-rise {
-                from { opacity: 0; transform: translateY(20px); }
+                from { opacity: 0; transform: translateY(12px); }
                 to   { opacity: 1; transform: none; }
             }
 
             /* Hero — entrée au chargement */
-            .hero-copy > *, .hero-proof .proof-item {
+            .hero-copy > *, .hero-artifact, .hero-signals .hero-signal {
                 animation: hero-rise .7s cubic-bezier(.2, .6, .2, 1) both;
             }
             .hero-copy .eyebrow { animation-delay: .04s; }
             .hero-copy h1       { animation-delay: .10s; }
             .hero-copy > p      { animation-delay: .18s; }
             .hero-actions       { animation-delay: .26s; }
-            .hero-proof .proof-item:nth-child(1) { animation-delay: .30s; }
-            .hero-proof .proof-item:nth-child(2) { animation-delay: .36s; }
-            .hero-proof .proof-item:nth-child(3) { animation-delay: .42s; }
+            .hero-artifact      { animation-delay: .20s; }
+            .hero-signals .hero-signal:nth-child(1) { animation-delay: .34s; }
+            .hero-signals .hero-signal:nth-child(2) { animation-delay: .40s; }
 
             /* Reveals au scroll (compositor-friendly, sans JS) */
             @supports (animation-timeline: view()) {
                 .section-kicker, .section-title, .section-lead, .truth-note, .ontology-note,
-                .truth-card, .audience-card, .capability, .step, .signal, .meaning-layer,
-                .arch-point, .fact, .market-note, .difference-board, .tco-panel,
-                .semantic-board, .ledger, .company-mark, .contact-box {
+                .problem-item, .step,
+                .market-note, .difference-board, .tco-panel,
+                .semantic-board, .ledger, .company-mark, .contact-box,
+                .doc-frame, .start-table, .trust-list li, .measure-note,
+                .founder-note, .faq .more {
                     animation: rise-in linear both;
                     animation-timeline: view();
-                    animation-range: entry 2% cover 24%;
+                    animation-range: entry 0% cover 18%;
                 }
                 /* Cascade dans les grilles — ignoré proprement si sibling-index() absent */
-                .truth-grid > *, .audience-grid > *, .capability-grid > *,
-                .pipeline-steps > *, .signal-list > *, .company-facts > *,
-                .arch-points > * {
-                    animation-range: entry calc(2% + (sibling-index() - 1) * 2.4%) cover 24%;
+                .problem-list > *,
+                .pipeline-steps > *,
+                .trust-list > * {
+                    animation-range: entry calc((sibling-index() - 1) * 2%) cover 18%;
                 }
             }
         }
 
         /* ===== Surfaces : rayons plus doux + élévation portée (soft skeuomorphism 2026) ===== */
-        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
-        .proof-item, .difference-board, .tco-panel, .signal, .arch-point,
-        .meaning-layer, .company-mark, .contact-box, .semantic-board, .ledger,
+        .market-note,
+        .difference-board, .tco-panel,
+        .company-mark, .contact-box, .semantic-board, .ledger,
         .difference-row.header {
             border-radius: var(--radius-card);
         }
 
         /* Élévation au repos sur les cartes des sections claires (moins « fil de fer ») */
-        .truth-card, .audience-card, .capability, .step, .fact, .market-note,
-        .proof-item, .difference-board, .tco-panel {
+        .market-note,
+        .difference-board, .tco-panel {
             box-shadow: var(--shadow-card);
         }
 
@@ -1633,14 +1775,8 @@
             border-radius: 2px;
         }
         /* Sur les sections sombres, le tiret reprend l'accent cyan déjà en place */
-        .ontology .section-kicker::before,
-        .architecture .section-kicker::before {
+        .ontology .section-kicker::before {
             background: #7ee7d8;
-        }
-
-        /* Glow d'accent au survol des cartes sombres */
-        .signal:hover, .meaning-layer:hover, .arch-point:hover {
-            box-shadow: 0 18px 44px -22px rgba(126, 231, 216, 0.45);
         }
 
         /* ===== CTA mobile persistant (thumb zone) ===== */
@@ -1735,20 +1871,20 @@
             .language-button[aria-pressed="true"] { background: #7ee7d8; color: #06201d; }
 
             /* Surfaces claires repensées en cartes sombres lisibles */
-            .hero-shot,
-            .truth-card, .audience-card, .capability, .step, .fact, .market-note,
-            .proof-item, .difference-board, .tco-panel, .company-mark {
+            .market-note,
+            .difference-board, .tco-panel, .company-mark, .decision-card,
+            .doc-frame, .start-table {
                 background: var(--surface);
                 border-color: var(--line);
             }
-            .hero-shot-bar,
             .panel-topbar,
             .difference-row.header,
-            .result-cell { background: #0e1517; }
-            .difference-row { border-bottom-color: var(--line); }
-            .tco-result { background: var(--line); }
+            .start-row.header { background: #0e1517; }
+            .difference-row, .start-row { border-bottom-color: var(--line); }
             .tco-object { color: #cdd8d5; }
-            .audience-card, .step { background: #0f1719; }
+            .result-cell + .result-cell { border-left-color: var(--line); }
+            .doc-frame img { filter: brightness(0.94) saturate(0.98); }
+            .step::before { background: var(--paper-2); }
 
             /* Boutons */
             .button-primary { background: #15938a; color: #04211e; box-shadow: 0 14px 36px rgba(20, 180, 165, 0.18); }
@@ -1756,24 +1892,22 @@
             .button-secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.16); color: var(--ink); }
             .button-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(126, 231, 216, 0.4); }
 
-            /* Section claires « truth/audience/etc. » : tokens déjà repris, on harmonise les fonds explicites */
-            .audiences, .pipeline { background: var(--paper-2); }
+            /* Sections claires : tokens déjà repris, on harmonise les fonds explicites */
+            .pipeline { background: var(--paper-2); }
             .truth-section, .difference, .company, .tco-section { background: var(--paper); }
-            .capabilities { background: #0e1517; }
             .contact { background: var(--paper-2); }
             .contact-box { background: linear-gradient(120deg, rgba(20, 180, 165, 0.12), transparent 42%), var(--surface); }
             .tco-section { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
             .company-mark { background: linear-gradient(135deg, rgba(20, 180, 165, 0.14), transparent 50%), var(--surface); }
 
-            /* Sections « feature » sombres : un cran plus profond pour garder le contraste de rythme */
-            .intro-band, .ontology, .architecture { background: var(--deep); }
+            /* Section « confiance » sombre : un cran plus profond pour garder le contraste de rythme */
+            .ontology { background: var(--deep); }
 
             /* Accent kicker sur les sections claires (désormais sombres) : passe au cyan pour rester lisible */
             .truth-section .section-kicker,
-            .audiences .section-kicker,
+            .pipeline .section-kicker,
             .difference .section-kicker,
             .tco-section .section-kicker,
-            .capabilities .section-kicker,
             .company .section-kicker,
             .contact .section-kicker { color: #7ee7d8; }
             .section-kicker::before { background: #7ee7d8; }
@@ -1782,13 +1916,33 @@
                On reprend le cyan déjà utilisé partout en sombre (≈ 13:1, AAA). */
             .accent-teal { color: #7ee7d8; }
 
-            /* Visuel produit : halo cyan discret pour détacher le bloc clair du fond sombre */
-            .hero-shot {
+            /* Fiche de décision : halo cyan discret pour la détacher du fond sombre */
+            .decision-card {
                 box-shadow:
-                    0 0 0 1px rgba(126, 231, 216, 0.1),
-                    0 40px 90px -45px rgba(0, 0, 0, 0.7),
-                    0 36px 84px -52px rgba(126, 231, 216, 0.22);
+                    0 0 0 1px rgba(126, 231, 216, 0.08),
+                    0 34px 80px -42px rgba(0, 0, 0, 0.7),
+                    0 30px 70px -48px rgba(126, 231, 216, 0.2);
             }
+            .decision-card--ghost { box-shadow: none; opacity: 0.4; }
+            .dc-skeleton {
+                background: repeating-linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.07) 0 10px, transparent 10px 26px);
+            }
+            .dc-action-label { color: #7ee7d8; }
+            .hero-signal svg { color: #7ee7d8; }
+            .hero-signals { border-top-color: rgba(255, 255, 255, 0.1); }
+
+            /* Menu mobile */
+            .nav-menu > summary {
+                border-color: rgba(255, 255, 255, 0.14);
+                background: rgba(255, 255, 255, 0.05);
+                color: var(--ink-2);
+            }
+            .nav-menu[open] > summary { background: #7ee7d8; color: #06201d; }
+            .nav-menu-panel { border-color: var(--line); background: var(--surface); }
+            .nav-menu-panel a { color: var(--ink-2); }
+            .nav-menu-panel a:hover { background: rgba(126, 231, 216, 0.12); color: #7ee7d8; }
+            .nav-menu-panel a:last-child { color: #7ee7d8; }
 
             /* Focus + sélection */
             ::selection { background: rgba(126, 231, 216, 0.22); }
@@ -1802,10 +1956,6 @@
             /* CTA mobile */
             .mobile-cta { background: #15938a; color: #04211e; }
 
-            /* Theme-color suit le fond sombre via le rendu ; l'image hero (UI claire) est légèrement
-               adoucie pour ne pas former un bloc trop lumineux sur le fond sombre. */
-            .hero-shot-bar { border-bottom-color: var(--line); }
-            .hero-shot img { filter: brightness(0.94) saturate(0.98); }
         }
 
         /* ===== Couleur élargie (juin 2026) : accents en OKLCH sur écrans wide-gamut =====
@@ -1873,50 +2023,24 @@
             font-size: 15px;
             line-height: 1.6;
         }
-        [data-theme="dark"] .ontology .more,
-        [data-theme="dark"] .architecture .more { background: rgba(255, 255, 255, 0.05); }
+        [data-theme="dark"] .ontology .more { background: rgba(255, 255, 255, 0.05); }
 
         /* ===== Raffinements typographiques & matière (juin 2026) =====
            CSS pur, non layeré (prioritaire), 100% statique / compatible GitHub Pages. */
 
         /* 1. Tracking sur le microtexte en capitales — lisibilité + finition premium */
-        .eyebrow, .section-kicker, .truth-card .index, .audience-card .role,
-        .difference-row.header, .capability .meta, .legal-item b {
+        .eyebrow, .section-kicker,
+        .difference-row.header, .legal-item b {
             letter-spacing: .06em;
         }
 
-        /* 2. Resserrage optique des très grands titres display (Outfit) */
+        /* 2. Resserrage optique des très grands titres display (Bricolage Grotesque) */
         h1, .section-title { letter-spacing: -.015em; }
-
-        /* 3. Cartes « cas d'usage » : l'espace bas devient intentionnel,
-              ancré par un accent corail (couleur d'appui poussée d'un cran) */
-        .audience-card { position: relative; padding-bottom: 38px; }
-        .audience-card::after {
-            content: "";
-            position: absolute;
-            left: 24px;
-            bottom: 22px;
-            width: 34px;
-            height: 3px;
-            border-radius: 2px;
-            background: var(--coral);
-        }
-
-        /* 4. Filet corail discret en tête des 3 KPI du hero */
-        .proof-item { position: relative; overflow: hidden; }
-        .proof-item::after {
-            content: "";
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: 2px;
-            background: var(--coral);
-            opacity: .85;
-        }
 
         /* 5. Grain tactile sur les bandes sombres — profondeur « matière » 2026,
               SVG inline (zéro requête réseau). Pseudo-éléments libres pour ne pas
-              écraser les halos existants (::after intro, ::before ontology/architecture). */
-        .intro-band::before, .ontology::after, .architecture::after {
+              écraser le halo existant (::before ontology). */
+        .ontology::after {
             content: "";
             position: absolute;
             inset: 0;
@@ -1940,6 +2064,32 @@
             }
             .more[open]::details-content { block-size: auto; }
         }
+
+        /* ===== Refonte 2026 — P1 : fondations ===== */
+
+        /* Bricolage Grotesque porte les titres : 700 suffit (800 empâte ses contreformes).
+           Règle non layerée : prime sur les font-weight 800 posés dans @layer components. */
+        h1, h2, h3, .logo { font-weight: 700; }
+
+        /* Le logo ne casse jamais (« Hyle / Labs » sur deux lignes à 375px) */
+        .logo { white-space: nowrap; }
+
+        /* WCAG 2.4.11 : le CTA mobile fixe ne doit pas masquer l'élément focusé */
+        @media (max-width: 700px) {
+            html { scroll-padding-bottom: 96px; }
+        }
+
+        /* Impression : les reveals scroll-driven laissent le contenu hors viewport à
+           opacity 0 — on neutralise tout pour que la page s'imprime entière. */
+        @media print {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            header, .mobile-cta, .theme-toggle, .language-switcher { position: static; }
+        }
     </style>
 </head>
 <body>
@@ -1952,166 +2102,134 @@
                 <span>Hyle Labs</span>
             </a>
             <nav class="nav" aria-label="Navigation principale">
-                <a href="#taveni">Taveni</a>
-                <a href="#preuve">Le problème</a>
-                <a href="#difference">Différence</a>
-                <a href="#tco">Coût IA</a>
-                <a href="#architecture">Souveraineté</a>
-                <a class="nav-cta" href="#contact">Évaluer Taveni</a>
+                <a href="#probleme">Le problème</a>
+                <a href="#fonctionnement">Fonctionnement</a>
+                <a href="#cout-ia">Coût IA</a>
+                <a href="#souverainete">Confiance &amp; données</a>
+                <a class="nav-cta" href="#contact">Demander une évaluation</a>
                 <button class="theme-toggle" type="button" aria-label="Basculer le thème clair ou sombre" aria-pressed="false" title="Thème clair / sombre">
                     <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.36 6.36 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
                 <div class="language-switcher" role="group" aria-label="Choisir la langue">
-                    <button class="language-button" type="button" data-lang="fr" aria-pressed="true">FR</button>
-                    <button class="language-button" type="button" data-lang="en" aria-pressed="false">EN</button>
-                    <button class="language-button" type="button" data-lang="es" aria-pressed="false">ES</button>
-                    <button class="language-button" type="button" data-lang="zh" aria-pressed="false">中文</button>
+                    <button class="language-button" type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+                    <button class="language-button" type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+                    <button class="language-button" type="button" data-lang="es" lang="es" aria-pressed="false">ES</button>
+                    <button class="language-button" type="button" data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button>
                 </div>
+                <details class="nav-menu" id="nav-menu">
+                    <summary class="nav-menu-label">Menu</summary>
+                    <div class="nav-menu-panel">
+                        <a class="nav-m1" href="#probleme">Le problème</a>
+                        <a class="nav-m2" href="#fonctionnement">Fonctionnement</a>
+                        <a class="nav-m3" href="#difference">Taveni vs notes IA</a>
+                        <a class="nav-m4" href="#cout-ia">Coût IA</a>
+                        <a class="nav-m5" href="#souverainete">Confiance &amp; données</a>
+                        <a class="nav-m6" href="#contact">Demander une évaluation</a>
+                    </div>
+                </details>
             </nav>
         </div>
     </header>
 
-    <a class="mobile-cta" href="#contact" aria-label="Évaluer Taveni">
-        <span>Évaluer Taveni</span>
+    <a class="mobile-cta" href="#contact" aria-label="Demander une évaluation">
+        <span>Demander une évaluation</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
 
     <main id="contenu">
-        <section class="hero" aria-labelledby="hero-title">
+        <section class="hero" id="taveni" aria-labelledby="hero-title">
             <div class="wrap hero-grid">
                 <div class="hero-copy">
                     <div class="eyebrow">Logiciel français · édité par Hyle Labs</div>
-                    <h1 id="hero-title"><span class="accent-teal">Taveni</span> transforme vos réunions en décisions et actions suivies</h1>
+                    <h1 id="hero-title">Vos réunions deviennent des <span class="accent-teal">décisions et des actions suivies</span>.</h1>
                     <p>
                         Après une réunion, l'essentiel se perd : qui a décidé quoi, pour quand, dans quel outil.
-                        <strong>Taveni capte vos échanges, retrouve les décisions et les transforme en actions
-                        claires</strong>, prêtes à rejoindre vos outils — CRM, support, gestion de projet.
-                        Vos équipes valident d'un coup d'œil avant l'envoi, et rien ne tombe entre les mailles.
+                        <strong>Taveni retrouve les décisions et les transforme en actions claires</strong>,
+                        validées par vos équipes avant de rejoindre votre CRM, votre support ou votre outil projet.
                     </p>
                     <div class="hero-actions">
-                        <a class="button button-primary" href="#parcours">
-                            Voir le fonctionnement
+                        <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=%C3%89valuation%20Taveni&body=Bonjour%20Hyle%20Labs%2C%0A%0AContexte%20%2F%20besoin%20%3A%0AOutils%20%C3%A0%20connecter%20%3A%0AContraintes%20RGPD%20%2F%20s%C3%A9curit%C3%A9%20%3A%0A%0AMerci%2C">
+                            Demander une évaluation
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
-                        <a class="button button-secondary" href="mailto:contact@hyle-labs.net?subject=D%C3%A9mo%20Taveni">
-                            Demander une démo
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <a class="button button-secondary" href="#fonctionnement">
+                            Voir le fonctionnement
                         </a>
                     </div>
+                    <p class="hero-keyline">Décisions reliées à leur preuve · Actions qui, quoi, pour quand · Validation humaine avant envoi</p>
                 </div>
-                <div class="hero-shot" aria-hidden="true">
-                    <div class="hero-shot-bar"><span></span><span></span><span></span></div>
-                    <img src="assets/taveni-tco-product.webp" width="1280" height="720" alt="" fetchpriority="high" decoding="async">
-                </div>
-                <div class="hero-proof" aria-label="Points clés Taveni">
-                    <div class="proof-item">
-                        <b>Décisions</b>
-                        <span>Reliées au moment exact où elles ont été prises</span>
-                    </div>
-                    <div class="proof-item">
-                        <b>Actions</b>
-                        <span>Qui fait quoi, pour quand, dans quel outil</span>
-                    </div>
-                    <div class="proof-item">
-                        <b>L'essentiel</b>
-                        <span>Le superflu filtré, l'utile dans vos outils</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="intro-band" id="taveni" aria-label="Ce que Taveni permet">
-            <div class="wrap intro-grid">
-                <p>
-                    Un résumé de réunion, personne ne le rouvre. Une décision avec un responsable et une
-                    échéance, ça se suit et ça s'exécute. Taveni écoute vos réunions, repère ce qui compte
-                    vraiment et n'envoie dans vos outils que l'utile : la décision, sa preuve, le responsable,
-                    la destination — et qui a le droit de la voir.
-                </p>
-                <div class="signal-list">
-                    <div class="signal">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M2 12h20"/></svg>
-                        <div><strong>Les décisions validées restent retrouvables</strong><span>Avec leur preuve, quand l'extrait d'origine est disponible.</span></div>
-                    </div>
-                    <div class="signal">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-                        <div><strong>Des actions, pas des notes</strong><span>Qui fait quoi, pour quand et dans quel outil — prêt à l'emploi.</span></div>
-                    </div>
-                    <div class="signal">
+                <figure class="hero-artifact">
+                    <article class="decision-card decision-card--ghost" aria-hidden="true">
+                        <div class="dc-skeleton"></div>
+                    </article>
+                    <article class="decision-card">
+                        <div class="dc-top">
+                            <span class="dc-id">décision #142</span>
+                            <span class="dc-stamp">validée</span>
+                        </div>
+                        <blockquote class="dc-quote"><mark class="dc-mark">« On valide le budget Q3 à 180 k€. »</mark></blockquote>
+                        <p class="dc-source">Comité produit · 00:17:42 · preuve audio</p>
+                        <div class="dc-action">
+                            <span class="dc-action-label">action créée</span>
+                            <p class="dc-action-text">Notifier la direction financière</p>
+                            <p class="dc-action-meta">Nathalie D. · pour le 12/07 · → CRM</p>
+                        </div>
+                    </article>
+                </figure>
+                <div class="hero-signals">
+                    <p class="hero-signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="m4 7 8 4 8-4"/><path d="M12 11v10"/></svg>
-                        <div><strong>Moins de coût IA inutile</strong><span>Après transcription, Taveni s'appuie sur l'information structurée, pas sur le verbatim brut renvoyé à chaque traitement.</span></div>
-                    </div>
-                    <div class="signal">
+                        <span class="hero-signal-text"><strong>Moins de coût d'IA inutile.</strong> Après transcription, Taveni s'appuie sur l'information structurée, pas sur le verbatim brut renvoyé à chaque traitement.</span>
+                    </p>
+                    <p class="hero-signal">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10"/><path d="M7 12h7"/><path d="M7 16h4"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
-                        <div><strong>Vos corrections enrichissent votre espace Taveni</strong><span>Elles restent rattachées à votre contexte et ne servent pas à entraîner des modèles tiers.</span></div>
-                    </div>
+                        <span class="hero-signal-text"><strong>Vos corrections vous appartiennent.</strong> Elles enrichissent votre espace Taveni et ne servent pas à entraîner des modèles tiers.</span>
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="truth-section" id="preuve" aria-labelledby="preuve-title">
+        <section class="truth-section" id="probleme" aria-labelledby="preuve-title">
             <div class="wrap">
                 <div class="section-kicker">Le problème</div>
-                <h2 class="section-title" id="preuve-title">Vos meilleures décisions se prennent à l'oral. Puis elles disparaissent.</h2>
+                <h2 class="section-title section-title--major" id="preuve-title">Vos meilleures décisions se prennent à l'oral. Puis elles disparaissent.</h2>
                 <p class="section-lead">
                     Les outils de résumé produisent des comptes rendus que personne ne rouvre. La vraie
                     valeur est ailleurs : dans les décisions que vos équipes prennent à l'oral, assument,
                     et doivent pouvoir retrouver, relire et exécuter.
                 </p>
 
-                <div class="truth-grid">
-                    <article class="truth-card">
-                        <span class="index">Mémoire orale</span>
-                        <h3>La décision s'évapore.</h3>
-                        <p>Budget, priorité, exception accordée à un client : la décision est prise à l'oral, puis se perd dans une longue transcription.</p>
-                        <ul>
-                            <li>décision</li>
-                            <li>extrait</li>
-                            <li>contexte</li>
-                        </ul>
-                    </article>
-                    <article class="truth-card">
-                        <span class="index">Action</span>
-                        <h3>La suite est trop floue.</h3>
-                        <p>“Je m'en occupe” n'est pas assez clair pour créer une tâche fiable dans un outil projet ou support.</p>
-                        <ul>
-                            <li>responsable</li>
-                            <li>échéance</li>
-                            <li>objet</li>
-                        </ul>
-                    </article>
-                    <article class="truth-card">
-                        <span class="index">Outil</span>
-                        <h3>Rien n'arrive jusqu'aux outils.</h3>
-                        <p>Le compte rendu existe, mais l'action ne rejoint ni le CRM, ni le support, ni le calendrier, ni l'outil de projet.</p>
-                        <ul>
-                            <li>destination</li>
-                            <li>format utile</li>
-                            <li>statut</li>
-                        </ul>
-                    </article>
-                    <article class="truth-card">
-                        <span class="index">Risque</span>
-                        <h3>L'information est sensible.</h3>
-                        <p>Tout partager avec un assistant ou une intégration n'est pas acceptable pour chaque dossier, projet ou sujet.</p>
-                        <ul>
-                            <li>droits</li>
-                            <li>confidentialité</li>
-                            <li>périmètre</li>
-                        </ul>
-                    </article>
-                    <article class="truth-card">
-                        <span class="index">Coût</span>
-                        <h3>La facture d'IA grimpe vite.</h3>
-                        <p>Moins l'IA coûte cher, plus on lui envoie tout sans trier. Résultat : on paie beaucoup pour du bruit.</p>
-                        <ul>
-                            <li>à relire</li>
-                            <li>validé</li>
-                            <li>bloqué</li>
-                        </ul>
-                    </article>
-                </div>
+                <ol class="problem-list">
+                    <li class="problem-item">
+                        <span class="pi-num" aria-hidden="true">01</span>
+                        <div>
+                            <h3>La décision s'évapore.</h3>
+                            <p>Budget, priorité, exception accordée à un client : la décision est prise à l'oral, puis se perd dans une longue transcription.</p>
+                        </div>
+                    </li>
+                    <li class="problem-item">
+                        <span class="pi-num" aria-hidden="true">02</span>
+                        <div>
+                            <h3>La suite est trop floue.</h3>
+                            <p>“Je m'en occupe” n'est pas assez clair pour créer une tâche fiable dans un outil projet ou support.</p>
+                        </div>
+                    </li>
+                    <li class="problem-item">
+                        <span class="pi-num" aria-hidden="true">03</span>
+                        <div>
+                            <h3>Rien n'arrive jusqu'aux outils.</h3>
+                            <p>Le compte rendu existe, mais l'action ne rejoint ni le CRM, ni le support, ni l'outil de projet — et personne ne contrôle qui peut voir quoi.</p>
+                        </div>
+                    </li>
+                </ol>
+                <details class="more problem-more">
+                    <summary>Deux angles souvent oubliés : les droits d'accès et la facture d'IA</summary>
+                    <ul class="more-list">
+                        <li>Information sensible — tout partager avec un assistant ou une intégration n'est pas acceptable pour chaque dossier, projet ou sujet : les droits d'accès doivent suivre la décision.</li>
+                        <li>Facture d'IA — moins l'IA coûte cher, plus on lui envoie tout sans trier ; on finit par payer beaucoup pour du bruit.</li>
+                    </ul>
+                </details>
                 <p class="truth-note">
                     Chaque réunion produit de la valeur. Taveni l'empêche de se perdre dans les têtes ou dans
                     des PDF oubliés : chaque décision devient un actif fiable, sourcé et prêt à rejoindre vos
@@ -2120,165 +2238,9 @@
             </div>
         </section>
 
-        <section class="audiences" aria-labelledby="audiences-title">
+        <section class="pipeline" id="fonctionnement">
             <div class="wrap">
-                <div class="section-kicker">Cas d'usage</div>
-                <h2 class="section-title" id="audiences-title">Utilisez Taveni là où une décision doit être retrouvée ou exécutée.</h2>
-                <p class="section-lead">
-                    Commencez par un processus où la mémoire orale conditionne une action,
-                    une validation ou une preuve à conserver.
-                </p>
-                <div class="audience-grid">
-                    <article class="audience-card">
-                        <span class="role">Direction</span>
-                        <h3>Comités et arbitrages.</h3>
-                        <p>Retrouvez pourquoi une priorité, un budget ou une date a été validé, avec l'extrait et les suites attendues.</p>
-                    </article>
-                    <article class="audience-card">
-                        <span class="role">Ventes & CS</span>
-                        <h3>Compte rendu vers CRM ou support.</h3>
-                        <p>Transformez vos engagements commerciaux en actions relues avant qu'elles ne partent dans le CRM, le support ou une relance.</p>
-                    </article>
-                    <article class="audience-card">
-                        <span class="role">Produit & ops</span>
-                        <h3>Décisions opérationnelles.</h3>
-                        <p>Suivez ce qui a été tranché entre plusieurs équipes et gardez visibles les actions qui manquent d'un propriétaire clair.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="difference" id="difference" aria-labelledby="difference-title">
-            <div class="wrap">
-                <div class="section-kicker">Positionnement</div>
-                <h2 class="section-title" id="difference-title">Taveni commence là où la note automatique s'arrête.</h2>
-                <p class="section-lead">
-                    La note automatique raconte ce qui a été dit. Taveni identifie ce qui doit produire un
-                    effet concret : la source, le responsable, le statut, les droits d'accès et la destination
-                    dans vos outils.
-                </p>
-
-                <div class="difference-layout">
-                    <article class="market-note">
-                        <h3>Pourquoi tout envoyer à l'IA coûte cher.</h3>
-                        <p>
-                            Plus l'IA devient bon marché, plus on lui envoie tout sans trier. Avec des agents
-                            qui travaillent en continu, transmettre des transcriptions brutes revient vite cher
-                            pour peu de valeur.
-                        </p>
-                        <p>
-                            Taveni trie ce qui est réutilisé en aval : les agents et les outils ne reçoivent que l'information utile et validée —
-                            de quoi créer une action, une preuve ou une décision réutilisable, sans repayer pour le verbatim brut.
-                        </p>
-                        <details class="more">
-                            <summary>Le paradoxe de Jevons, en deux mots</summary>
-                            <p>Quand une ressource devient moins chère, on en consomme davantage — pas moins. Pour l'IA : plus le coût par requête baisse, plus on multiplie les appels, et la dépense totale augmente. Taveni applique l'effet inverse en ne traitant que l'utile.</p>
-                        </details>
-                    </article>
-
-                    <div class="difference-board" aria-label="Positionnement Taveni face aux outils de prise de notes IA">
-                        <div class="difference-row header"><span>Sujet</span><span>Outil de notes IA classique</span><span>Angle Taveni</span></div>
-                        <div class="difference-row"><b>Résumé</b><span data-label="Notes IA">Produit une synthèse lisible, souvent détachée de l'exécution.</span><span data-label="Taveni">Isole les arbitrages, actions, risques et preuves qui méritent d'être conservés.</span></div>
-                        <div class="difference-row"><b>Qualification</b><span data-label="Notes IA">Détecte des tâches ou prochaines étapes à partir de la conversation.</span><span data-label="Taveni">Exige source, responsable, droit, statut de relecture et destination.</span></div>
-                        <div class="difference-row"><b>Exécution</b><span data-label="Notes IA">Envoie notes ou actions selon les intégrations disponibles.</span><span data-label="Taveni">Synchronise seulement l'élément utile, après validation, vers l'outil prévu.</span></div>
-                        <div class="difference-row"><b>Contrôle</b><span data-label="Notes IA">Gère surtout l'accès à la réunion, à la note ou à la transcription.</span><span data-label="Taveni">Filtre par droit, outil, assistant, durée et coût d'inférence.</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="tco-section" id="tco">
-            <div class="wrap tco-layout">
-                <div class="tco-copy">
-                    <div class="section-kicker">Le coût de l'IA</div>
-                    <h2 class="section-title">Tout réinjecter dans l'IA coûte cher. Taveni ne réutilise que l'essentiel.</h2>
-                    <p class="section-lead">
-                        Une IA qui travaille en continu coûte bien plus qu'un simple chatbot. Lui transmettre
-                        une transcription brute, c'est payer pour du contexte inutile.
-                    </p>
-                    <p class="section-lead">
-                        Ce qui n'a ni source, ni responsable, ni droit d'accès, ni destination ne devrait pas être synchronisé vers vos outils métier sans validation.
-                        Vous concentrez la dépense IA sur l'information qui sert vraiment.
-                    </p>
-                </div>
-
-                <div class="tco-panel" aria-label="Exemple de contexte métier">
-                    <div class="panel-topbar">
-                        <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-                        <code>processing.context.json</code>
-                    </div>
-                    <pre class="tco-object"><code>{
-  <span class="key">"meeting_title"</span>: <span class="str">"Revue commerciale Q3"</span>,
-  <span class="key">"participants"</span>: [
-    { <span class="key">"name"</span>: <span class="str">"Nathalie Dupont"</span>,
-      <span class="key">"role"</span>: <span class="str">"CFO"</span> },
-    { <span class="key">"name"</span>: <span class="str">"Karim Benali"</span>,
-      <span class="key">"role"</span>: <span class="str">"Sales Lead"</span> }
-  ],
-  <span class="key">"domain_vocabulary"</span>: [
-    <span class="str">"ARR"</span>, <span class="str">"renouvellement"</span>, <span class="str">"comité Q3"</span>
-  ],
-  <span class="key">"output_instructions"</span>: <span class="str">"Prioriser décisions, actions et preuves."</span>,
-  <span class="note">"routing_rules"</span>: <span class="str">"Ne pas envoyer sans responsable, source ni droit"</span>
-}</code></pre>
-                    <div class="tco-result" aria-label="Résultat attendu du contexte métier">
-                        <div class="result-cell"><b>qui</b><span>participants et rôles clarifiés</span></div>
-                        <div class="result-cell"><b>quoi</b><span>contexte utile retenu</span></div>
-                        <div class="result-cell"><b>règle</b><span>tokens inutiles évités</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ontology" id="ontologie">
-            <div class="wrap">
-                <div class="section-kicker">Boucle de décision</div>
-                <h2 class="section-title">On délègue la tâche, pas l'apprentissage.</h2>
-                <p class="section-lead">
-                    Une proposition de l'IA n'a de valeur qu'une fois validée par un humain. Chaque fois que
-                    vos équipes corrigent, confirment ou rejettent, elles apprennent vos règles au système —
-                    et ce savoir vous appartient, même si vous changez d'IA demain.
-                </p>
-
-                <div class="ontology-grid">
-                    <div class="meaning-stack" aria-label="Règles de validation Taveni">
-                        <div class="meaning-layer">
-                            <b>Un système qui vous appartient</b>
-                            <span>Chaque correction enseigne vos règles à votre propre système.</span>
-                        </div>
-                        <div class="meaning-layer">
-                            <b>Décision sourcée</b>
-                            <span>Une décision importante doit pouvoir être reliée à l'extrait qui la justifie.</span>
-                        </div>
-                        <div class="meaning-layer">
-                            <b>Donnée sensible</b>
-                            <span>Une information confidentielle reste limitée aux personnes qui doivent la voir.</span>
-                        </div>
-                        <div class="meaning-layer">
-                            <b>Assistant autorisé</b>
-                            <span>Taveni associe droits et contexte pour limiter ce qui peut être partagé avec les assistants.</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="semantic-board" aria-label="Exemple de validation intentionnelle">
-                            <div class="semantic-row"><span>Phrase détectée</span><span>Question à trancher</span><span>Suite</span></div>
-                            <div class="semantic-row"><span>“On valide le budget Q3”</span><span>Peut-on retrouver l'extrait qui justifie cette décision ?</span><span class="decision">à vérifier</span></div>
-                            <div class="semantic-row"><span>“Je m'en occupe lundi”</span><span>Le responsable, l'échéance et le sujet sont-ils assez clairs ?</span><span class="decision">à compléter</span></div>
-                            <div class="semantic-row"><span>“Sujet confidentiel dossier”</span><span>Cette information doit-elle rester limitée à certaines personnes ?</span><span class="decision">à confirmer</span></div>
-                        </div>
-                        <p class="ontology-note">
-                            Si vous changez de modèle demain, vos décisions qualifiées, vos corrections
-                            et vos règles d'accès restent votre capital.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="pipeline" id="parcours">
-            <div class="wrap">
-                <div class="section-kicker">Flux</div>
+                <div class="section-kicker">Fonctionnement</div>
                 <h2 class="section-title">Capture › Qualifie › Relit › Synchronise.</h2>
                 <p class="section-lead">
                     À chaque étape, vous voyez ce qui a été dit, filtré, validé par vos équipes
@@ -2313,94 +2275,154 @@
                         <li>Synchronisation — seules les actions validées rejoignent vos outils (CRM, support, projet), et leur statut reste suivi.</li>
                     </ul>
                 </details>
-            </div>
-        </section>
 
-        <section class="capabilities">
-            <div class="wrap">
-                <div class="section-kicker">Évaluation</div>
-                <h2 class="section-title">Mesurer la valeur, pas la hype.</h2>
-                <p class="section-lead">
-                    Une évaluation Taveni ne promet pas l'automatisation totale. Elle mesure, sur un processus
-                    réel, le temps de recherche gagné, les ressaisies évitées, les risques réduits et le coût d'IA maîtrisé.
-                </p>
+                <figure class="doc-frame">
+                    <img src="assets/taveni-tco-product.webp" width="1280" height="720" alt="Interface Taveni : import d'une réunion et ajout de contexte métier avant transcription." loading="lazy" decoding="async">
+                    <figcaption class="doc-frame-label">taveni — import &amp; contexte de réunion</figcaption>
+                </figure>
 
-                <div class="capability-grid">
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
-                        <h3>Processus ciblé.</h3>
-                        <p>Choisissez un type de réunion, un outil cible et quelques critères de réussite avant de parler d'automatisation large.</p>
-                        <span class="meta">cadrage</span>
-                    </article>
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                        <h3>Décisions sourcées.</h3>
-                        <p>Vérifiez si les arbitrages importants ressortent avec l'extrait, le contexte et le statut de relecture.</p>
-                        <span class="meta">preuve</span>
-                    </article>
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="5" cy="8" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="5" cy="16" r="2"/><circle cx="19" cy="16" r="2"/></svg>
-                        <h3>Actions qualifiées.</h3>
-                        <p>Mesurez combien d'actions ont un responsable, une prochaine étape, une destination et un statut clair.</p>
-                        <span class="meta">exécution</span>
-                    </article>
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8"/><path d="M8 13h5"/><path d="M21 12c0 4.4-4 8-9 8a10.7 10.7 0 0 1-4-.8L3 20l1.3-3.4A7.2 7.2 0 0 1 3 12c0-4.4 4-8 9-8s9 3.6 9 8Z"/></svg>
-                        <h3>Connecteur utile.</h3>
-                        <p>Testez un premier flux vers le CRM, le support ou l'outil projet avant d'élargir le périmètre.</p>
-                        <span class="meta">intégration</span>
-                    </article>
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
-                        <h3>Règles d'accès.</h3>
-                        <p>Identifiez les sujets sensibles, les personnes autorisées et les informations qui ne doivent pas alimenter un assistant.</p>
-                        <span class="meta">contrôle</span>
-                    </article>
-                    <article class="capability">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1v7Z"/><path d="m9 12 2 2 4-4"/></svg>
-                        <h3>Mesure de valeur.</h3>
-                        <p>Comparez temps de recherche, ressaisie évitée, risques contrôlés et volume de contexte envoyé aux modèles.</p>
-                        <span class="meta">ROI</span>
-                    </article>
+                <div class="start-block">
+                    <h3 class="start-title">Où commencer</h3>
+                    <div class="start-table" aria-label="Premiers cas d'usage par équipe">
+                        <div class="start-row header"><span>Équipe</span><span>Réunion type</span><span>Ce que Taveni en fait</span></div>
+                        <div class="start-row"><b>Direction</b><span class="start-meeting">Comités et arbitrages</span><span class="start-outcome">Retrouver pourquoi une priorité, un budget ou une date a été validé, avec l'extrait et les suites attendues.</span></div>
+                        <div class="start-row"><b>Ventes &amp; CS</b><span class="start-meeting">Rendez-vous client</span><span class="start-outcome">Les engagements commerciaux deviennent des actions relues avant de partir dans le CRM, le support ou une relance.</span></div>
+                        <div class="start-row"><b>Produit &amp; ops</b><span class="start-meeting">Décisions opérationnelles</span><span class="start-outcome">Ce qui a été tranché entre équipes reste visible, y compris les actions sans propriétaire clair.</span></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="architecture" id="architecture">
+        <section class="difference" id="difference" aria-labelledby="difference-title">
             <div class="wrap">
-                <div class="section-kicker">Souveraineté</div>
-                <h2 class="section-title">Vos décisions restent à vous, quelle que soit l'IA que vous utilisez.</h2>
+                <div class="section-kicker">Positionnement</div>
+                <h2 class="section-title" id="difference-title">Taveni commence là où la note automatique s'arrête.</h2>
                 <p class="section-lead">
-                    Chaque décision validée, chaque correction et chaque règle d'accès enrichit votre patrimoine
-                    de décisions. Taveni conserve la preuve, le statut de relecture, les droits d'accès et la
-                    part d'information partagée avec vos outils ou vos assistants IA.
+                    La note automatique raconte ce qui a été dit. Taveni identifie ce qui doit produire un
+                    effet concret : la source, le responsable, le statut, les droits d'accès et la destination
+                    dans vos outils.
                 </p>
 
-                <div class="arch-grid">
-                    <div class="ledger" aria-label="Exemple de traçabilité">
-                        <div class="ledger-row"><span>Information</span><span>Origine</span><span>État</span></div>
-                        <div class="ledger-row"><span>décision</span><span>réunion · 00:17:42 · preuve orale</span><span>validée</span></div>
-                        <div class="ledger-row"><span>engagement</span><span>intervenant · extrait · confiance</span><span>à revoir</span></div>
-                        <div class="ledger-row"><span>risque</span><span>règles d'accès · confidentialité</span><span>restreint</span></div>
+                <div class="difference-layout">
+                    <article class="market-note">
+                        <h3>Pourquoi tout envoyer à l'IA coûte cher.</h3>
+                        <p>
+                            Plus l'IA devient bon marché, plus on lui envoie tout sans trier — et la dépense
+                            grimpe pour peu de valeur. Taveni ne réutilise que ce qui a été qualifié :
+                            les agents et les outils reçoivent l'information validée, de quoi créer une action,
+                            une preuve ou une décision réutilisable, sans repayer pour le verbatim brut.
+                        </p>
+                        <details class="more">
+                            <summary>Le paradoxe de Jevons, en deux mots</summary>
+                            <p>Quand une ressource devient moins chère, on en consomme davantage — pas moins. Pour l'IA : plus le coût par requête baisse, plus on multiplie les appels, et la dépense totale augmente. Taveni applique l'effet inverse en ne traitant que l'utile.</p>
+                        </details>
+                    </article>
+
+                    <div class="difference-board" aria-label="Positionnement Taveni face aux outils de prise de notes IA">
+                        <div class="difference-row header"><span>Sujet</span><span>Outil de notes IA classique</span><span>Angle Taveni</span></div>
+                        <div class="difference-row"><b>Résumé</b><span data-label="Notes IA">Produit une synthèse lisible, souvent détachée de l'exécution.</span><span data-label="Taveni">Isole les arbitrages, actions, risques et preuves qui méritent d'être conservés.</span></div>
+                        <div class="difference-row"><b>Qualification</b><span data-label="Notes IA">Détecte des tâches ou prochaines étapes à partir de la conversation.</span><span data-label="Taveni">Exige source, responsable, droit, statut de relecture et destination.</span></div>
+                        <div class="difference-row"><b>Exécution</b><span data-label="Notes IA">Envoie notes ou actions selon les intégrations disponibles.</span><span data-label="Taveni">Synchronise seulement l'élément utile, après validation, vers l'outil prévu.</span></div>
+                        <div class="difference-row"><b>Contrôle</b><span data-label="Notes IA">Gère surtout l'accès à la réunion, à la note ou à la transcription.</span><span data-label="Taveni">Filtre par droit, outil, assistant, durée et coût d'inférence.</span></div>
                     </div>
-                    <div class="arch-points">
-                        <article class="arch-point">
-                            <h3>Décisions sourcées.</h3>
-                            <p>Les arbitrages critiques restent reliés à leur preuve avant partage ou synchronisation.</p>
-                        </article>
-                        <article class="arch-point">
-                            <h3>Partager le minimum utile.</h3>
-                            <p>Les outils et assistants reçoivent uniquement les informations prévues pour eux.</p>
-                        </article>
-                        <article class="arch-point">
-                            <h3>Données sensibles.</h3>
-                            <p>Les droits d'accès sont vérifiés avant qu'une information n'alimente un assistant.</p>
-                        </article>
-                        <article class="arch-point">
-                            <h3>Boucle d'apprentissage.</h3>
-                            <p>Vos validations, rejets et corrections rendent les prochaines propositions plus proches du fonctionnement réel de l'équipe.</p>
-                        </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="tco-section" id="cout-ia">
+            <div class="wrap tco-layout">
+                <div class="tco-copy">
+                    <div class="section-kicker">Le coût de l'IA</div>
+                    <h2 class="section-title">Tout réinjecter dans l'IA coûte cher. Taveni ne réutilise que l'essentiel.</h2>
+                    <p class="section-lead">
+                        Une IA qui travaille en continu coûte bien plus qu'un simple chatbot. Lui transmettre
+                        une transcription brute, c'est payer pour du contexte inutile.
+                    </p>
+                    <details class="more tco-more">
+                        <summary>Comment le contexte est qualifié</summary>
+                        <p>Le contexte n'est pas versé en bloc. Profil de réunion, vocabulaire métier et contexte d'organisation poussé via A2A/MCP sont qualifiés avant extraction. Ce qui n'a ni source, ni responsable, ni droit d'accès, ni destination reste hors synchronisation.</p>
+                    </details>
+                </div>
+
+                <div class="tco-panel" aria-label="Exemple de contexte métier">
+                    <div class="panel-topbar">
+                        <code>processing.context.json</code>
                     </div>
+                    <pre class="tco-object"><code>{
+  <span class="key">"meeting_title"</span>: <span class="str">"Revue commerciale Q3"</span>,
+  <span class="key">"participants"</span>: [
+    { <span class="key">"name"</span>: <span class="str">"Nathalie Dupont"</span>,
+      <span class="key">"role"</span>: <span class="str">"CFO"</span> },
+    { <span class="key">"name"</span>: <span class="str">"Karim Benali"</span>,
+      <span class="key">"role"</span>: <span class="str">"Sales Lead"</span> }
+  ],
+  <span class="key">"user_profile"</span>: {
+    <span class="key">"company"</span>: <span class="str">"Hyle Labs"</span>,
+    <span class="key">"job_title"</span>: <span class="str">"Direction financière"</span>
+  },
+  <span class="key">"vocabulary"</span>: [
+    <span class="str">"ARR"</span>, <span class="str">"renouvellement"</span>, <span class="str">"comité Q3"</span>
+  ],
+  <span class="key">"org_projects"</span>: [<span class="str">"Expansion Q3"</span>],
+  <span class="key">"org_clients"</span>: [<span class="str">"Acme Corp"</span>],
+  <span class="key">"org_products"</span>: [<span class="str">"Taveni"</span>],
+  <span class="key">"output_instruction"</span>: <span class="str">"Prioriser décisions, actions et preuves."</span>,
+  <span class="note">"routing_rules"</span>: <span class="str">"Ne pas envoyer sans responsable, source ni droit"</span>
+}</code></pre>
+                    <div class="tco-result" aria-label="Résultat attendu du contexte métier">
+                        <div class="result-cell"><b>qui</b><span>annuaire et rôles clarifiés</span></div>
+                        <div class="result-cell"><b>quoi</b><span>projets, clients, vocabulaire retenus</span></div>
+                        <div class="result-cell"><b>règle</b><span>tokens inutiles évités</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ontology" id="souverainete">
+            <div class="wrap">
+                <div class="section-kicker">Confiance &amp; souveraineté</div>
+                <h2 class="section-title section-title--major">On délègue la tâche, pas l'apprentissage.</h2>
+                <p class="section-lead">
+                    Une proposition de l'IA n'a de valeur qu'une fois validée par un humain. Chaque
+                    correction enseigne vos règles à votre propre système : décision sourcée, donnée
+                    sensible protégée, assistant limité au nécessaire — et ce savoir vous appartient,
+                    même si vous changez d'IA demain.
+                </p>
+
+                <div class="ontology-grid">
+                    <div>
+                        <div class="semantic-board" aria-label="Exemple de validation intentionnelle">
+                            <div class="semantic-row"><span>Phrase détectée</span><span>Question à trancher</span><span>Suite</span></div>
+                            <div class="semantic-row"><span>“On valide le budget Q3”</span><span>Peut-on retrouver l'extrait qui justifie cette décision ?</span><span class="decision">à vérifier</span></div>
+                            <div class="semantic-row"><span>“Je m'en occupe lundi”</span><span>Le responsable, l'échéance et le sujet sont-ils assez clairs ?</span><span class="decision">à compléter</span></div>
+                            <div class="semantic-row"><span>“Sujet confidentiel dossier”</span><span>Cette information doit-elle rester limitée à certaines personnes ?</span><span class="decision">à confirmer</span></div>
+                        </div>
+                        <p class="ontology-note">
+                            Si vous changez de modèle demain, vos décisions qualifiées, vos corrections
+                            et vos règles d'accès restent votre capital.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="ledger" aria-label="Exemple de traçabilité">
+                            <div class="ledger-row"><span>Information</span><span>Origine</span><span>État</span></div>
+                            <div class="ledger-row"><span>décision</span><span>réunion · 00:17:42 · preuve orale</span><span>validée</span></div>
+                            <div class="ledger-row"><span>engagement</span><span>intervenant · extrait · confiance</span><span>à revoir</span></div>
+                            <div class="ledger-row"><span>risque</span><span>règles d'accès · confidentialité</span><span>restreint</span></div>
+                        </div>
+                        <ul class="trust-list">
+                            <li><strong>Décisions sourcées.</strong> <span>Les arbitrages critiques restent reliés à leur preuve avant partage ou synchronisation.</span></li>
+                            <li><strong>Partager le minimum utile.</strong> <span>Les outils et assistants reçoivent uniquement les informations prévues pour eux, même quand le contexte vient d'un agent connecté.</span></li>
+                            <li><strong>Données sensibles.</strong> <span>Les droits d'accès sont vérifiés avant qu'une information n'alimente un assistant.</span></li>
+                            <li><strong>Boucle d'apprentissage.</strong> <span>Vos validations, rejets et corrections rapprochent les prochaines propositions du fonctionnement réel de l'équipe.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="measure-note">
+                    <h3>Mesurer la valeur, pas la hype.</h3>
+                    <p>Une évaluation Taveni ne promet pas l'automatisation totale. Elle mesure, sur un de vos processus réels, quatre choses simples :</p>
+                    <p class="measure-criteria">temps de recherche gagné · ressaisies évitées · risques contrôlés · coût d'IA maîtrisé</p>
                 </div>
             </div>
         </section>
@@ -2408,7 +2430,7 @@
         <section class="company" id="hyle-labs" aria-labelledby="company-title">
             <div class="wrap company-layout">
                 <div class="company-mark" aria-hidden="true">
-                    <img src="assets/hyle-labs-mark.svg" alt="">
+                    <img src="assets/hyle-labs-mark.svg" alt="" width="64" height="64">
                 </div>
                 <div class="company-copy">
                     <div class="section-kicker">Hyle Labs</div>
@@ -2423,31 +2445,57 @@
                         doit réduire la ressaisie sans retirer aux équipes la capacité de relire,
                         limiter et décider ce qui est exécuté.
                     </p>
-                    <div class="company-facts">
-                        <div class="fact"><b>Rhône · RCS Lyon</b><span>Éditeur logiciel français</span></div>
-                        <div class="fact"><b>Équipes métier</b><span>Conçu pour produit, ventes, opérations, IT et équipes réglementées</span></div>
-                        <div class="fact"><b>Assistants IA</b><span>Minimum utile avant partage</span></div>
-                        <div class="fact"><b>Europe</b><span>Consentement, sécurité et contraintes de déploiement prises au sérieux</span></div>
-                    </div>
+                    <blockquote class="founder-note">
+                        <p class="founder-quote">« J'ai créé Taveni parce que les décisions les plus importantes de nos équipes vivaient dans des comptes rendus que personne ne relisait. Nous construisons l'outil qui les rend exécutables — sans jamais retirer la décision aux humains. »</p>
+                        <p class="founder-sig">Adryan Perez — fondateur, Hyle Labs · Lyon</p>
+                    </blockquote>
+                    <p class="company-facts-line">SASU française · RCS Lyon · RGPD par conception · Données traitées en Europe</p>
                 </div>
             </div>
         </section>
 
         <section class="contact" id="contact">
-            <div class="wrap contact-box">
-                <div>
-                    <div class="section-kicker">Échanger avec nous</div>
-                    <h2>Mesurer Taveni sur un processus réel ?</h2>
-                    <p>
-                        Envoyez-nous votre contexte : type de réunion, outil cible, contraintes RGPD et
-                        critères de réussite. Nous vous répondrons avec un périmètre d'évaluation chiffré
-                        sur le temps de recherche, les ressaisies, les risques et le coût d'IA.
-                    </p>
+            <div class="wrap">
+                <div class="contact-box">
+                    <div>
+                        <div class="section-kicker">Échanger avec nous</div>
+                        <h2>Mesurer Taveni sur un processus réel ?</h2>
+                        <p>
+                            Envoyez-nous votre contexte : type de réunion, outil cible, contraintes RGPD et
+                            critères de réussite. Nous vous répondrons avec un périmètre d'évaluation chiffré
+                            sur le temps de recherche, les ressaisies, les risques et le coût d'IA.
+                        </p>
+                        <p class="contact-meta">Réponse sous 48 h · Évaluation sur un processus réel · Sans engagement</p>
+                    </div>
+                    <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=%C3%89valuation%20Taveni&body=Bonjour%20Hyle%20Labs%2C%0A%0AContexte%20%2F%20besoin%20%3A%0AOutils%20%C3%A0%20connecter%20%3A%0AContraintes%20RGPD%20%2F%20s%C3%A9curit%C3%A9%20%3A%0A%0AMerci%2C">
+                        contact@hyle-labs.net
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
                 </div>
-                <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=%C3%89change%20Taveni&body=Bonjour%20Hyle%20Labs%2C%0A%0AContexte%20%2F%20besoin%20%3A%0AOutils%20%C3%A0%20connecter%20%3A%0AContraintes%20RGPD%20%2F%20s%C3%A9curit%C3%A9%20%3A%0A%0AMerci%2C">
-                    contact@hyle-labs.net
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
+
+                <div class="faq">
+                    <h3 class="faq-title">Questions directes</h3>
+                    <details class="more faq-1">
+                        <summary>Faut-il changer d'outils pour utiliser Taveni ?</summary>
+                        <p>Non. Taveni s'ajoute à l'existant : il pousse des actions validées vers le CRM, le support ou l'outil projet que vous utilisez déjà. On commence par un premier connecteur, puis on élargit si la valeur est démontrée.</p>
+                    </details>
+                    <details class="more faq-2">
+                        <summary>Où vont les données ? (RGPD)</summary>
+                        <p>Hyle Labs est une société française : consentement, sécurité et contraintes de déploiement sont traités dès la conception. Les droits d'accès sont vérifiés avant qu'une information n'alimente un assistant, et vos corrections ne servent pas à entraîner des modèles tiers.</p>
+                    </details>
+                    <details class="more faq-3">
+                        <summary>Que se passe-t-il si nous changeons de modèle d'IA ?</summary>
+                        <p>Vos décisions qualifiées, vos corrections et vos règles d'accès restent votre capital, indépendamment du modèle utilisé. Changer d'IA ne vous fait pas repartir de zéro.</p>
+                    </details>
+                    <details class="more faq-4">
+                        <summary>Combien ça coûte ?</summary>
+                        <p>Taveni est en phase d'évaluation cadrée : nous chiffrons d'abord, sur un de vos processus réels, le temps de recherche gagné, les ressaisies évitées, les risques réduits et le coût d'IA maîtrisé. Vous décidez ensuite en connaissance de cause.</p>
+                    </details>
+                    <details class="more faq-5">
+                        <summary>Quels outils connectez-vous ?</summary>
+                        <p>Les premiers flux visent le CRM, le support et la gestion de projet. Dites-nous quels outils comptent pour vous : le périmètre d'évaluation se construit autour d'un premier connecteur utile.</p>
+                    </details>
+                </div>
             </div>
         </section>
     </main>
@@ -2456,12 +2504,21 @@
         <div class="wrap footer-inner">
             <div>
                 <strong>Hyle Labs SASU</strong><br>
-                254 rue Vendôme, 69003 Lyon · contact@hyle-labs.net<br>
-                © <span id="year">2026</span> Hyle Labs. Taveni est édité par Hyle Labs.
+                1 C rue Gérard Neyrin, 69630 Chaponost · contact@hyle-labs.net<br>
+                © <span id="year">2026</span> Hyle Labs. Taveni est édité par Hyle Labs.<br>
+                <span class="footer-note">Fait à Lyon. Aucun tracker tiers — polices auto-hébergées.</span>
             </div>
-            <div class="footer-links">
-                <a href="mailto:contact@hyle-labs.net">Contact</a>
-                <button type="button" id="legal-open">Mentions légales</button>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="mailto:contact@hyle-labs.net">Contact</a>
+                    <button type="button" id="legal-open">Mentions légales</button>
+                </div>
+                <div class="footer-langs" aria-label="Langues disponibles">
+                    <a href="?lang=fr" hreflang="fr" lang="fr">Français</a>
+                    <a href="?lang=en" hreflang="en" lang="en">English</a>
+                    <a href="?lang=es" hreflang="es" lang="es">Español</a>
+                    <a href="?lang=zh" hreflang="zh-Hans" lang="zh-Hans">中文</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -2471,7 +2528,7 @@
             <h2 id="legal-title">Mentions légales</h2>
             <div class="legal-grid">
                 <div class="legal-item"><b>Société</b><span>HYLE LABS · SASU</span></div>
-                <div class="legal-item"><b>Siège public</b><span>254 rue Vendôme, 69003 Lyon</span></div>
+                <div class="legal-item"><b>Siège public</b><span>1 C rue Gérard Neyrin, 69630 Chaponost</span></div>
                 <div class="legal-item"><b>SIREN</b><span>101 857 431 · RCS Lyon</span></div>
                 <div class="legal-item"><b>TVA intracom.</b><span>FR92101857431</span></div>
                 <div class="legal-item"><b>Directeur de publication</b><span>Adryan Perez, Président</span></div>
@@ -2483,6 +2540,6 @@
         </div>
     </dialog>
 
-    <script src="assets/i18n.js?v=20260629" defer></script>
+    <script src="assets/i18n.js?v=20260702" defer></script>
 </body>
 </html>
