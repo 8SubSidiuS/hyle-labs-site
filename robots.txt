@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hyle-labs.net/sitemap.xml
+
+# Résumé à destination des assistants IA (convention llms.txt)
+# https://hyle-labs.net/llms.txt

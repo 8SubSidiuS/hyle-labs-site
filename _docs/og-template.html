@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>OG card template — hyle-labs.net</title>
+<style>
+    @font-face {
+        font-family: "Inter";
+        font-weight: 400 800;
+        src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "Bricolage Grotesque";
+        font-weight: 200 800;
+        src: url("/assets/fonts/bricolage-latin.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "JetBrains Mono";
+        font-weight: 400 700;
+        src: url("/assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
+    }
+    * { margin: 0; box-sizing: border-box; }
+    :root {
+        --paper: #f7f8f3;
+        --surface: #ffffff;
+        --ink: #111418;
+        --ink-2: #2f3a3f;
+        --muted: #5d696c;
+        --line: #d9dfdc;
+        --teal-2: #0b5f59;
+        --coral: #f06543;
+        --decision-wash: rgba(240, 101, 67, 0.13);
+    }
+    body { font-family: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        display: flex;
+        flex-direction: column;
+        padding: 56px 64px 44px;
+    }
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(62% 85% at 96% 0%, rgba(15, 118, 110, 0.14), transparent 58%),
+            radial-gradient(50% 70% at -6% 108%, rgba(15, 118, 110, 0.07), transparent 56%);
+        pointer-events: none;
+    }
+    .top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .top img { width: 44px; height: 44px; display: block; }
+    .top span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: .22em;
+        color: var(--muted);
+    }
+    .middle {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 56px;
+        min-height: 0;
+    }
+    .pitch { max-width: 640px; }
+    .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--teal-2);
+        font-size: 16px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 3px; background: var(--coral); }
+    h1 {
+        margin-top: 22px;
+        font-family: "Bricolage Grotesque", "Inter", -apple-system, "PingFang SC", sans-serif;
+        font-size: 59px;
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -.015em;
+    }
+    h1 .accent { color: var(--teal-2); }
+    /* Fiche de décision — la signature produit */
+    .decision-card {
+        flex: 0 0 auto;
+        width: 396px;
+        padding: 24px 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        box-shadow:
+            0 1px 2px rgba(17, 20, 24, 0.05),
+            0 34px 80px -42px rgba(17, 20, 24, 0.40),
+            0 30px 70px -48px rgba(15, 118, 110, 0.28);
+    }
+    .dc-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .dc-stamp {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: var(--decision-wash);
+        color: var(--ink);
+        font-weight: 700;
+    }
+    .dc-stamp::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--coral); }
+    .dc-quote {
+        margin: 18px 0 12px;
+        font-family: "Bricolage Grotesque", "Inter", -apple-system, "PingFang SC", sans-serif;
+        font-size: 23px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+    .dc-quote mark {
+        background: linear-gradient(transparent 62%, var(--decision-wash) 62%);
+        color: inherit;
+    }
+    .dc-source { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted); }
+    .dc-action { margin-top: 18px; padding-top: 15px; border-top: 1px dashed var(--line); }
+    .dc-action-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        color: var(--teal-2);
+    }
+    .dc-action-text { margin-top: 7px; font-weight: 700; font-size: 17px; }
+    .dc-action-meta { margin-top: 4px; font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted); }
+    .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        color: var(--muted);
+    }
+    .bottom .url { font-weight: 700; color: var(--ink-2); }
+    .bottom .sig { display: inline-flex; align-items: center; gap: 10px; }
+    .bottom .sig::before { content: ""; width: 9px; height: 9px; border-radius: 2px; background: var(--coral); }
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="top">
+        <img src="/assets/hyle-labs-mark.svg" alt="">
+        <span>HYLE LABS</span>
+    </div>
+    <div class="middle">
+        <div class="pitch">
+            <div class="eyebrow" id="eyebrow"></div>
+            <h1 id="title"></h1>
+        </div>
+        <article class="decision-card">
+            <div class="dc-top">
+                <span id="dc-id"></span>
+                <span class="dc-stamp" id="dc-stamp"></span>
+            </div>
+            <p class="dc-quote"><mark id="dc-quote"></mark></p>
+            <p class="dc-source" id="dc-source"></p>
+            <div class="dc-action">
+                <span class="dc-action-label" id="dc-action-label"></span>
+                <p class="dc-action-text" id="dc-action-text"></p>
+                <p class="dc-action-meta" id="dc-action-meta"></p>
+            </div>
+        </article>
+    </div>
+    <div class="bottom">
+        <span class="url">hyle-labs.net</span>
+        <span class="sig" id="sig"></span>
+    </div>
+</div>
+<script>
+    const strings = {
+        fr: {
+            eyebrow: "Logiciel français · édité par Hyle Labs",
+            title: 'Vos réunions, structurées en <span class="accent">décisions et actions à relire</span>.',
+            id: "décision #142",
+            stamp: "à relire",
+            quote: "« On valide le budget Q3 à 180 k€. »",
+            source: "Comité produit · 00:17:42 · preuve audio",
+            actionLabel: "action proposée",
+            actionText: "Notifier la direction financière",
+            actionMeta: "Nathalie D. · pour le 12/07 · cible : CRM",
+            sig: "taveni — la réunion devient décision"
+        },
+        en: {
+            eyebrow: "French software · built by Hyle Labs",
+            title: 'Your meetings, structured as <span class="accent">decisions and actions to review</span>.',
+            id: "decision #142",
+            stamp: "needs review",
+            quote: "“We approve the Q3 budget at €180k.”",
+            source: "Product committee · 00:17:42 · audio evidence",
+            actionLabel: "proposed action",
+            actionText: "Notify the finance team",
+            actionMeta: "Nathalie D. · by Jul 12 · target: CRM",
+            sig: "taveni — meetings become decisions"
+        },
+        es: {
+            eyebrow: "Software francés · creado por Hyle Labs",
+            title: 'Tus reuniones, estructuradas como <span class="accent">decisiones y acciones por revisar</span>.',
+            id: "decisión #142",
+            stamp: "por revisar",
+            quote: "«Aprobamos el presupuesto del Q3: 180 k€.»",
+            source: "Comité de producto · 00:17:42 · prueba de audio",
+            actionLabel: "acción propuesta",
+            actionText: "Avisar a la dirección financiera",
+            actionMeta: "Nathalie D. · para el 12/07 · objetivo: CRM",
+            sig: "taveni — la reunión se vuelve decisión"
+        },
+        zh: {
+            eyebrow: "法国软件 · 由 Hyle Labs 研发",
+            title: '将会议结构化为<span class="accent">待审核的决策与行动</span>。',
+            id: "决策 #142",
+            stamp: "待审核",
+            quote: "“Q3 预算定为 18 万欧元。”",
+            source: "产品委员会 · 00:17:42 · 音频依据",
+            actionLabel: "建议行动",
+            actionText: "通知财务负责人",
+            actionMeta: "Nathalie D. · 7月12日前 · 目标：CRM",
+            sig: "taveni — 会议沉淀为决策"
+        }
+    };
+    const lang = new URLSearchParams(location.search).get("lang") || "fr";
+    const t = strings[strings[lang] ? lang : "fr"];
+    document.documentElement.lang = lang;
+    document.getElementById("eyebrow").textContent = t.eyebrow;
+    document.getElementById("title").innerHTML = t.title;
+    document.getElementById("dc-id").textContent = t.id;
+    document.getElementById("dc-stamp").textContent = t.stamp;
+    document.getElementById("dc-quote").textContent = t.quote;
+    document.getElementById("dc-source").textContent = t.source;
+    document.getElementById("dc-action-label").textContent = t.actionLabel;
+    document.getElementById("dc-action-text").textContent = t.actionText;
+    document.getElementById("dc-action-meta").textContent = t.actionMeta;
+    document.getElementById("sig").textContent = t.sig;
+    document.fonts.ready.then(() => { document.title = "ready-" + lang; });
+</script>
+</body>
+</html>

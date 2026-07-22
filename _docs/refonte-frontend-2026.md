@@ -7,6 +7,19 @@
 > synchronisées ×3 langues (0 manquante), 0 erreur console, JSON-LD Organization + SoftwareApplication
 > + FAQPage valide. Ce document reste la référence pour toute évolution ultérieure du frontend.
 >
+> **Mise à jour claims du 18/07/2026** : les formulations non étayées sur le
+> traitement européen, l'entraînement de modèles tiers, le délai de réponse,
+> les résultats chiffrés, les connecteurs, les droits d'accès, la portabilité et
+> le coût ont été qualifiées dans les quatre langues et le JSON-LD. Le contrôle
+> automatisé complet est `npm test` et le registre de préparation
+> corporate est `_docs/hyle-corporate-comms-readiness-v1.md`.
+>
+> **Mise à jour SEO multilingue du 18/07/2026** : le français reste la source
+> éditoriale dans `index.html`, mais `/en/`, `/es/` et `/zh/` sont maintenant des
+> pages HTML complètes générées par `npm run build`. Canonical, hreflang, Open
+> Graph, JSON-LD, FAQ et sitemap sont contrôlés par `npm test`. Ne jamais modifier
+> directement les trois pages générées.
+>
 > Brief original rédigé le 02/07/2026 à partir d'un audit complet du code (`index.html`,
 > `assets/i18n.js`), de captures d'écran (desktop/mobile, clair/sombre) et de recherches web
 > sur les pratiques 2025-2026 (sources en annexe).
@@ -22,10 +35,12 @@
 
 Ces règles priment sur toute proposition du présent document. Les violer casse le site.
 
-1. **Site 100 % statique sur GitHub Pages.** Pas de framework, pas de build step, pas de SSR,
-   pas de dépendance npm. HTML + CSS natif + JS vanilla minimal. Le domaine est `hyle-labs.net`
-   (fichier `CNAME`). Jekyll est actif (pas de `.nojekyll`) : les fichiers/dossiers préfixés `_`
-   ne sont pas déployés — c'est pourquoi ce document vit dans `_docs/`.
+1. **Site 100 % statique sur GitHub Pages.** Pas de framework, pas de SSR et pas de dépendance
+   navigateur. HTML + CSS natif + JS vanilla minimal. Un build Node déterministe, avec Cheerio
+   comme dépendance de développement verrouillée, matérialise `/en/`, `/es/`, `/zh/` et
+   `sitemap.xml` avant publication. Le domaine est `hyle-labs.net` (fichier `CNAME`). Jekyll est
+   actif (pas de `.nojekyll`) : les fichiers/dossiers préfixés `_` ne sont pas déployés — c'est
+   pourquoi ce document vit dans `_docs/`.
 2. **i18n : le français est la source, dans le DOM.** Le FR est codé en dur dans `index.html` ;
    EN/ES/ZH vivent dans l'objet `translations` de `assets/i18n.js`, appliqués via des tuples
    `bindings` `["clé", "sélecteur CSS", "type"]` (`text` | `html` | `label` | `attr:xxx`).
@@ -35,13 +50,19 @@ Ces règles priment sur toute proposition du présent document. Les violer casse
    - **Ne jamais insérer un élément qui décale un sélecteur `:nth-child`/`:nth-of-type` existant.**
      Pour tout nouvel élément, utiliser une classe dédiée comme sélecteur de binding.
    - Un binding `text` écrase le HTML interne (pas de `<strong>` dans un élément bindé `text`).
-   - Vérifications : `node -c assets/i18n.js` + croiser les clés `bindings` vs `translations`
+   - Vérifications : `node --check assets/i18n.js` + croiser les clés `bindings` vs `translations`
      (0 clé manquante par langue).
+   - Exécuter `npm run build` après toute modification éditoriale ou i18n, puis `npm test`.
+   - `/en/index.html`, `/es/index.html`, `/zh/index.html` et `sitemap.xml` sont générés : ne
+     jamais les éditer à la main. Le contrôle `check:generated` refuse tout artefact périmé.
    - Après toute modification de `assets/i18n.js`, **bumper le `?v=`** du
-     `<script src="assets/i18n.js?v=YYYYMMDD">` dans `index.html` (cache GitHub Pages ~600 s).
-3. **Langue et thème suivent le navigateur à chaque visite.** Bascule manuelle = `sessionStorage`
-   uniquement, jamais `localStorage`. Le script de thème inline dans le `<head>` (anti-FOUC) doit
-   rester inline et premier. Ne pas réintroduire de persistance `localStorage`.
+     `<script src="assets/i18n.js?v=YYYYMMDD[-N]">` dans `index.html` (cache GitHub Pages ~600 s).
+3. **La langue suit l'URL canonique ; le thème suit le navigateur.** `/` sert le français,
+   `/en/` l'anglais, `/es/` l'espagnol et `/zh/` le chinois simplifié. Les anciens liens
+   `?lang=` sont remplacés côté navigateur par la route statique correspondante, mais ne doivent
+   plus être publiés. Le thème peut être basculé pour la session via `sessionStorage`, jamais via
+   `localStorage`. Le script de thème inline dans le `<head>` (anti-FOUC) doit rester inline et
+   premier.
 4. **RGPD strict** : aucune requête tierce (fonts auto-hébergées, pas d'analytics tiers, pas de CDN).
 5. **Refus assumés** (direction validée par le propriétaire, juin 2026) : pas de 3D/WebGL,
    pas de scrolljacking, pas de couleurs « dopamine » saturées, pas de vidéo autoplay en hero.
@@ -365,7 +386,8 @@ Layout : 55/45, copy à gauche. Contenu :
    Garder `accent-teal` sur « décisions » et « actions suivies ».
 3. Lead 2 phrases max (aujourd'hui 4) : la mécanique (capte → retrouve → transforme → validation
    humaine) descend dans le fonctionnement.
-4. CTA : primaire **« Demander une évaluation »** (mailto enrichi actuel), secondaire fantôme
+4. CTA : primaire **« Demander une évaluation »** (formulaire Taveni prérempli et attribué à
+   Hyle Labs), secondaire fantôme
    **« Voir le fonctionnement »** (ancre). Inversion de la hiérarchie actuelle.
 5. **Artefact hero (remplace le screenshot de modale)** : une **fiche de décision Taveni**
    reconstruite en HTML/CSS pur — c'est l'objet que le produit fabrique :
@@ -461,11 +483,13 @@ Structure en trois temps sur **une seule bande sombre** :
   fondateur — nom, titre (« Adryan Perez, fondateur — Lyon »), 2 phrases à la première personne
   sur pourquoi Taveni existe, et si accepté une photo réelle sobre (pas d'avatar IA ; à défaut,
   pas de photo du tout). Les acheteurs B2B achètent à des gens identifiables. Facts conservés
-  en une ligne : `SASU française · RCS Lyon · RGPD par conception · données en Europe`.
+  en une ligne : `SASU française · RCS Lyon · Taveni en évaluation cadrée` ; aucun claim
+  privacy, sécurité ou région ne doit réapparaître sans preuve et revue dédiées.
 - **Contact** : conserver le mailto (contrainte statique assumée) mais l'habiller en
-  « périmètre d'évaluation » : 3 mentions au-dessus du bouton — « Réponse sous 48 h ·
-  Évaluation sur un processus réel · Sans engagement ». Le corps du mailto actuel (contexte,
-  outils, contraintes RGPD) est déjà bon.
+  « périmètre d'évaluation » : 3 mentions au-dessus du bouton — « Évaluation sur un processus
+  réel · Périmètre cadré · Sans engagement ». Aucun délai de réponse ne doit être annoncé tant
+  que l'owner et la couverture ne sont pas prouvés. Le corps du mailto actuel (contexte, outils,
+  contraintes RGPD) est déjà bon.
 - **FAQ courte (nouveau)** : 4-5 `<details class="more">` — « Faut-il changer d'outils ? »,
   « Où vont les données ? (RGPD) », « Que se passe-t-il si on change de modèle d'IA ? »,
   « Combien ça coûte ? » (réponse honnête pré-lancement : évaluation cadrée d'abord),
@@ -475,9 +499,9 @@ Structure en trois temps sur **une seule bande sombre** :
 
 ### 7.9 Footer
 
-- Ajouter : rappel des 5 ancres + liens langues (`?lang=en|es|zh` — aide SEO/partage,
-  les `hreflang` existent déjà) + mention « Fait à Lyon, sans tracker tiers » (signal RGPD
-  différenciant, vérifiable). Mentions légales dialog conservé.
+- Ajouter : rappel des 5 ancres + liens vers les routes statiques `/`, `/en/`, `/es/`, `/zh/`
+  (SEO, partage et navigation sans JavaScript) + mention « Fait à Lyon, sans tracker tiers »
+  (signal de sobriété et de confiance vérifiable). Mentions légales dialog conservé.
 
 ---
 
@@ -490,7 +514,8 @@ Structure en trois temps sur **une seule bande sombre** :
       les nouveaux liens footer et le menu mobile.
 - [ ] Focus non masqué (2.4.11) : `scroll-padding-bottom: 96px` sur `html` en mobile pour que
       le sticky CTA ne recouvre jamais l'élément focusé.
-- [ ] `lang="en|es|zh"` sur chaque bouton de langue ; libellés `aria-pressed` conservés.
+- [x] Les langues sont de vrais liens avec `lang`, `hreflang` dans le footer et
+      `aria-current="page"` sur la route active ; la navigation fonctionne sans JavaScript.
 - [ ] La fiche de décision hero est du texte réel (lue par les lecteurs d'écran) ; le screenshot
       produit reçoit un `alt` descriptif et perd `aria-hidden`.
 - [ ] Ordre des headings strict (h1 → h2 → h3, aucun saut).
@@ -519,9 +544,12 @@ Pour **chaque** lot de modifications :
 2. Mettre à jour `bindings` (clés retirées/ajoutées) dans `assets/i18n.js`.
 3. Écrire EN, ES, ZH pour chaque clé nouvelle/modifiée (ZH : refonte récente de qualité —
    maintenir le registre naturel, pas du mot-à-mot).
-4. `node -c assets/i18n.js` + script de croisement clés/bindings : 0 manquante × 3 langues.
+4. `node --check assets/i18n.js`, puis `npm run build` et `npm test` : 0 binding manquant,
+   artefacts générés à jour, métadonnées/FAQ/JSON-LD cohérents et assets présents × 4 langues.
 5. Bumper `?v=` du script dans `index.html`.
 6. Mettre à jour `pageMeta` (title/description/og/schema) si le hero ou le positionnement bouge.
+7. Ne jamais corriger directement une page sous `en/`, `es/` ou `zh/` : corriger la source puis
+   régénérer. Vérifier également `robots.txt` et le cluster hreflang de `sitemap.xml` via `npm test`.
 
 ## 11. Plan d'exécution par phases
 
@@ -540,7 +568,7 @@ Chaque phase est shippable indépendamment, i18n synchronisée à chaque fois.
 ```bash
 # serveur local
 python3 -m http.server 8931 --bind 127.0.0.1 &
-B goto "http://127.0.0.1:8931/index.html?lang=fr"   # puis en, es, zh
+B goto "http://127.0.0.1:8931/"      # puis /en/, /es/, /zh/
 B js "window.__setTheme('dark')"                     # bascule thème
 B viewport 375x812 ; B viewport 1440x900             # 2 viewports
 B screenshot ... ; B console --errors                # rendu + erreurs

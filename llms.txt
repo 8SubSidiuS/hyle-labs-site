@@ -1,0 +1,14 @@
+# Hyle Labs
+
+> Hyle Labs est une SASU française (Rhône) qui édite Taveni, un logiciel conçu pour structurer les décisions, actions et contexte issus des réunions. Tout envoi vers un outil externe reste soumis à une approbation humaine explicite. Taveni est en phase d'évaluation cadrée : périmètre, critères de réussite et conditions sont définis avant tout démarrage.
+
+## Pages
+
+- [Accueil (FR)](https://hyle-labs.net/) : présentation complète — problème, fonctionnement, coût de l'IA, confiance et données, contact.
+- [English](https://hyle-labs.net/en/) : full presentation in English.
+- [Español](https://hyle-labs.net/es/) : presentación completa en español.
+- [中文](https://hyle-labs.net/zh/) : 中文完整介绍。
+
+## Contact
+
+- Demander une évaluation sur un processus réel : contact@hyle-labs.net

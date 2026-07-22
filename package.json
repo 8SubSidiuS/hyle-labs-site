@@ -1,0 +1,16 @@
+{
+  "name": "hyle-labs-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-locales.mjs",
+    "check:generated": "node scripts/build-locales.mjs --check",
+    "check:syntax": "node --check assets/i18n.js && node --check assets/site.js && node --check scripts/build-locales.mjs && node --check scripts/site-contract.mjs && node --check scripts/validate-site.mjs",
+    "test:unit": "node --test scripts/*.test.mjs",
+    "validate": "node scripts/validate-site.mjs",
+    "test": "npm run check:syntax && npm run test:unit && npm run check:generated && npm run validate"
+  },
+  "devDependencies": {
+    "cheerio": "1.0.0"
+  }
+}
