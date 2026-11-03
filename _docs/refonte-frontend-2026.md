@@ -624,11 +624,14 @@ lien « Confidentialité » dans le pied de page ; e-mails préremplis EN/ES/ZH 
 (le helper `mailto` produisait des `+`, affichés tels quels par les clients mail).
 
 Mesures (serveur local, Chromium 1243) : axe-core 0 violation sur 7 configurations
-(4 langues, clair/sombre, 1440/390), panneau de capture réelle ouvert ou fermé ; Lighthouse
-desktop 100/100/100/100, mobile 95/100/100/100 contre 94 avant (LCP 3,1 → 2,9 s, CLS 0, sans
-compression en local) ; premier affichage ~79 → ~32 Ko transférés (plus d'image `eager` dans
-le hero). Hauteur mobile (390 px) à contenu enrichi : FR 11 642 → 11 608 px, EN 11 204 →
-11 235, ES 11 738 → 11 574, ZH 9 856 → 9 682 — grâce au compactage mobile (libellés en tête
+(4 langues, clair/sombre, 1440/390), panneau de capture réelle ouvert ou fermé ; Lighthouse mobile,
+médiane de 3 passes, serveur local compressant en gzip comme GitHub Pages : performance
+97 → 99, FCP 1,05 s = 1,05 s, LCP 2,63 → 2,25 s, CLS 0, poids total 281 → 198 Ko ;
+accessibilité, bonnes pratiques et SEO à 100 ; desktop 100/100/100/100. Sans compression
+(`python3 -m http.server`), le HTML plus lourd en CSS inline donne 94 → 93 : à ne pas
+prendre pour référence. Premier affichage ~79 → ~32 Ko (plus d'image `eager` dans le
+hero). Hauteur mobile (390 px) à contenu enrichi : FR 11 642 → 11 576 px, EN 11 204 →
+11 202, ES 11 738 → 11 542, ZH 9 856 → 9 652 — grâce au compactage mobile (libellés en tête
 de phrase dans le comparatif, qui/quoi/mesure côte à côte, état sur la ligne de la phrase dans
 les tableaux sombres, équipe et réunion type sur une ligne) et à deux redondances retirées
 (paragraphe « déléguer la tâche » répétant le titre de la section 5, accroche du fonctionnement
@@ -641,7 +644,13 @@ capture ; montants insécables en ES/ZH ; « extrait source lorsqu'il est dispon
 « propositions… quand la réunion les précise » (deux formulations plus affirmatives
 qu'avant) ; logo jamais écrasé et bascule de thème réellement masquée sous 360 px (règle en
 couche battue par une règle hors couche) ; séquence limitée à `@media screen` (impression =
-état final) ; `aria-label` des langues du pied de page traduit.
+état final) ; `aria-label` des langues du pied de page traduit. En mobile, « Voir les quatre étapes »
+devient un lien texte (un seul bouton plein par écran, critère P2).
+
+Balayage QA (4 langues × 6 largeurs de 320 à 1 920 px × 2 thèmes = 48 combinaisons :
+débordement, éléments hors écran, chevauchement et retour à la ligne dans l'en-tête, logo,
+cibles tactiles < 24 px, images, erreurs console) : 0 problème sur la branche, 56 sur `main`
+(dont, à 320 px, un lien de logo large de 1 px).
 
 ---
 

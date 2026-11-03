@@ -3069,6 +3069,26 @@
             .theme-toggle { display: none; }
         }
 
+        /* Téléphone : un seul bouton plein. « Voir les quatre étapes » est une
+           navigation interne, pas une conversion : lien texte, comme sur Taveni
+           (cible tactile de 44 px conservée). */
+        @media (max-width: 430px) {
+            .hero-actions { row-gap: 4px; }
+            .hero-actions .button-secondary {
+                width: auto;
+                min-height: 44px;
+                padding: 0;
+                border: 0;
+                background: none;
+                box-shadow: none;
+                color: var(--accent);
+                text-decoration: underline;
+                text-decoration-thickness: 1px;
+                text-underline-offset: 4px;
+            }
+            .hero-actions .button-secondary:hover { transform: none; }
+        }
+
         @media (max-width: 1200px) {
             .nav > a:not(.nav-cta) { display: none; }
             .nav-menu { display: block; }
@@ -3155,10 +3175,12 @@
             .start-row:not(.header) { padding: 10px 16px; }
             .trust-list li { padding: 9px 0; }
             .proof-notes { margin-top: 12px; }
-            .hero-checks { gap: 6px; padding-top: 16px; }
+            .hero-checks { gap: 4px; padding-top: 14px; }
+            .hero-checks li { font-size: 13.5px; line-height: 1.45; }
             .truth-note,
             .ontology-note { font-size: 14.5px; line-height: 1.6; }
-            .hero-grid { row-gap: 20px; }
+            .hero-grid { row-gap: 18px; }
+            .hero-actions { margin-top: 24px; }
 
             /* Notes de la capture : libellé en tête de phrase */
             .proof-notes li { display: block; padding: 10px 0; }
