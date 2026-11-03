@@ -1744,9 +1744,12 @@
 
         /* Animations d'entrée */
         @media (prefers-reduced-motion: no-preference) {
+            /* Glissement seul, sans opacité : liée au défilement, une opacité laissait
+               à mi-transparence tout texte arrêté près du bas de l'écran (contraste
+               insuffisant au repos, mesuré après chaque saut d'ancre). */
             @keyframes rise-in {
-                from { opacity: 0; transform: translateY(12px); }
-                to   { opacity: 1; transform: none; }
+                from { transform: translateY(12px); }
+                to   { transform: none; }
             }
             @keyframes hero-rise {
                 from { opacity: 0; transform: translateY(12px); }
@@ -3012,7 +3015,9 @@
                     mask-image: linear-gradient(180deg, #000 calc(var(--tco-fill) - 8%), transparent var(--tco-fill));
                     animation: tco-fill linear both;
                     animation-timeline: --tco-panel;
-                    animation-range: entry 10% cover 45%;
+                    /* Fin quand 60 % du panneau est entré : le remplissage devance toujours
+                       le bas de l'écran, aucune ligne visible ne reste masquée à l'arrêt. */
+                    animation-range: entry 0% entry 60%;
                 }
                 @keyframes tco-fill {
                     from { --tco-fill: 12%; }

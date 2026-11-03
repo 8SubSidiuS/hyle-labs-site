@@ -652,6 +652,13 @@ débordement, éléments hors écran, chevauchement et retour à la ligne dans l
 cibles tactiles < 24 px, images, erreurs console) : 0 problème sur la branche, 56 sur `main`
 (dont, à 320 px, un lien de logo large de 1 px).
 
+Suivi (PR #3) — contraste au repos après chaque saut d'ancre, défilement terminé : les
+apparitions liées au défilement jouaient sur l'opacité, si bien qu'un texte arrêté près du
+bas de l'écran restait à mi-transparence (19 nœuds sous le seuil sur 32 sauts audités en
+production). Elles ne jouent plus que sur un glissement de 12 px : 0 violation. Le
+remplissage du JSON se termine quand 60 % du panneau est entré : sur 129 positions de
+défilement (4 tailles d'écran), aucune ligne visible ne reste masquée.
+
 ---
 
 ## Annexe — Sources (recherches du 02/07/2026)
