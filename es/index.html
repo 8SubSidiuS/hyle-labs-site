@@ -38,6 +38,17 @@
                 if (mq.addEventListener) mq.addEventListener("change", onChange);
                 else if (mq.addListener) mq.addListener(onChange);
             }
+            /* Démonstration du hero : armée avant le premier rendu si le mouvement est
+               permis (l'état initial s'affiche d'emblée, sans flash de l'état final).
+               Filet de sécurité : si site.js n'a pas pris la main en 4 s, la
+               démonstration revient à son état final. */
+            var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!calm) {
+                root.classList.add("demo-live");
+                setTimeout(function () {
+                    if (root.dataset.demo !== "js") root.classList.remove("demo-live");
+                }, 4000);
+            }
             document.addEventListener("DOMContentLoaded", function () {
                 var btn = document.querySelector(".theme-toggle");
                 if (!btn) return;
@@ -254,7 +265,11 @@
                 /* Fil rouge « décision » : seul usage autorisé du corail (tampons,
                    surlignage, puces d'artefacts). Jamais en texte < 18px, jamais sur un CTA. */
                 --decision: var(--coral);
-                --decision-wash: color-mix(in srgb, var(--coral) 13%, transparent);
+                --decision-wash: color-mix(in srgb, var(--coral) 17%, transparent);
+                /* Accent fonctionnel (icônes, états actifs, liens d'appui) : teal foncé en
+                   clair, cyan en sombre — le teal tombe à 2,5:1 sur le fond sombre. */
+                --accent: var(--teal-2);
+                --accent-wash: color-mix(in srgb, var(--teal) 8%, transparent);
                 --radius: 8px;
                 --radius-card: 12px;
                 --radius-lg: 16px;
@@ -532,33 +547,25 @@
                 background: linear-gradient(0deg, var(--paper) 0%, rgba(247, 248, 243, 0) 100%);
             }
 
+            /* Desktop : récit à gauche (garanties ancrées en bas), démonstration sur toute
+               la hauteur à droite. Mobile : récit, démonstration, puis garanties. */
             .hero-grid {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+                grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+                grid-template-rows: minmax(0, 1fr) auto;
                 grid-template-areas:
-                    "copy shot"
-                    "proof proof";
-                column-gap: 44px;
+                    "copy demo"
+                    "checks demo";
+                column-gap: clamp(40px, 5vw, 72px);
                 row-gap: 32px;
-                align-items: center;
-                padding: 60px 0 44px;
+                padding: 52px 0 48px;
             }
 
             .hero-copy {
                 grid-area: copy;
-                max-width: 690px;
+                align-self: center;
+                max-width: 640px;
             }
-
-            /* ===== Capture produit réelle en hero — l'artefact que le produit fabrique ===== */
-            .hero-artifact {
-                grid-area: shot;
-                position: relative;
-                margin: 0;
-                justify-self: end;
-                width: min(440px, 100%);
-            }
-
-            .hero-artifact .doc-frame { margin-top: 0; }
 
             .eyebrow {
                 display: inline-flex;
@@ -589,17 +596,17 @@
                 max-width: 760px;
             }
 
-            .hero-copy p {
+            .hero-lead {
                 margin-top: 24px;
-                max-width: 620px;
+                max-width: 600px;
                 color: var(--ink-2);
-                font-size: clamp(18px, 2vw, 22px);
+                font-size: clamp(18px, 1.6vw, 21px);
                 line-height: 1.6;
             }
 
-            .hero-copy strong {
+            .hero-lead strong {
                 color: var(--ink);
-                font-weight: 800;
+                font-weight: 700;
             }
 
             .hero-actions {
@@ -645,45 +652,42 @@
                 background: white;
             }
 
-            /* Ligne de preuve : trois fragments, pas un gabarit de statistiques */
-            .hero-copy p.hero-keyline {
-                margin-top: 26px;
-                max-width: 560px;
+            /* Rassurance sous les CTA : ce qu'engage la demande, en mono discret */
+            .hero-note {
+                margin-top: 16px;
                 color: var(--muted);
-                font-size: var(--text-sm);
-                font-weight: 600;
-                line-height: 1.7;
-            }
-
-            /* Deux signaux différenciants sous le hero */
-            .hero-signals {
-                grid-area: proof;
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 16px 36px;
-                padding-top: 24px;
-                border-top: 1px solid rgba(17, 20, 24, 0.1);
-            }
-
-            .hero-signal {
-                display: flex;
-                gap: 12px;
-                align-items: flex-start;
-                margin: 0;
-                color: var(--ink-2);
-                font-size: 15px;
+                font-family: var(--font-mono);
+                font-size: 12.5px;
                 line-height: 1.6;
             }
 
-            .hero-signal svg {
-                flex: 0 0 auto;
-                margin-top: 3px;
-                color: var(--teal-2);
+            /* Trois garanties courtes, ancrées en bas de la colonne récit (une ligne
+               chacune : en colonnes étroites, elles se hachaient sur cinq lignes) */
+            .hero-checks {
+                grid-area: checks;
+                align-self: end;
+                display: grid;
+                gap: 8px;
+                max-width: 600px;
+                margin: 0;
+                padding: 20px 0 0;
+                list-style: none;
+                border-top: 1px solid var(--line);
             }
 
-            .hero-signal strong {
-                color: var(--ink);
-                font-weight: 700;
+            .hero-checks li {
+                display: flex;
+                gap: 10px;
+                align-items: flex-start;
+                color: var(--muted);
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .hero-checks svg {
+                flex: 0 0 auto;
+                margin-top: 2px;
+                color: var(--accent);
             }
 
             section {
@@ -965,31 +969,6 @@
                 font-weight: 700;
             }
 
-            /* Conclusion : la mesure avant la hype */
-            .measure-note {
-                margin-top: var(--space-block);
-                padding-top: 26px;
-                border-top: 1px solid rgba(255, 255, 255, 0.12);
-                max-width: 760px;
-            }
-
-            .measure-note h3 {
-                font-size: var(--text-h3);
-                color: white;
-            }
-
-            .measure-note p {
-                margin-top: 10px;
-                color: rgba(255, 255, 255, 0.7);
-                font-size: 16px;
-            }
-
-            .measure-note .measure-criteria {
-                font-family: var(--font-mono);
-                font-size: 13.5px;
-                color: #7ee7d8;
-            }
-
             .semantic-board {
                 border: 1px solid rgba(255, 255, 255, 0.14);
                 border-radius: var(--radius);
@@ -1119,15 +1098,29 @@
                 font-size: 12px;
             }
 
-            /* Où commencer — un tableau, pas trois cartes */
-            .start-block { margin-top: var(--space-block); }
-
-            .start-title {
-                font-size: var(--text-h3);
+            /* Où commencer — section à part, juste après le problème : chaque cible
+               (direction, ventes, ops) s'y reconnaît avant le « comment ». Un tableau,
+               pas trois cartes. Même fond que le problème : filet et marge réduite. */
+            .start-section {
+                padding-top: calc(var(--space-section) * 0.65);
+                background: var(--paper);
+                border-top: 1px solid var(--line);
             }
 
+            .truth-section { padding-bottom: calc(var(--space-section) * 0.65); }
+
+            /* En-tête de section en deux colonnes : titre à gauche, accroche à droite */
+            .section-head {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                gap: 20px clamp(36px, 6vw, 88px);
+                align-items: end;
+            }
+
+            .section-head .section-lead { margin-top: 0; }
+
             .start-table {
-                margin-top: 18px;
+                margin-top: var(--space-block);
                 border: 1px solid var(--line);
                 border-radius: var(--radius-card);
                 background: var(--surface);
@@ -1230,84 +1223,178 @@
                 line-height: 1.75;
             }
 
-            /* Mot du fondateur — la preuve humaine d'un produit pré-commercialisation */
+            /* Mot du fondateur — la preuve humaine d'un produit pré-commercialisation.
+               Filet teal : le corail reste réservé au fil rouge « décision ». */
             .founder-note {
-                margin: 28px 0 0;
-                padding: 4px 0 4px 22px;
-                border-left: 3px solid var(--decision);
+                margin: 32px 0 0;
+                padding: 2px 0 2px 24px;
+                border-left: 3px solid var(--accent);
             }
 
             .founder-note .founder-quote {
                 margin: 0;
-                max-width: 60ch;
+                max-width: 36ch;
                 font-family: var(--font-display);
-                font-size: 18.5px;
-                font-weight: 500;
-                line-height: 1.5;
+                font-size: clamp(1.3rem, 1.05rem + 0.9vw, 1.75rem);
+                font-weight: 600;
+                line-height: 1.32;
+                letter-spacing: -0.01em;
                 color: var(--ink);
+                text-wrap: pretty;
             }
 
             .founder-note .founder-sig {
-                margin-top: 12px;
+                margin-top: 14px;
                 font-family: var(--font-mono);
                 font-size: 13px;
                 color: var(--muted);
             }
 
-            .company-facts-line {
-                font-family: var(--font-mono);
-                font-size: 13px;
-                color: var(--muted);
-            }
-
-            .contact {
-                padding: clamp(56px, 8vw, 90px) 0;
-                background: var(--surface);
-            }
-
-            .contact-box {
+            /* Signaux de confiance vérifiables, en liste à coches */
+            .trust-checks {
                 display: grid;
-                grid-template-columns: 1fr auto;
-                gap: 24px;
-                align-items: center;
-                padding: 34px;
-                border: 1px solid rgba(17, 20, 24, 0.12);
-                border-radius: var(--radius);
-                background:
-                    linear-gradient(120deg, rgba(15,118,110,0.11), transparent 42%),
-                    #fbfcf9;
+                grid-template-columns: repeat(2, minmax(0, max-content));
+                gap: 10px 32px;
+                margin: 30px 0 0;
+                padding: 22px 0 0;
+                list-style: none;
+                border-top: 1px solid var(--line);
+            }
+
+            .trust-checks li {
+                display: flex;
+                gap: 10px;
+                align-items: flex-start;
+                color: var(--ink-2);
+                font-size: 14.5px;
+                line-height: 1.5;
+            }
+
+            .trust-checks svg {
+                flex: 0 0 auto;
+                margin-top: 2px;
+                color: var(--accent);
+            }
+
+            .trust-checks a {
+                color: var(--accent);
+                font-weight: 600;
+                text-underline-offset: 3px;
+            }
+
+            /* CTA final : l'appel à gauche, ce que mesure l'évaluation à droite */
+            .contact {
+                padding: clamp(64px, 9vw, 112px) 0;
+                background: var(--surface);
+                border-top: 1px solid var(--line);
+            }
+
+            .contact-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+                gap: clamp(36px, 6vw, 88px);
+                align-items: start;
             }
 
             .contact-box h2 {
-                font-size: var(--text-h2);
+                margin-top: 12px;
+                max-width: 15ch;
+                font-size: var(--text-h2-major);
                 font-weight: 700;
+                letter-spacing: -0.015em;
             }
 
-            .contact-box p {
-                margin-top: 12px;
-                max-width: 640px;
+            .contact-box .contact-text {
+                margin-top: 18px;
+                max-width: 56ch;
                 color: var(--ink-2);
-                font-size: 17px;
+                font-size: var(--text-lead);
+                line-height: 1.6;
             }
+
+            .contact-box .button { margin-top: 30px; }
 
             .contact-box .contact-meta {
+                margin-top: 14px;
                 font-family: var(--font-mono);
-                font-size: 13px;
+                font-size: 12.5px;
                 color: var(--muted);
             }
 
-            /* Questions directes — réutilise le composant dépliable */
-            .faq {
-                margin-top: var(--space-block);
-                max-width: 860px;
+            .measures {
+                padding-left: clamp(0px, 3vw, 40px);
+                border-left: 1px solid var(--line);
             }
 
-            .faq-title {
-                font-size: var(--text-h3);
+            .measures-label {
+                color: var(--accent);
+                font-family: var(--font-mono);
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .06em;
+                text-transform: uppercase;
             }
 
-            .faq .more { margin-top: 12px; }
-            .faq .more > p { max-width: 72ch; }
+            .measures-list {
+                margin: 10px 0 0;
+                padding: 0;
+                list-style: none;
+                counter-reset: measure;
+            }
+
+            .measures-list li {
+                display: grid;
+                grid-template-columns: 34px minmax(0, 1fr);
+                column-gap: 8px;
+                padding: 16px 0;
+                border-bottom: 1px solid var(--line);
+                counter-increment: measure;
+            }
+
+            .measures-list li:last-child { border-bottom: 0; }
+
+            .measures-list li::before {
+                content: counter(measure, decimal-leading-zero);
+                grid-row: span 2;
+                padding-top: 3px;
+                color: var(--muted);
+                font-family: var(--font-mono);
+                font-size: 12.5px;
+            }
+
+            .measures-list b {
+                font-family: var(--font-display);
+                font-size: 17px;
+                font-weight: 700;
+                line-height: 1.3;
+            }
+
+            .measures-list span {
+                margin-top: 4px;
+                color: var(--muted);
+                font-size: 14.5px;
+                line-height: 1.55;
+            }
+
+            /* Questions directes — section à part entière, avant le CTA final. Même fond
+               que la section Hyle Labs : un filet et des marges réduites évitent
+               240 px de vide entre les deux. */
+            .company { padding-bottom: calc(var(--space-section) * 0.65); }
+
+            .faq-section {
+                padding-top: calc(var(--space-section) * 0.65);
+                background: var(--paper);
+                border-top: 1px solid var(--line);
+            }
+
+            .faq-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+                gap: clamp(32px, 6vw, 88px);
+                align-items: start;
+            }
+
+            .faq-head { position: sticky; top: 104px; }
 
             footer {
                 border-top: 1px solid rgba(17, 20, 24, 0.1);
@@ -1470,21 +1557,30 @@
                 }
                 .hero-grid {
                     grid-template-columns: 1fr;
+                    grid-template-rows: none;
                     grid-template-areas:
                         "copy"
-                        "shot"
-                        "proof";
+                        "demo"
+                        "checks";
                     column-gap: 0;
                     padding: 48px 0 40px;
                 }
-                .hero-artifact { justify-self: start; width: min(460px, 100%); }
                 .difference-layout,
                 .tco-layout,
                 .ontology-grid,
-                .contact-box {
+                .section-head,
+                .faq-layout,
+                .contact-layout {
                     grid-template-columns: 1fr;
                 }
-                .tco-copy { position: static; }
+                .tco-copy,
+                .faq-head { position: static; }
+                .measures {
+                    padding-left: 0;
+                    padding-top: 8px;
+                    border-left: 0;
+                    border-top: 1px solid var(--line);
+                }
                 /* Frise verticale : le rail horizontal n'a plus de sens empilé */
                 .pipeline-steps { grid-template-columns: 1fr; gap: 0; }
                 .pipeline-steps::before { display: none; }
@@ -1523,9 +1619,9 @@
                     padding: 30px 0 32px;
                 }
                 h1 { font-size: clamp(33px, 9vw, 44px); }
-                .hero-copy p { font-size: 17px; }
-                .hero-copy p.hero-keyline { font-size: 13.5px; }
-                .hero-signals,
+                .hero-lead { font-size: 17px; }
+                .hero-checks,
+                .trust-checks,
                 .tco-result,
                 .legal-grid {
                     grid-template-columns: 1fr;
@@ -1571,7 +1667,6 @@
                 .semantic-row .decision {
                     justify-self: start;
                 }
-                .contact-box { padding: 24px; }
                 .footer-inner {
                     grid-template-columns: 1fr;
                 }
@@ -1676,26 +1771,26 @@
                 to   { opacity: 1; transform: none; }
             }
 
-            /* Hero — entrée au chargement */
-            .hero-copy > *, .hero-artifact, .hero-signals .hero-signal {
+            /* Hero — entrée au chargement. Le titre et l'accroche s'affichent sans
+               fondu : ce sont eux que le visiteur lit d'abord (et l'élément LCP). */
+            .hero-actions, .hero-note, .demo, .hero-checks li {
                 animation: hero-rise .7s cubic-bezier(.2, .6, .2, 1) both;
             }
-            .hero-copy .eyebrow { animation-delay: .04s; }
-            .hero-copy h1       { animation-delay: .10s; }
-            .hero-copy > p      { animation-delay: .18s; }
-            .hero-actions       { animation-delay: .26s; }
-            .hero-artifact      { animation-delay: .20s; }
-            .hero-signals .hero-signal:nth-child(1) { animation-delay: .34s; }
-            .hero-signals .hero-signal:nth-child(2) { animation-delay: .40s; }
+            .hero-actions       { animation-delay: .08s; }
+            .hero-note          { animation-delay: .14s; }
+            .demo               { animation-delay: .12s; }
+            .hero-checks li:nth-child(1) { animation-delay: .22s; }
+            .hero-checks li:nth-child(2) { animation-delay: .28s; }
+            .hero-checks li:nth-child(3) { animation-delay: .34s; }
 
             /* Reveals au scroll (compositor-friendly, sans JS) */
             @supports (animation-timeline: view()) {
                 .section-kicker, .section-title, .section-lead, .truth-note, .ontology-note,
                 .problem-item, .step,
                 .market-note, .difference-board, .tco-panel,
-                .semantic-board, .ledger, .company-mark, .contact-box,
-                .doc-frame, .start-table, .trust-list li, .measure-note,
-                .founder-note, .faq .more {
+                .semantic-board, .ledger, .company-mark, .contact-box, .measures,
+                .doc-frame, .proof-copy, .start-table, .trust-list li,
+                .founder-note, .trust-checks, .faq .more {
                     animation: rise-in linear both;
                     animation-timeline: view();
                     animation-range: entry 0% cover 18%;
@@ -1812,6 +1907,9 @@
                 --deep-2: #0b1314;
                 --shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
                 --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 36px -22px rgba(0, 0, 0, 0.7);
+                --accent: #7ee7d8;
+                --accent-wash: rgba(126, 231, 216, 0.1);
+                --decision-wash: color-mix(in srgb, var(--coral) 24%, transparent);
             }
 
             body { background: var(--paper); color: var(--ink); }
@@ -1849,7 +1947,8 @@
             .step::before { background: var(--paper-2); }
 
             /* Boutons */
-            .button-primary { background: #15938a; color: #04211e; box-shadow: 0 14px 36px rgba(20, 180, 165, 0.18); }
+            /* #199c91 : 5,0:1 avec le texte (#15938a plafonnait à 4,48:1) */
+            .button-primary { background: #199c91; color: #04211e; box-shadow: 0 14px 36px rgba(20, 180, 165, 0.18); }
             .button-primary:hover { background: #7ee7d8; }
             .button-secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.16); color: var(--ink); }
             .button-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(126, 231, 216, 0.4); }
@@ -1858,7 +1957,6 @@
             .pipeline { background: var(--paper-2); }
             .truth-section, .difference, .company, .tco-section { background: var(--paper); }
             .contact { background: var(--paper-2); }
-            .contact-box { background: linear-gradient(120deg, rgba(20, 180, 165, 0.12), transparent 42%), var(--surface); }
             .tco-section { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
             .company-mark { background: linear-gradient(135deg, rgba(20, 180, 165, 0.14), transparent 50%), var(--surface); }
 
@@ -1878,15 +1976,13 @@
                On reprend le cyan déjà utilisé partout en sombre (≈ 13:1, AAA). */
             .accent-teal { color: #7ee7d8; }
 
-            /* Capture hero : halo cyan discret pour la détacher du fond sombre */
-            .hero-artifact .doc-frame {
+            /* Démonstration du hero : halo cyan discret sous la fiche de décision */
+            .demo-card {
                 box-shadow:
-                    0 0 0 1px rgba(126, 231, 216, 0.08),
-                    0 34px 80px -42px rgba(0, 0, 0, 0.7),
-                    0 30px 70px -48px rgba(126, 231, 216, 0.2);
+                    0 0 0 1px rgba(126, 231, 216, 0.06),
+                    0 30px 70px -40px rgba(0, 0, 0, 0.75),
+                    0 26px 60px -46px rgba(126, 231, 216, 0.22);
             }
-            .hero-signal svg { color: #7ee7d8; }
-            .hero-signals { border-top-color: rgba(255, 255, 255, 0.1); }
 
             /* Menu mobile */
             .nav-menu > summary {
@@ -2048,7 +2144,7 @@
                 transform: none !important;
             }
             header, .mobile-cta, .theme-toggle, .language-switcher { position: static; }
-            .scroll-progress { display: none !important; }
+            .scroll-progress, .demo-replay { display: none !important; }
         }
 
         /* ===== Finition 2026 — wayfinding & signature « dossier » ===== */
@@ -2153,12 +2249,11 @@
            Resserre les espacements sans toucher au desktop : sections plus courtes,
            frise en 2×2, JSON et listes compactés. */
         @media (max-width: 700px) {
-            :root { --space-section: 48px; }
+            :root { --space-section: 40px; }
 
             .hero-grid { padding: 26px 0 26px; }
-            .hero-copy p { line-height: 1.55; margin-top: 18px; }
+            .hero-lead { line-height: 1.55; margin-top: 18px; }
             .hero-actions { margin-top: 26px; }
-            .faq .more { margin-top: 8px; }
 
             .problem-item { padding: 20px 0; }
 
@@ -2178,28 +2273,942 @@
             .semantic-row { padding: 13px 14px; gap: 6px; }
             .ledger-row { padding: 12px 14px; }
             .trust-list li { padding: 10px 0; line-height: 1.5; }
-            .measure-note { margin-top: 32px; padding-top: 18px; }
             .ontology-note { margin-top: 12px; }
 
             .company-copy p { line-height: 1.65; }
             .contact { padding: 44px 0; }
         }
 
-        /* Hero — l'artefact respire davantage sur grand écran */
-        @media (min-width: 1400px) {
-            .hero-artifact { width: min(470px, 100%); }
-        }
-
-        /* Capture « actions » au niveau de la frise : même largeur que le cadre du dépliable */
-        .doc-frame--actions {
-            margin: var(--space-block) 0 0;
-            max-width: 900px;
-        }
-
         /* Le cadre produit vit désormais dans le dépliable : présentation allégée */
         .more .doc-frame {
             margin: 6px 14px 14px;
             box-shadow: none;
+        }
+
+        /* ===== Novembre 2026 — motifs repris de la landing Taveni =====
+           Démonstration commentée du hero, sections en deux colonnes, point de
+           contrôle humain visible, capture annotée, FAQ puis CTA final. CSS non
+           layeré (prime sur @layer components) ; tokens --accent pour les deux thèmes. */
+
+        :root { --ease-out: cubic-bezier(.2, .6, .2, 1); }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* --- Démonstration du hero : réunion → proposition → relecture --- */
+        /* Grille : étapes, légende et scène sur toute la largeur ; en bas, « Revoir »
+           à gauche et la mention « exemple illustratif » à droite. */
+        .demo {
+            grid-area: demo;
+            align-self: center;
+            justify-self: end;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            column-gap: 12px;
+            width: 100%;
+            max-width: 520px;
+            margin: 0;
+        }
+
+        .demo-steps,
+        .demo-caption,
+        .demo-stage { grid-column: 1 / -1; }
+
+        .demo-steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .demo-steps li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            min-height: 40px;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--ink);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.25;
+            transition: opacity .45s var(--ease-out), border-color .45s var(--ease-out), background-color .45s var(--ease-out);
+        }
+
+        .demo-step-n {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            transition: border-color .45s var(--ease-out), background-color .45s var(--ease-out), color .45s var(--ease-out);
+        }
+
+        .demo-steps li[aria-current="step"] {
+            border-color: var(--accent);
+            background: var(--accent-wash);
+        }
+
+        .demo-steps li[aria-current="step"] .demo-step-n {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: var(--surface);
+        }
+
+        .demo.is-playing .demo-steps li:not([aria-current]) { opacity: .5; }
+
+        /* Deux lignes réservées : la légende change de longueur sans décaler la scène */
+        .demo-caption {
+            min-height: calc(2 * 1.35em);
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 13.5px;
+            line-height: 1.35;
+        }
+
+        @keyframes demo-caption-in {
+            from { opacity: 0; transform: translateY(3px); }
+            to   { opacity: 1; transform: none; }
+        }
+        .demo-caption.is-fresh { animation: demo-caption-in .45s var(--ease-out); }
+
+        /* Rejouer n'a de sens que si site.js pilote la séquence (mouvement permis) */
+        .demo-replay {
+            display: none;
+            grid-column: 1;
+            justify-self: start;
+            align-items: center;
+            gap: 6px;
+            min-height: 36px;
+            margin: 4px 0 0 -8px;
+            padding: 0 8px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: opacity .3s ease, background-color .2s ease;
+        }
+        .demo-live[data-demo="js"] .demo-replay { display: inline-flex; }
+        .demo-replay:hover { background: var(--accent-wash); }
+        .demo.is-playing .demo-replay { opacity: .55; }
+
+        .demo-stage {
+            display: grid;
+            margin-top: 4px;
+        }
+
+        .demo-source,
+        .demo-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-card);
+            background: var(--surface);
+            box-shadow: var(--shadow-card);
+        }
+
+        .demo-source {
+            padding: 14px 16px 16px;
+            transition: opacity .5s var(--ease-out);
+        }
+
+        .demo-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4px 10px;
+        }
+
+        .demo-label {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .demo-meta {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+        }
+
+        .demo-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .demo-play {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--surface);
+        }
+
+        .demo-play svg { margin-left: 2px; }
+
+        .demo-time {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            white-space: nowrap;
+        }
+
+        .demo-track {
+            position: relative;
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--line);
+            overflow: hidden;
+        }
+
+        /* Largeur (et non transform) : l'impression neutralise les transforms */
+        .demo-progress {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 48%;
+            border-radius: inherit;
+            background: var(--accent);
+            transition: width .9s var(--ease-out);
+        }
+
+        .demo-excerpt {
+            margin-top: 12px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Fil rouge « décision » : le surlignage corail relie la phrase à la fiche */
+        .demo-mark {
+            padding: 1px 2px;
+            border-radius: 3px;
+            background-color: transparent;
+            background-image: linear-gradient(var(--decision-wash), var(--decision-wash));
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            color: var(--ink);
+            font-weight: 650;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            transition: background-size .55s var(--ease-out);
+        }
+
+        /* Le fil part de la phrase surlignée et aboutit sur la pastille de la fiche :
+           même abscisse (bordure 1 px + padding 16 px + rayon 3,5 px − 1 px de fil),
+           et il traverse le haut de la fiche (18 px d'écart + 24 px jusqu'à la pastille). */
+        .demo-thread {
+            position: relative;
+            z-index: 1;
+            justify-self: start;
+            width: 2px;
+            height: 42px;
+            margin: 0 0 -24px 19.5px;
+            border-radius: 1px;
+            background: var(--decision);
+            transform-origin: 50% 0;
+            transition: transform .3s var(--ease-out);
+        }
+
+        .demo-card {
+            position: relative;
+            overflow: hidden;
+            transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+        }
+
+        .demo-card-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-card-label::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--decision);
+        }
+
+        .demo-card-body {
+            padding: 14px 16px 0;
+            transition: opacity .5s var(--ease-out);
+        }
+
+        .demo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 9px 3px 7px;
+            border-radius: 999px;
+            background: var(--accent-wash);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: opacity .35s ease .35s;
+        }
+
+        .demo-card-title {
+            margin-top: 10px;
+            color: var(--ink);
+            font-family: var(--font-display);
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.25;
+            text-wrap: balance;
+        }
+
+        .demo-fields {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px 12px;
+            margin: 14px 0 0;
+            padding: 12px 0 14px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .demo-fields dt {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        .demo-fields dd {
+            margin: 3px 0 0;
+            color: var(--ink);
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .demo-actions {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        /* Liseré qui désigne les gestes de relecture pendant le 3e temps */
+        .demo-actions::after {
+            content: "";
+            position: absolute;
+            inset: 5px 9px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            pointer-events: none;
+            transition: border-color .45s var(--ease-out);
+        }
+
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 32px;
+            padding: 0 12px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--surface);
+            color: var(--ink-2);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .demo-btn--ok {
+            border-color: transparent;
+            background: var(--teal-2);
+            color: #fff;
+        }
+
+        .demo-gate {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-top: 1px solid var(--line);
+            background: var(--paper);
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            transition: color .45s var(--ease-out), background-color .45s var(--ease-out);
+        }
+
+        .demo-gate svg {
+            flex: 0 0 auto;
+            color: var(--accent);
+            transition: transform .45s var(--ease-out);
+        }
+
+        .demo-note {
+            grid-column: 2;
+            align-self: center;
+            margin-top: 4px;
+            min-height: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2px 12px;
+            text-align: right;
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* Lignes explicites : la capture réelle partage la cellule de la scène */
+        .demo-steps { grid-row: 1; }
+        .demo-caption { grid-row: 2; }
+        .demo-stage,
+        .demo-real { grid-row: 3; grid-column: 1 / -1; }
+        .demo-replay,
+        .demo-note { grid-row: 4; }
+
+        /* Capture réelle à la demande. L'image prend la hauteur de la scène
+           (height 0 + flex) : afficher la capture ne décale rien. */
+        .demo-real {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            margin-top: 4px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-card);
+            /* Fond de l'écran capturé : l'espace laissé par l'image le prolonge */
+            background: #fff;
+            box-shadow: var(--shadow-card);
+        }
+
+        .demo-real[hidden] { display: none; }
+
+        /* À l'ouverture, le panneau défile sous l'en-tête collant, pas dessous */
+        .demo-real { scroll-margin-top: 72px; }
+        /* Le CTA mobile fixe masquerait « Revenir à l'exemple » (WCAG 2.4.11) */
+        body:has(.demo-real:not([hidden])) .mobile-cta { display: none; }
+
+        /* Sur #contact, le CTA mobile fixe couvrait le bouton e-mail qu'il annonce */
+        .mobile-cta { transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+        .at-contact .mobile-cta {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+        }
+
+        .demo-real img {
+            flex: 1 1 0;
+            width: 100%;
+            height: 0;
+            min-height: 0;
+            object-fit: contain;
+            object-position: top center;
+        }
+
+        .demo-real-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px 12px;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line);
+            background: var(--paper);
+        }
+
+        .demo-real-label {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+
+        .demo-real-close {
+            min-height: 36px;
+            padding: 0 12px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--surface);
+            color: var(--ink);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .demo-real-close:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* Pendant la capture, les étapes et la légende (qui décrivent la démo) s'effacent */
+        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption) { opacity: .35; }
+        /* La scène, « Revoir » (qui rejouerait derrière le panneau) et la mention
+           « données fictives » ne valent pas pour la capture réelle */
+        .demo:has(.demo-real:not([hidden])) :is(.demo-stage, .demo-replay, .demo-note-text) { visibility: hidden; }
+
+
+        /* La maquette renvoie à la capture réelle du même scénario (revue Q3) */
+        .demo-proof-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 24px;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .demo-proof-link:hover { text-decoration-thickness: 2px; }
+
+        .proof { scroll-margin-top: 96px; }
+
+        /* Séquence : chaque règle décrit l'état AVANT l'étape qui le lève. Sans la
+           classe demo-live (pas de JS, mouvement réduit, filet de sécurité), aucune
+           ne s'applique : la démonstration reste dans son état final. Écran
+           seulement : imprimée avant d'avoir joué, la page garde l'état final. */
+        @media screen {
+            .demo-live .demo:not(.s1) .demo-progress { width: 0; }
+            .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
+            .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
+            .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
+            .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
+            /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
+            .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
+            .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
+            .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
+            .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
+            .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+        }
+
+        [data-theme="dark"] .demo-btn--ok { background: #7ee7d8; color: #06201d; }
+
+        /* --- Le problème : titre à gauche, récit numéroté à droite --- */
+        .problem-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+            gap: clamp(36px, 6vw, 88px);
+            align-items: start;
+        }
+
+        .problem-head {
+            position: sticky;
+            top: 104px;
+        }
+
+        /* Titre « chapitre » ramené d'un cran en colonne : sinon six lignes de dix signes */
+        .problem-layout .section-title--major {
+            font-size: clamp(2rem, 1.45rem + 1.7vw, 2.75rem);
+        }
+
+        .problem-layout .problem-list {
+            margin-top: 6px;
+            max-width: none;
+        }
+
+        .problem-layout .problem-more,
+        .problem-layout .truth-note { max-width: none; }
+
+        @media (max-width: 980px) {
+            .problem-layout { grid-template-columns: 1fr; }
+            .problem-head { position: static; }
+            /* L'écart de grille sépare déjà l'accroche de la liste : pas de marge en plus */
+            .problem-layout .problem-list { margin-top: 0; }
+        }
+
+        @media (max-width: 700px) {
+            .problem-layout,
+            .faq-layout,
+            .contact-layout { gap: 28px; }
+        }
+
+        /* --- Fonctionnement : un résultat par étape, la relecture mise en avant --- */
+
+        /* Le rail passe sous les jalons. Chaque étape animée forme son propre
+           contexte d'empilement : sans cela le rail rempli barrait « 01 », « 02 »… */
+        .pipeline-steps::before,
+        .pipeline-steps::after { z-index: 0; }
+        .step { z-index: 1; }
+
+        .step-out {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .step--gate .step-out {
+            border-top-color: color-mix(in srgb, var(--accent) 35%, transparent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .step-out svg { flex: 0 0 auto; }
+
+        /* Le point de contrôle humain : un panneau teinté sous l'étape « Relire » */
+        .step--gate::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: 24px -14px -14px;
+            border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+            border-radius: var(--radius-card);
+            background: var(--accent-wash);
+        }
+
+        /* --- Capture réelle annotée --- */
+        .proof {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+            gap: clamp(28px, 4vw, 56px);
+            align-items: center;
+            margin: var(--space-block) 0 0;
+        }
+
+        .proof .doc-frame {
+            margin: 0;
+            max-width: none;
+        }
+
+        .proof-kicker {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .proof-title {
+            margin-top: 10px;
+            color: var(--ink);
+            font-family: var(--font-display);
+            font-size: var(--text-h3);
+            font-weight: 700;
+            line-height: 1.2;
+            text-wrap: balance;
+        }
+
+        .proof-notes {
+            display: grid;
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .proof-notes li {
+            display: grid;
+            gap: 4px;
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .proof-notes b {
+            color: var(--ink);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .proof-notes span {
+            color: var(--muted);
+            font-size: 14.5px;
+            line-height: 1.55;
+        }
+
+        /* Capture portrait de la galerie : bornée pour ne pas dominer le dépliable */
+        .more .doc-frame--evidence { max-width: 460px; }
+
+        /* --- Positionnement : la colonne Taveni porte le contraste --- */
+        .difference-row.header span:nth-child(2) { color: var(--muted); }
+        .difference-row.header span:nth-child(3) { color: var(--accent); }
+        .difference-row:not(.header) span:last-child { color: var(--ink-2); }
+
+        /* --- FAQ : accordéon à filets, icône « + » qui pivote en « × » --- */
+        .faq .more {
+            margin: 0;
+            border: 0;
+            border-top: 1px solid var(--line);
+            border-radius: 0;
+            background: none;
+        }
+
+        .faq .more:last-child { border-bottom: 1px solid var(--line); }
+
+        .faq .more > summary {
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 44px;
+            padding: 18px 0;
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 16.5px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .faq .more > summary::before { content: none; }
+
+        .faq .more > summary::after {
+            content: "";
+            flex: 0 0 auto;
+            width: 13px;
+            height: 13px;
+            background:
+                linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+                linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+            color: var(--muted);
+            transition: transform .25s var(--ease-out), color .2s ease;
+        }
+
+        .faq .more[open] > summary::after { transform: rotate(45deg); }
+        .faq .more > summary:hover,
+        .faq .more > summary:hover::after { color: var(--accent); }
+
+        .faq .more > p {
+            padding: 0 0 20px;
+            max-width: 64ch;
+            color: var(--muted);
+        }
+
+        /* --- Coût de l'IA : le contexte se remplit ligne à ligne pendant la lecture
+           (motif Taveni « le contexte se remplit avant la validation »). Masque
+           piloté par le défilement, sans toucher au JSON traduit. Valeur initiale
+           108 % : sans animation (impression, navigateur non compatible), tout est
+           visible. --- */
+        @property --tco-fill {
+            syntax: "<percentage>";
+            inherits: false;
+            initial-value: 108%;
+        }
+
+        @supports (animation-timeline: view()) {
+            @media (prefers-reduced-motion: no-preference) {
+                /* Timeline nommée sur le panneau : en overflow hidden, il est lui-même
+                   conteneur de défilement, donc un view() posé sur le JSON resterait figé. */
+                .tco-panel { view-timeline-name: --tco-panel; }
+                .tco-object {
+                    -webkit-mask-image: linear-gradient(180deg, #000 calc(var(--tco-fill) - 8%), transparent var(--tco-fill));
+                    mask-image: linear-gradient(180deg, #000 calc(var(--tco-fill) - 8%), transparent var(--tco-fill));
+                    animation: tco-fill linear both;
+                    animation-timeline: --tco-panel;
+                    animation-range: entry 10% cover 45%;
+                }
+                @keyframes tco-fill {
+                    from { --tco-fill: 12%; }
+                    to   { --tco-fill: 108%; }
+                }
+            }
+        }
+
+        /* --- Contraste en thème sombre : le teal foncé (#0b5f59) tombe à ~2,5:1 sur
+           les fonds sombres. Tous les textes qu'il colorait passent à l'accent cyan. --- */
+        .eyebrow,
+        .step::before { color: var(--accent); }
+
+        [data-theme="dark"] .section-kicker,
+        [data-theme="dark"] .start-row.header,
+        [data-theme="dark"] .difference-row.header,
+        [data-theme="dark"] .result-cell b,
+        [data-theme="dark"] .tco-object .key,
+        [data-theme="dark"] .legal-item b { color: var(--accent); }
+        [data-theme="dark"] .difference-row.header span:nth-child(2) { color: var(--muted); }
+        [data-theme="dark"] .tco-object .str { color: #a9bcff; }
+        /* En mobile, la réunion type devient un sur-titre teal : cyan en sombre */
+        @media (max-width: 700px) {
+            [data-theme="dark"] .start-row .start-meeting { color: var(--accent); }
+        }
+
+        /* --- En-tête : logo + navigation complète = 1 121 px en français. En dessous,
+           les liens cassaient sur deux lignes (« 中文 » empilé à 1 024 px) puis
+           chevauchaient le logo : ils passent dans le menu jusqu'à 1 200 px. --- */
+        .nav a,
+        .language-button { white-space: nowrap; }
+
+        .logo img { flex-shrink: 0; }
+
+        @media (max-width: 360px) {
+            .theme-toggle { display: none; }
+        }
+
+        /* Téléphone : un seul bouton plein. « Voir les quatre étapes » est une
+           navigation interne, pas une conversion : lien texte, comme sur Taveni
+           (cible tactile de 44 px conservée). */
+        @media (max-width: 430px) {
+            .hero-actions { row-gap: 4px; }
+            .hero-actions .button-secondary {
+                width: auto;
+                min-height: 44px;
+                padding: 0;
+                border: 0;
+                background: none;
+                box-shadow: none;
+                color: var(--accent);
+                text-decoration: underline;
+                text-decoration-thickness: 1px;
+                text-underline-offset: 4px;
+            }
+            .hero-actions .button-secondary:hover { transform: none; }
+        }
+
+        @media (max-width: 1200px) {
+            .nav > a:not(.nav-cta) { display: none; }
+            .nav-menu { display: block; }
+        }
+
+        /* --- Responsive des nouveaux composants --- */
+        @media (max-width: 980px) {
+            .demo { justify-self: start; }
+            .proof { grid-template-columns: 1fr; }
+            .proof .doc-frame { max-width: 640px; }
+            .step--gate::after { inset: 4px -12px 0; }
+            .step--gate { padding-bottom: 18px; }
+        }
+
+        @media (max-width: 700px) {
+            .demo-steps li { gap: 6px; padding: 6px 8px; font-size: 12px; }
+            .demo-excerpt { font-size: 14.5px; }
+            .demo-card-title { font-size: 17px; }
+            .demo-fields { gap: 8px; }
+            .demo-fields dt { font-size: 9.5px; letter-spacing: .04em; }
+            .demo-fields dd { font-size: 12.5px; }
+            .step--gate::after { inset: 4px -10px 0; }
+            .step--gate { padding-bottom: 14px; }
+            .proof-notes li { padding: 11px 0; }
+            .faq .more > summary { padding: 16px 0; font-size: 16px; }
+            .contact-box h2 { max-width: none; }
+            .contact-box .contact-text { font-size: 16.5px; }
+            .section-lead { font-size: 17px; }
+            .founder-note .founder-quote { font-size: 1.2rem; }
+
+            /* --- Compactage mobile : mêmes contenus, moins d'empilements --- */
+
+            /* Comparatif : le libellé « Notes IA / Taveni » ouvre la phrase au lieu
+               d'occuper sa propre ligne (8 lignes gagnées). Cyan en sombre. */
+            .difference-row:not(.header) span::before {
+                display: inline;
+                margin: 0 6px 0 0;
+                color: var(--accent);
+                font-size: 11px;
+                letter-spacing: .05em;
+            }
+
+            /* Coût de l'IA : qui / quoi / mesure restent côte à côte */
+            .tco-result { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .result-cell { padding: 12px 10px; }
+            .result-cell + .result-cell {
+                border-top: 0;
+                border-left: 1px solid var(--line);
+            }
+            .result-cell span { font-size: 12.5px; line-height: 1.4; }
+
+            /* Tableaux de la section sombre : l'état rejoint la ligne de la phrase */
+            .semantic-row:not(:first-child),
+            .ledger-row:not(:first-child) {
+                grid-template-columns: minmax(0, 1fr) auto;
+                column-gap: 12px;
+                row-gap: 6px;
+            }
+            .semantic-row:not(:first-child) span:nth-child(1),
+            .ledger-row:not(:first-child) span:nth-child(1) { grid-area: 1 / 1; }
+            .semantic-row:not(:first-child) span:nth-child(2),
+            .ledger-row:not(:first-child) span:nth-child(2) { grid-area: 2 / 1 / 3 / 3; }
+            .semantic-row:not(:first-child) span:nth-child(3),
+            .ledger-row:not(:first-child) span:nth-child(3) {
+                grid-area: 1 / 2;
+                justify-self: end;
+                align-self: center;
+            }
+
+            /* Où commencer : l'équipe et sa réunion type sur une même ligne */
+            .start-row:not(.header) {
+                grid-template-columns: auto minmax(0, 1fr);
+                column-gap: 10px;
+                align-items: baseline;
+            }
+            .start-row:not(.header) .start-outcome { grid-column: 1 / -1; }
+
+            .tco-object { line-height: 1.5; }
+            .problem-item { padding: 16px 0; }
+            .tco-object { padding: 14px; }
+            .measures-list li { padding: 10px 0; }
+            .faq .more > summary { padding: 14px 0; }
+            .step-out { margin-top: 10px; padding-top: 8px; }
+            .start-row:not(.header) { padding: 10px 16px; }
+            .trust-list li { padding: 9px 0; }
+            .proof-notes { margin-top: 12px; }
+            .hero-checks { gap: 4px; padding-top: 14px; }
+            .hero-checks li { font-size: 13.5px; line-height: 1.45; }
+            .truth-note,
+            .ontology-note { font-size: 14.5px; line-height: 1.6; }
+            .hero-grid { row-gap: 18px; }
+            .hero-actions { margin-top: 24px; }
+
+            /* Notes de la capture : libellé en tête de phrase */
+            .proof-notes li { display: block; padding: 10px 0; }
+            .proof-notes b { margin-right: 6px; }
+            .measures-list li { padding: 12px 0; }
+            .measures-list span { font-size: 14px; }
+            /* Tuile-logo décorative : le logo est déjà dans l'en-tête */
+            .company-mark { display: none; }
+            .trust-checks { gap: 6px; margin-top: 24px; padding-top: 18px; }
+
+            /* Tableaux de la section sombre : empilés, leurs en-têtes tenaient trois
+               lignes grasses. Ils deviennent une seule ligne de légende en mono. */
+            .semantic-row:first-child,
+            .ledger-row:first-child {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2px 14px;
+                padding: 10px 14px;
+                font-family: var(--font-mono);
+                font-weight: 600;
+                letter-spacing: .05em;
+                text-transform: uppercase;
+            }
+            .semantic-row:first-child span,
+            .ledger-row:first-child span {
+                color: rgba(255, 255, 255, 0.72);
+                font-size: 10.5px;
+            }
         }
     </style>
 </head>
@@ -2244,10 +3253,6 @@
         </div>
     </header>
 
-    <a class="mobile-cta" href="#contact" aria-label="Solicitar una evaluación">
-        <span>Solicitar una evaluación</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-    </a>
 
     <main id="contenu">
         <section class="hero" id="taveni" aria-labelledby="hero-title">
@@ -2255,107 +3260,200 @@
                 <div class="hero-copy">
                     <div class="eyebrow">Software francés · creado por Hyle Labs</div>
                     <h1 id="hero-title">Tus reuniones, estructuradas como <span class="accent-teal">decisiones y acciones por revisar</span>.</h1>
-                    <p>Después de una reunión, lo esencial se pierde: quién decidió qué, para cuándo y en qué herramienta. <strong>Taveni está diseñado para estructurar decisiones y acciones</strong> para que el equipo las revise antes de cualquier envío externo. La vía hacia una herramienta de negocio se verifica y delimita durante la evaluación.</p>
+                    <p class="hero-lead">Después de una reunión, lo esencial se pierde: quién decidió qué, para cuándo y en qué herramienta. Taveni extrae propuestas de decisiones y acciones, con responsable y fecha límite cuando la reunión los precisa; <strong>tu equipo comprueba cada propuesta</strong> antes de compartirla o enviarla a otra herramienta.</p>
                     <div class="hero-actions">
-                        <a class="button button-primary" href="https://taveni.ai/contact?source_page=%2Fhyle-labs&amp;subject=Evaluaci%C3%B3n+de+Taveni&amp;message=Hola+Hyle+Labs%2C%0A%0AContexto+%2F+necesidad%3A%0AHerramientas+a+conectar%3A%0ARestricciones+RGPD+%2F+seguridad%3A%0A%0AGracias%2C&amp;plan_interest=enterprise">
+                        <a class="button button-primary" href="#contact">
                             Solicitar una evaluación
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                         </a>
                         <a class="button button-secondary" href="#fonctionnement">
-                            Ver cómo funciona
+                            Ver los cuatro pasos
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
                         </a>
                     </div>
-                    <p class="hero-keyline">Decisiones vinculadas a su prueba · Acciones con quién, qué, para cuándo · Validación humana antes del envío</p>
+                    <p class="hero-note">Evaluación sobre un proceso real · Alcance definido · Sin compromiso</p>
                 </div>
-                <figure class="hero-artifact">
-                    <figure class="doc-frame doc-frame--hero">
-                        <img src="/assets/taveni-decision-preuve.webp" width="755" height="850" alt="Interfaz de Taveni: transcripción con marcas de tiempo de una revisión comercial — la decisión «Aprobamos el presupuesto del Q3: 180 000 €» y la acción propuesta con su destino CRM." loading="eager" fetchpriority="high" decoding="async">
-                        <figcaption class="doc-frame-label">taveni — decisión vinculada a su prueba</figcaption>
-                    </figure>
+
+                <!-- Démonstration en trois temps : la phrase de réunion devient une décision
+                     à relire. Le HTML porte l'état final (sans JS, mouvement réduit, impression) ;
+                     site.js rejoue la séquence quand la classe demo-live est posée dans <head>. -->
+                <figure class="demo" id="demo">
+                    <ol class="demo-steps" aria-label="La vista previa en tres pasos">
+                        <li><span class="demo-step-n" aria-hidden="true">1</span><span class="demo-step-title">La reunión</span><span class="visually-hidden"> — </span><span class="demo-step-body visually-hidden">La frase en la que se toma la decisión.</span></li>
+                        <li><span class="demo-step-n" aria-hidden="true">2</span><span class="demo-step-title">La propuesta</span><span class="visually-hidden"> — </span><span class="demo-step-body visually-hidden">Taveni redacta una decisión a partir de ella, con su nivel de confianza.</span></li>
+                        <li><span class="demo-step-n" aria-hidden="true">3</span><span class="demo-step-title">Tu revisión</span><span class="visually-hidden"> — </span><span class="demo-step-body visually-hidden">La corriges, la validas o la rechazas antes de cualquier envío.</span></li>
+                    </ol>
+                    <p class="demo-caption" aria-hidden="true">La corriges, la validas o la rechazas antes de cualquier envío.</p>
+                    <div class="demo-stage" role="img" aria-label="Ilustración: en la grabación de una revisión comercial, la frase «Validamos el presupuesto Q3 de 180 000 euros» se convierte en una decisión propuesta, con responsable, fecha límite y extracto de origen. Tu equipo la corrige, la valida o la rechaza antes de cualquier envío.">
+                        <div class="demo-source">
+                            <div class="demo-head">
+                                <span class="demo-label demo-source-label">Grabación fuente</span>
+                                <span class="demo-meta">Revisión comercial Q3 · 00:42:18</span>
+                            </div>
+                            <div class="demo-player">
+                                <span class="demo-play"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5-12-7.5Z"></path></svg></span>
+                                <span class="demo-time">00:42 / 01:28</span>
+                                <span class="demo-track"><span class="demo-progress"></span></span>
+                            </div>
+                            <p class="demo-excerpt">…Muy bien. <mark class="demo-mark">Validamos el presupuesto Q3 de 180&nbsp;000&nbsp;euros; lo llevo al comité del martes.</mark> Acción para mí: notificar a dirección financiera el importe validado, para el 12 de julio a más tardar…</p>
+                        </div>
+                        <span class="demo-thread"></span>
+                        <div class="demo-card">
+                            <div class="demo-card-body">
+                                <div class="demo-head">
+                                    <span class="demo-label demo-card-label">Decisión propuesta</span>
+                                    <span class="demo-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Confianza alta</span>
+                                </div>
+                                <p class="demo-card-title">Validar el presupuesto Q3 de 180&nbsp;000&nbsp;€ en el comité del martes.</p>
+                                <dl class="demo-fields">
+                                    <div class="demo-field-owner"><dt>Responsable</dt><dd>Karim Benali</dd></div>
+                                    <div class="demo-field-due"><dt>Fecha límite</dt><dd>Comité del martes</dd></div>
+                                    <div class="demo-field-source"><dt>Fuente</dt><dd>Extracto · 00:42:18</dd></div>
+                                </dl>
+                            </div>
+                            <div class="demo-actions">
+                                <span class="demo-btn demo-btn--edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.4 3.6a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"></path></svg>Corregir</span>
+                                <span class="demo-btn demo-btn--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Validar</span>
+                                <span class="demo-btn demo-btn--reject"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>Rechazar</span>
+                            </div>
+                            <p class="demo-gate"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="11" x="4" y="11" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Nada se envía hasta que tu equipo lo valida.</p>
+                        </div>
+                    </div>
+                    <!-- Capture réelle à la demande, à la place de la scène (même cellule de
+                         grille) : hors du role="img" de la scène, car elle contient un bouton. -->
+                    <div class="demo-real" id="demo-real" hidden="">
+                        <div class="demo-real-bar">
+                            <p class="demo-real-label">Captura real · acciones de la misma revisión Q3</p>
+                            <button class="demo-real-close" type="button">Volver al ejemplo</button>
+                        </div>
+                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Interfaz de Taveni: acciones extraídas de una revisión comercial, con prioridad, nivel de confianza, fecha límite, extracto de origen y destino por conectar." loading="lazy" decoding="async">
+                    </div>
+                    <button class="demo-replay" type="button">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                        Ver de nuevo
+                    </button>
+                    <figcaption class="demo-note">
+                        <span class="demo-note-text">Ejemplo ilustrativo · datos ficticios</span>
+                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle" aria-controls="demo-real">Ver una captura real<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
+                    </figcaption>
                 </figure>
-                <div class="hero-signals">
-                    <p class="hero-signal">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"></path><path d="m4 7 8 4 8-4"></path><path d="M12 11v10"></path></svg>
-                        <span class="hero-signal-text"><strong>Objetivo: menos contexto innecesario.</strong> La evaluación mide qué reprocesamiento evita el contexto estructurado, sin anunciar ahorros antes de observarlos.</span>
-                    </p>
-                    <p class="hero-signal">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10"></path><path d="M7 12h7"></path><path d="M7 16h4"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>
-                        <span class="hero-signal-text"><strong>Tus correcciones permanecen bajo tu control.</strong> Su almacenamiento, uso y posible intercambio con modelos o herramientas de terceros se delimitan antes de la evaluación.</span>
-                    </p>
-                </div>
+
+                <ul class="hero-checks">
+                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Propuestas acompañadas de su extracto de origen cuando está disponible</li>
+                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Responsable y fecha límite propuestos cuando el contexto los respalda</li>
+                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Empieza con la grabación de una sola reunión</li>
+                </ul>
             </div>
         </section>
 
         <section class="truth-section" id="probleme" aria-labelledby="preuve-title">
-            <div class="wrap">
-                <div class="section-kicker">El problema</div>
-                <h2 class="section-title section-title--major" id="preuve-title">Tus mejores decisiones se toman en voz alta. Y luego desaparecen.</h2>
-                <p class="section-lead">Las herramientas de resumen producen actas que nadie reabre. El valor real está en otra parte: en las decisiones que tus equipos toman en voz alta, asumen y necesitan poder encontrar, revisar y ejecutar.</p>
+            <div class="wrap problem-layout">
+                <div class="problem-head">
+                    <div class="section-kicker">El problema</div>
+                    <h2 class="section-title section-title--major" id="preuve-title">Tus mejores decisiones se toman en voz alta. Y luego desaparecen.</h2>
+                    <p class="section-lead">Las herramientas de resumen producen actas que nadie reabre. El valor real está en otra parte: en las decisiones que tus equipos toman en voz alta, asumen y necesitan poder encontrar, revisar y ejecutar.</p>
+                </div>
 
-                <ol class="problem-list">
-                    <li class="problem-item">
-                        <span class="pi-num" aria-hidden="true">01</span>
-                        <div>
-                            <h3>La decisión se evapora.</h3>
-                            <p>Presupuesto, prioridad, una excepción concedida a un cliente: la decisión se toma en voz alta y luego se pierde en una larga transcripción.</p>
-                        </div>
-                    </li>
-                    <li class="problem-item">
-                        <span class="pi-num" aria-hidden="true">02</span>
-                        <div>
-                            <h3>El siguiente paso es demasiado vago.</h3>
-                            <p>«Me ocupo» no basta para crear una tarea fiable en una herramienta de proyecto o soporte.</p>
-                        </div>
-                    </li>
-                    <li class="problem-item">
-                        <span class="pi-num" aria-hidden="true">03</span>
-                        <div>
-                            <h3>Nada llega a las herramientas.</h3>
-                            <p>El resumen existe, pero la acción no llega ni al CRM, ni al soporte, ni a la herramienta de proyecto — y nadie controla quién puede ver qué.</p>
-                        </div>
-                    </li>
-                </ol>
-                <details class="more problem-more">
-                    <summary>Dos ángulos que se olvidan a menudo: los derechos de acceso y la factura de IA</summary>
-                    <ul class="more-list">
-                        <li>Información sensible — compartirlo todo con un asistente o una integración no es aceptable para cada cuenta, proyecto o tema: los derechos de acceso deben acompañar a la decisión.</li>
-                        <li>Factura de IA — cuanto más barata es la IA, más se le envía todo sin filtrar; se acaba pagando mucho por ruido.</li>
-                    </ul>
-                </details>
-                <p class="truth-note">Taveni está diseñado para convertir el material de una reunión en memoria operativa con fuente: decisiones y acciones por revisar antes de cualquier entrega. La evaluación verifica qué se conserva y resulta realmente útil y reutilizable en tu flujo.</p>
+                <div class="problem-body">
+                    <ol class="problem-list">
+                        <li class="problem-item">
+                            <span class="pi-num" aria-hidden="true">01</span>
+                            <div>
+                                <h3>La decisión se evapora.</h3>
+                                <p>Presupuesto, prioridad, una excepción concedida a un cliente: la decisión se toma en voz alta y luego se pierde en una larga transcripción.</p>
+                            </div>
+                        </li>
+                        <li class="problem-item">
+                            <span class="pi-num" aria-hidden="true">02</span>
+                            <div>
+                                <h3>El siguiente paso es demasiado vago.</h3>
+                                <p>«Me ocupo» no basta para crear una tarea fiable en una herramienta de proyecto o soporte.</p>
+                            </div>
+                        </li>
+                        <li class="problem-item">
+                            <span class="pi-num" aria-hidden="true">03</span>
+                            <div>
+                                <h3>Nada llega a las herramientas.</h3>
+                                <p>El resumen existe, pero la acción no llega ni al CRM, ni al soporte, ni a la herramienta de proyecto — y nadie controla quién puede ver qué.</p>
+                            </div>
+                        </li>
+                    </ol>
+                    <details class="more problem-more">
+                        <summary>Dos ángulos que se olvidan a menudo: los derechos de acceso y la factura de IA</summary>
+                        <ul class="more-list">
+                            <li>Información sensible — compartirlo todo con un asistente o una integración no es aceptable para cada cuenta, proyecto o tema: los derechos de acceso deben acompañar a la decisión.</li>
+                            <li>Factura de IA — cuanto más barata es la IA, más se le envía todo sin filtrar; se acaba pagando mucho por ruido.</li>
+                        </ul>
+                    </details>
+                    <p class="truth-note">Taveni está diseñado para convertir el material de una reunión en memoria operativa con fuente: decisiones y acciones por revisar antes de cualquier entrega. La evaluación verifica qué se conserva y resulta realmente útil y reutilizable en tu flujo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="start-section" id="commencer" aria-labelledby="start-title">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="section-kicker">Por dónde empezar</div>
+                        <h2 class="section-title" id="start-title">Empieza por la reunión que exige más seguimiento manual.</h2>
+                    </div>
+                    <p class="section-lead">Elige una reunión operativa recurrente y el lugar donde se gestionan sus seguimientos: es en ese proceso concreto donde juzgas si Taveni te ayuda.</p>
+                </div>
+                <div class="start-table" role="table" aria-label="Primeros casos de uso por equipo">
+                    <div class="start-row header" role="row"><span role="columnheader">Equipo</span><span role="columnheader">Reunión tipo</span><span role="columnheader">Qué hace Taveni con ella</span></div>
+                    <div class="start-row" role="row"><b role="rowheader">Dirección</b><span class="start-meeting" role="cell">Comités y arbitrajes</span><span class="start-outcome" role="cell">Recuperar por qué se aprobó una prioridad, un presupuesto o una fecha, con el extracto y los siguientes pasos esperados.</span></div>
+                    <div class="start-row" role="row"><b role="rowheader">Ventas y CS</b><span class="start-meeting" role="cell">Reuniones con clientes</span><span class="start-outcome" role="cell">Los compromisos comerciales se convierten en acciones propuestas por revisar; la entrega a CRM, soporte o seguimiento se elige y verifica durante la evaluación.</span></div>
+                    <div class="start-row" role="row"><b role="rowheader">Producto y ops</b><span class="start-meeting" role="cell">Decisiones operativas</span><span class="start-outcome" role="cell">Lo decidido entre equipos sigue visible, incluidas las acciones sin responsable claro.</span></div>
+                </div>
             </div>
         </section>
 
         <section class="pipeline" id="fonctionnement">
             <div class="wrap">
                 <div class="section-kicker">Flujo por evaluar</div>
-                <h2 class="section-title">Captura&nbsp;› Cualifica&nbsp;› Revisa&nbsp;› Prepara la entrega.</h2>
-                <p class="section-lead">La evaluación verifica qué puede capturarse, estructurarse y revisarse. Una entrega a una herramienta de negocio solo se incluye tras la aprobación humana y la verificación de la vía de destino.</p>
+                <h2 class="section-title">Cuatro pasos. Aprobación antes del envío.</h2>
+                <p class="section-lead">Taveni prepara propuestas; tu equipo las revisa y aprueba antes de cualquier envío. La vía hacia cada herramienta de negocio se verifica durante la evaluación.</p>
 
                 <div class="pipeline-steps">
                     <article class="step" data-step="1">
                         <h3>Capturar.</h3>
                         <p>Captura una reunión, llamada o fuente existente sin perder el contexto oral.</p>
+                        <p class="step-out">Reunión y contexto reunidos</p>
                     </article>
                     <article class="step" data-step="2">
                         <h3>Cualificar.</h3>
                         <p>Añade roles, proyectos, vocabulario, reglas de acceso, prueba y destino esperado.</p>
+                        <p class="step-out">Propuestas para revisar</p>
                     </article>
-                    <article class="step" data-step="3">
+                    <!-- Le point de contrôle humain : la seule étape mise en avant. -->
+                    <article class="step step--gate" data-step="3">
                         <h3>Revisar.</h3>
                         <p>Confirma decisiones y acciones importantes o mantén pendientes los elementos incompletos.</p>
+                        <p class="step-out"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="11" x="4" y="11" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Contenido aprobado por tu equipo</p>
                     </article>
                     <article class="step" data-step="4">
                         <h3>Preparar la entrega.</h3>
                         <p>Tras la aprobación, usa el conector verificado en el alcance o una exportación manual documentada.</p>
+                        <p class="step-out">Envío controlado</p>
                     </article>
                 </div>
 
-                <!-- Ce que l'étape « Qualifier » produit réellement : les actions
-                     extraites de la même revue commerciale Q3 que le hero. -->
-                <figure class="doc-frame doc-frame--actions">
-                    <img src="/assets/taveni-actions-q3.webp" width="1440" height="900" alt="Interfaz de Taveni: acciones extraídas de una revisión comercial, con prioridad, nivel de confianza, fecha límite y umbral de revisión." loading="lazy" decoding="async">
-                    <figcaption class="doc-frame-label">taveni — acciones cualificadas pendientes de revisión</figcaption>
+                <!-- Ce que l'étape « Qualifier » produit réellement : les actions extraites
+                     de la même revue commerciale Q3 que la démonstration du hero, recadrées
+                     sur la carte utile pour rester lisibles. -->
+                <figure class="proof" id="capture-reelle">
+                    <div class="doc-frame doc-frame--actions">
+                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Interfaz de Taveni: acciones extraídas de una revisión comercial, con prioridad, nivel de confianza, fecha límite, extracto de origen y destino por conectar." loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="proof-copy">
+                        <p class="proof-kicker">Captura real de Taveni</p>
+                        <p class="proof-title">Acciones cualificadas, a la espera de tu revisión.</p>
+                        <ul class="proof-notes">
+                            <li><b>Fecha límite, prioridad, confianza</b><span>Propuestas a partir de la reunión, editables antes de validar.</span></li>
+                            <li><b>Extracto citado</b><span>Cada acción conserva el extracto de la reunión del que procede, cuando está disponible.</span></li>
+                            <li><b>Destino por conectar</b><span>Nada se envía hasta que la acción esté aprobada y su destino conectado.</span></li>
+                        </ul>
+                    </figcaption>
                 </figure>
 
                 <details class="more pipeline-more">
@@ -2366,6 +3464,10 @@
                         <li>Revisión — el equipo confirma, completa o rechaza; esta revisión nunca concede permiso implícito para escribir en otro sistema.</li>
                         <li>Entrega — tras la aprobación explícita, el resultado sigue la vía verificada durante la evaluación: un conector incluido o una exportación manual documentada.</li>
                     </ul>
+                    <figure class="doc-frame doc-frame--evidence">
+                        <img src="/assets/taveni-decision-preuve.webp" width="755" height="850" alt="Interfaz de Taveni: transcripción con marcas de tiempo de una revisión comercial — la decisión «Aprobamos el presupuesto del Q3: 180 000 €» y la acción propuesta con su destino CRM." loading="lazy" decoding="async">
+                        <figcaption class="doc-frame-label">taveni — decisión vinculada a su prueba</figcaption>
+                    </figure>
                     <figure class="doc-frame doc-frame--validation">
                         <img src="/assets/taveni-file-validation.webp" width="1440" height="900" alt="Interfaz de Taveni: cola de revisión de decisiones, compromisos y riesgos extraídos de una reunión, con nivel de confianza y estado." loading="lazy" decoding="async">
                         <figcaption class="doc-frame-label">taveni — revisión humana de decisiones y acciones</figcaption>
@@ -2391,16 +3493,6 @@
                         <figcaption class="doc-frame-label">taveni — acción vinculada a su tarea de ClickUp</figcaption>
                     </figure>
                 </details>
-
-                <div class="start-block">
-                    <h3 class="start-title">Por dónde empezar</h3>
-                    <div class="start-table" role="table" aria-label="Primeros casos de uso por equipo">
-                        <div class="start-row header" role="row"><span role="columnheader">Equipo</span><span role="columnheader">Reunión tipo</span><span role="columnheader">Qué hace Taveni con ella</span></div>
-                        <div class="start-row" role="row"><b role="rowheader">Dirección</b><span class="start-meeting" role="cell">Comités y arbitrajes</span><span class="start-outcome" role="cell">Recuperar por qué se aprobó una prioridad, un presupuesto o una fecha, con el extracto y los siguientes pasos esperados.</span></div>
-                        <div class="start-row" role="row"><b role="rowheader">Ventas y CS</b><span class="start-meeting" role="cell">Reuniones con clientes</span><span class="start-outcome" role="cell">Los compromisos comerciales se convierten en acciones propuestas por revisar; la entrega a CRM, soporte o seguimiento se elige y verifica durante la evaluación.</span></div>
-                        <div class="start-row" role="row"><b role="rowheader">Producto y ops</b><span class="start-meeting" role="cell">Decisiones operativas</span><span class="start-outcome" role="cell">Lo decidido entre equipos sigue visible, incluidas las acciones sin responsable claro.</span></div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -2509,12 +3601,6 @@
                         </ul>
                     </div>
                 </div>
-
-                <div class="measure-note">
-                    <h3>Medir el valor, no la hype.</h3>
-                    <p>Una evaluación Taveni no promete una automatización total. Sobre uno de tus procesos reales, mide cuatro cosas simples:</p>
-                    <p class="measure-criteria">tiempo de búsqueda · recaptura manual · incidentes cualificados · coste de IA observado</p>
-                </div>
             </div>
         </section>
 
@@ -2527,33 +3613,27 @@
                     <div class="section-kicker">Hyle Labs</div>
                     <h2 class="section-title" id="company-title">Productos de IA para convertir lo oral en capital.</h2>
                     <p>Construimos productos para equipos cuyas decisiones y acciones circulan entre conversaciones, herramientas y asistentes. Taveni está diseñado para estructurar arbitrajes orales como decisiones, pruebas y acciones por revisar dentro de un alcance verificado.</p>
-                    <p>Nuestra línea directriz es simple: delegar la tarea, no el aprendizaje. La IA debe reducir la captura manual sin quitar a los equipos la capacidad de revisar, limitar y decidir qué se ejecuta.</p>
                     <blockquote class="founder-note">
-                        <p class="founder-quote">«Creé Taveni porque las decisiones más importantes de nuestros equipos vivían en actas que nadie releía. Construimos la herramienta que las hace ejecutables — sin quitarles nunca la decisión a las personas.»</p>
+                        <p class="founder-quote">«Creé Taveni porque decisiones útiles quedaban enterradas en las actas. El objetivo es hacerlas más fáciles de encontrar y revisar, sin quitar nunca la decisión a las personas.»</p>
                         <p class="founder-sig">Adryan Perez — fundador, Hyle Labs · Lyon</p>
                     </blockquote>
-                    <p class="company-facts-line">SASU francesa · RCS Lyon · Taveni en evaluación acotada</p>
+                    <ul class="trust-checks">
+                        <li class="trust-check-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>Empresa francesa · SASU · RCS Lyon</span></li>
+                        <li class="trust-check-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>Taveni en evaluación acotada</span></li>
+                        <li class="trust-check-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span><a href="/privacy/#en">Política de privacidad</a> publicada (en francés e inglés)</span></li>
+                        <li class="trust-check-4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>Ningún rastreador de terceros en este sitio</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section class="contact" id="contact">
-            <div class="wrap">
-                <div class="contact-box">
-                    <div>
-                        <div class="section-kicker">Hablemos</div>
-                        <h2>¿Medir Taveni en un flujo de trabajo real?</h2>
-                        <p>Envíanos tu contexto: tipo de reunión, herramienta objetivo, restricciones RGPD y criterios de éxito. Te responderemos con una propuesta de alcance, criterios de medición y las condiciones necesarias para la evaluación.</p>
-                        <p class="contact-meta">Evaluación sobre un proceso real · Alcance definido · Sin compromiso</p>
-                    </div>
-                    <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=Evaluaci%C3%B3n+de+Taveni&amp;body=Hola+Hyle+Labs%2C%0A%0AContexto+%2F+necesidad%3A%0AHerramientas+a+conectar%3A%0ARestricciones+RGPD+%2F+seguridad%3A%0A%0AGracias%2C">
-                        contact@hyle-labs.net
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                    </a>
+        <section class="faq-section" id="questions" aria-labelledby="faq-title">
+            <div class="wrap faq-layout">
+                <div class="faq-head">
+                    <div class="section-kicker">Respuestas directas</div>
+                    <h2 class="section-title faq-title" id="faq-title">Lo que preguntan los equipos antes de evaluar.</h2>
                 </div>
-
                 <div class="faq">
-                    <h3 class="faq-title">Respuestas directas</h3>
                     <details class="more faq-1">
                         <summary>¿Hay que cambiar de herramientas para usar Taveni?</summary>
                         <p>No necesariamente. La evaluación parte de tus herramientas actuales y define una entrega. Según la disponibilidad verificada, utiliza un conector incluido en el alcance o una exportación manual documentada.</p>
@@ -2577,6 +3657,38 @@
                 </div>
             </div>
         </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="wrap contact-layout">
+                <div class="contact-box">
+                    <div class="section-kicker">Hablemos</div>
+                    <h2 id="contact-title">Evalúa Taveni con una de tus reuniones.</h2>
+                    <p class="contact-text">Envíanos tu contexto: tipo de reunión, herramienta objetivo, restricciones RGPD y criterios de éxito. Te responderemos con una propuesta de alcance, criterios de medición y las condiciones necesarias para la evaluación.</p>
+                    <a class="button button-primary" href="mailto:contact@hyle-labs.net?subject=Evaluaci%C3%B3n%20de%20Taveni&amp;body=Hola%20Hyle%20Labs%2C%0A%0AContexto%20%2F%20necesidad%3A%0AHerramientas%20a%20conectar%3A%0ARestricciones%20RGPD%20%2F%20seguridad%3A%0A%0AGracias%2C">
+                        contact@hyle-labs.net
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
+                    <p class="contact-meta">Evaluación sobre un proceso real · Alcance definido · Sin compromiso</p>
+                </div>
+
+                <!-- Ce que l'évaluation mesure : donne au CTA un contenu concret
+                     (repris de la landing Taveni, sans promesse de gain). -->
+                <div class="measures">
+                    <p class="measures-label" id="measures-title">Lo que mide una evaluación</p>
+                    <ol class="measures-list" aria-labelledby="measures-title">
+                        <li class="measure-1"><b>Tiempo de búsqueda</b><span>Con qué rapidez se encuentran una decisión y su fuente.</span></li>
+                        <li class="measure-2"><b>Copia manual</b><span>Cuánta información sigue siendo necesario copiar a mano.</span></li>
+                        <li class="measure-3"><b>Errores detectados antes de compartir</b><span>Qué errores se detectan antes de compartir la información o enviarla a otra herramienta.</span></li>
+                        <li class="measure-4"><b>Coste de IA observado</b><span>El coste de procesamiento de IA atribuible a la muestra evaluada, sin prometer ahorros futuros.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <a class="mobile-cta" href="#contact" aria-label="Solicitar una evaluación">
+            <span>Solicitar una evaluación</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
     </main>
 
     <footer>
@@ -2592,9 +3704,10 @@
                 </nav>
                 <div class="footer-links">
                     <a href="mailto:contact@hyle-labs.net">Contacto</a>
+                    <a class="footer-privacy" href="/privacy/#en">Privacidad</a>
                     <button type="button" id="legal-open">Aviso legal</button>
                 </div>
-                <div class="footer-langs" aria-label="Langues disponibles">
+                <div class="footer-langs" aria-label="Idiomas disponibles">
                     <a href="/" hreflang="fr" lang="fr">Français</a>
                     <a href="/en/" hreflang="en" lang="en">English</a>
                     <a href="/es/" hreflang="es" lang="es">Español</a>
@@ -2621,7 +3734,7 @@
         </div>
     </dialog>
 
-    <script src="/assets/site.js?v=20260721" defer=""></script>
+    <script src="/assets/site.js?v=20261103" defer=""></script>
 
 
 </body></html>

@@ -264,10 +264,27 @@ for (const [language, page] of Object.entries(pages)) {
         assert(Number(image.attr("height")) > 0, `${language} image is missing an explicit height`);
         assert.notEqual(image.attr("alt"), undefined, `${language} image is missing an alt attribute`);
     });
-    // Hero produit : au-dessus de la ligne de flottaison, chargement immédiat.
-    assert.equal($(".doc-frame--hero img").attr("loading"), "eager");
-    // Toutes les autres captures produit : différées.
-    $(".doc-frame:not(.doc-frame--hero) img").each((_index, node) => {
+    // Démonstration du hero : une maquette, donc signalée comme exemple fictif,
+    // décrite aux lecteurs d'écran et racontée en trois temps légendés.
+    const demo = $("#demo");
+    assert.equal(demo.length, 1, `${language} hero demonstration is missing`);
+    assert(demo.find(".demo-note").text().trim(), `${language} hero demo must be labelled as illustrative`);
+    assert.equal(demo.find(".demo-stage").attr("role"), "img", `${language} hero demo stage must be an image`);
+    assert(demo.find(".demo-stage").attr("aria-label")?.trim(), `${language} hero demo needs a text alternative`);
+    assert.equal(demo.find(".demo-steps > li").length, 3, `${language} hero demo must tell three steps`);
+    demo.find(".demo-steps > li").each((_index, node) => {
+        assert($(node).find(".demo-step-body").text().trim(), `${language} hero demo step lacks its caption`);
+    });
+    // La capture réelle reste à un clic, dans le hero : masquée par défaut, image
+    // différée (aucun poids au premier affichage), lien de repli vers la section.
+    const realPanel = demo.find("#demo-real");
+    assert.equal(realPanel.length, 1, `${language} hero real screenshot panel is missing`);
+    assert(realPanel.is("[hidden]"), `${language} hero real screenshot must start hidden`);
+    assert.equal(realPanel.find("img").attr("loading"), "lazy", `${language} hero real screenshot must be lazy`);
+    assert(realPanel.find("img").attr("alt")?.trim(), `${language} hero real screenshot needs an alt text`);
+    assert.equal(demo.find("#demo-proof").attr("href"), "#capture-reelle", `${language} hero proof link fallback mismatch`);
+    // Captures produit réelles : aucune au-dessus de la ligne de flottaison, toutes différées.
+    $(".doc-frame img").each((_index, node) => {
         assert.equal($(node).attr("loading"), "lazy");
         assert.equal($(node).attr("decoding"), "async");
     });
@@ -283,23 +300,21 @@ for (const [language, page] of Object.entries(pages)) {
         }
     });
 
-    const evaluationHref = $(".hero-actions .button-primary").attr("href");
-    const evaluationUrl = new URL(evaluationHref);
-    assert.equal(evaluationUrl.origin, "https://taveni.ai", `${language} evaluation CTA origin mismatch`);
-    assert.equal(evaluationUrl.pathname, "/contact", `${language} evaluation CTA path mismatch`);
-    assert.equal(evaluationUrl.searchParams.get("source_page"), "/hyle-labs");
-    assert.equal(evaluationUrl.searchParams.get("plan_interest"), "enterprise");
-    assert(evaluationUrl.searchParams.get("subject")?.trim(), `${language} evaluation subject is empty`);
-    assert(evaluationUrl.searchParams.get("message")?.trim(), `${language} evaluation message is empty`);
-    assert.deepEqual(
-        [...evaluationUrl.searchParams.keys()].sort(),
-        ["message", "plan_interest", "source_page", "subject"],
-        `${language} evaluation CTA exposes unexpected attribution fields`
-    );
-    assert(
-        $(".contact-box .button-primary").attr("href")?.startsWith("mailto:contact@hyle-labs.net"),
-        `${language} contact email fallback is missing`
-    );
+    // Tous les CTA « Demander une évaluation » (hero, navigation, CTA mobile) mènent à
+    // #contact, dont le bouton ouvre un e-mail prérempli. taveni.ai/contact n'est pas
+    // servi (domaine parqué au 03/11/2026) : ne le réintroduire qu'une fois en ligne,
+    // avec son contrat d'attribution (source_page, plan_interest — voir 7c1f479).
+    for (const selector of [".hero-actions .button-primary", ".nav .nav-cta", ".mobile-cta"]) {
+        assert.equal($(selector).attr("href"), "#contact", `${language} ${selector} must lead to #contact`);
+    }
+    const contactHref = $(".contact-box .button-primary").attr("href") || "";
+    assert(contactHref.startsWith("mailto:contact@hyle-labs.net?"), `${language} contact email is missing`);
+    // RFC 6068 : un « + » s'afficherait tel quel dans le client mail.
+    assert(!contactHref.includes("+"), `${language} contact email encodes spaces as "+"`);
+    const contactParams = new URLSearchParams(contactHref.split("?")[1]);
+    assert(contactParams.get("subject")?.trim(), `${language} contact email subject is empty`);
+    assert(contactParams.get("body")?.trim(), `${language} contact email body is empty`);
+    assert(!/taveni\.ai/.test(html), `${language} links to taveni.ai, which is not served yet`);
 
     const runtimeScripts = $('script[src]').toArray();
     assert.equal(runtimeScripts.length, 1, `${language} must load exactly one external runtime script`);
