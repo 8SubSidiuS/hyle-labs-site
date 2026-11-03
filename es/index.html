@@ -1565,7 +1565,6 @@
                     column-gap: 0;
                     padding: 48px 0 40px;
                 }
-                .demo { justify-self: start; }
                 .difference-layout,
                 .tco-layout,
                 .ontology-grid,
@@ -2725,6 +2724,14 @@
         /* Le CTA mobile fixe masquerait « Revenir à l'exemple » (WCAG 2.4.11) */
         body:has(.demo-real:not([hidden])) .mobile-cta { display: none; }
 
+        /* Sur #contact, le CTA mobile fixe couvrait le bouton e-mail qu'il annonce */
+        .mobile-cta { transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+        .at-contact .mobile-cta {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+        }
+
         .demo-real img {
             flex: 1 1 0;
             width: 100%;
@@ -2741,7 +2748,7 @@
             justify-content: space-between;
             gap: 6px 12px;
             padding: 8px 12px;
-            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
             background: var(--paper);
         }
 
@@ -2766,7 +2773,10 @@
         .demo-real-close:hover { border-color: var(--accent); color: var(--accent); }
 
         /* Pendant la capture, les étapes et la légende (qui décrivent la démo) s'effacent */
-        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption, .demo-replay) { opacity: .35; }
+        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption) { opacity: .35; }
+        /* La scène, « Revoir » (qui rejouerait derrière le panneau) et la mention
+           « données fictives » ne valent pas pour la capture réelle */
+        .demo:has(.demo-real:not([hidden])) :is(.demo-stage, .demo-replay, .demo-note-text) { visibility: hidden; }
 
 
         /* La maquette renvoie à la capture réelle du même scénario (revue Q3) */
@@ -2788,18 +2798,21 @@
 
         /* Séquence : chaque règle décrit l'état AVANT l'étape qui le lève. Sans la
            classe demo-live (pas de JS, mouvement réduit, filet de sécurité), aucune
-           ne s'applique : la démonstration reste dans son état final. */
-        .demo-live .demo:not(.s1) .demo-progress { width: 0; }
-        .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
-        .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
-        .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
-        .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
-        /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
-        .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
-        .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
-        .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
-        .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
-        .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+           ne s'applique : la démonstration reste dans son état final. Écran
+           seulement : imprimée avant d'avoir joué, la page garde l'état final. */
+        @media screen {
+            .demo-live .demo:not(.s1) .demo-progress { width: 0; }
+            .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
+            .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
+            .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
+            .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
+            /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
+            .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
+            .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
+            .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
+            .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
+            .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+        }
 
         [data-theme="dark"] .demo-btn--ok { background: #7ee7d8; color: #06201d; }
 
@@ -3050,6 +3063,12 @@
         .nav a,
         .language-button { white-space: nowrap; }
 
+        .logo img { flex-shrink: 0; }
+
+        @media (max-width: 360px) {
+            .theme-toggle { display: none; }
+        }
+
         @media (max-width: 1200px) {
             .nav > a:not(.nav-cta) { display: none; }
             .nav-menu { display: block; }
@@ -3219,7 +3238,7 @@
                 <div class="hero-copy">
                     <div class="eyebrow">Software francés · creado por Hyle Labs</div>
                     <h1 id="hero-title">Tus reuniones, estructuradas como <span class="accent-teal">decisiones y acciones por revisar</span>.</h1>
-                    <p class="hero-lead">Después de una reunión, lo esencial se pierde: quién decidió qué, para cuándo y en qué herramienta. Taveni prepara decisiones, acciones, responsables y fechas límite; <strong>tu equipo comprueba cada propuesta</strong> antes de compartirla o enviarla a otra herramienta.</p>
+                    <p class="hero-lead">Después de una reunión, lo esencial se pierde: quién decidió qué, para cuándo y en qué herramienta. Taveni extrae propuestas de decisiones y acciones, con responsable y fecha límite cuando la reunión los precisa; <strong>tu equipo comprueba cada propuesta</strong> antes de compartirla o enviarla a otra herramienta.</p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="#contact">
                             Solicitar una evaluación
@@ -3263,7 +3282,7 @@
                                     <span class="demo-label demo-card-label">Decisión propuesta</span>
                                     <span class="demo-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Confianza alta</span>
                                 </div>
-                                <p class="demo-card-title">Validar el presupuesto Q3 de 180 000 € en el comité del martes.</p>
+                                <p class="demo-card-title">Validar el presupuesto Q3 de 180&nbsp;000&nbsp;€ en el comité del martes.</p>
                                 <dl class="demo-fields">
                                     <div class="demo-field-owner"><dt>Responsable</dt><dd>Karim Benali</dd></div>
                                     <div class="demo-field-due"><dt>Fecha límite</dt><dd>Comité del martes</dd></div>
@@ -3281,11 +3300,11 @@
                     <!-- Capture réelle à la demande, à la place de la scène (même cellule de
                          grille) : hors du role="img" de la scène, car elle contient un bouton. -->
                     <div class="demo-real" id="demo-real" hidden="">
-                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Interfaz de Taveni: acciones extraídas de una revisión comercial, con prioridad, nivel de confianza, fecha límite, extracto de origen y destino por conectar." loading="lazy" decoding="async">
                         <div class="demo-real-bar">
                             <p class="demo-real-label">Captura real · acciones de la misma revisión Q3</p>
                             <button class="demo-real-close" type="button">Volver al ejemplo</button>
                         </div>
+                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Interfaz de Taveni: acciones extraídas de una revisión comercial, con prioridad, nivel de confianza, fecha límite, extracto de origen y destino por conectar." loading="lazy" decoding="async">
                     </div>
                     <button class="demo-replay" type="button">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
@@ -3293,7 +3312,7 @@
                     </button>
                     <figcaption class="demo-note">
                         <span class="demo-note-text">Ejemplo ilustrativo · datos ficticios</span>
-                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle">Ver una captura real<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
+                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle" aria-controls="demo-real">Ver una captura real<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
                     </figcaption>
                 </figure>
 
@@ -3409,7 +3428,7 @@
                         <p class="proof-title">Acciones cualificadas, a la espera de tu revisión.</p>
                         <ul class="proof-notes">
                             <li><b>Fecha límite, prioridad, confianza</b><span>Propuestas a partir de la reunión, editables antes de validar.</span></li>
-                            <li><b>Extracto citado</b><span>Cada acción conserva la frase de la reunión de la que procede.</span></li>
+                            <li><b>Extracto citado</b><span>Cada acción conserva el extracto de la reunión del que procede, cuando está disponible.</span></li>
                             <li><b>Destino por conectar</b><span>Nada se envía hasta que la acción esté aprobada y su destino conectado.</span></li>
                         </ul>
                     </figcaption>
@@ -3666,7 +3685,7 @@
                     <a class="footer-privacy" href="/privacy/#en">Privacidad</a>
                     <button type="button" id="legal-open">Aviso legal</button>
                 </div>
-                <div class="footer-langs" aria-label="Langues disponibles">
+                <div class="footer-langs" aria-label="Idiomas disponibles">
                     <a href="/" hreflang="fr" lang="fr">Français</a>
                     <a href="/en/" hreflang="en" lang="en">English</a>
                     <a href="/es/" hreflang="es" lang="es">Español</a>

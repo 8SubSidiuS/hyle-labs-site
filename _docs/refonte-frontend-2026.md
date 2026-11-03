@@ -627,12 +627,21 @@ Mesures (serveur local, Chromium 1243) : axe-core 0 violation sur 7 configuratio
 (4 langues, clair/sombre, 1440/390), panneau de capture réelle ouvert ou fermé ; Lighthouse
 desktop 100/100/100/100, mobile 95/100/100/100 contre 94 avant (LCP 3,1 → 2,9 s, CLS 0, sans
 compression en local) ; premier affichage ~79 → ~32 Ko transférés (plus d'image `eager` dans
-le hero). Hauteur mobile (390 px) à contenu enrichi : FR 11 642 → 11 582 px, EN 11 204 →
-11 208, ES 11 738 → 11 523, ZH 9 856 → 9 657 — grâce au compactage mobile (libellés en tête
+le hero). Hauteur mobile (390 px) à contenu enrichi : FR 11 642 → 11 608 px, EN 11 204 →
+11 235, ES 11 738 → 11 574, ZH 9 856 → 9 682 — grâce au compactage mobile (libellés en tête
 de phrase dans le comparatif, qui/quoi/mesure côte à côte, état sur la ligne de la phrase dans
 les tableaux sombres, équipe et réunion type sur une ligne) et à deux redondances retirées
 (paragraphe « déléguer la tâche » répétant le titre de la section 5, accroche du fonctionnement
-resserrée). Desktop : 9 098 → 9 172 px.
+resserrée). Desktop : 9 098 → 9 206 px.
+
+Revue indépendante (PR #2) — corrigé : CTA mobile fixe masqué sur `#contact` (il couvrait
+le bouton e-mail) ; barre du panneau de capture en haut (le bouton focalisé sortait de
+l'écran en 320 × 568) ; scène, « Revoir » et mention « données fictives » masqués pendant la
+capture ; montants insécables en ES/ZH ; « extrait source lorsqu'il est disponible » et
+« propositions… quand la réunion les précise » (deux formulations plus affirmatives
+qu'avant) ; logo jamais écrasé et bascule de thème réellement masquée sous 360 px (règle en
+couche battue par une règle hors couche) ; séquence limitée à `@media screen` (impression =
+état final) ; `aria-label` des langues du pied de page traduit.
 
 ---
 

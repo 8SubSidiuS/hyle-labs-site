@@ -90,8 +90,7 @@
         sections.forEach((section) => observer.observe(section));
     }
 
-    // Démo du hero : trois temps légendés (~5 s), joués une fois à l'apparition.
-    // Textes lus dans le DOM ; sans demo-live (<head>), l'état final reste affiché.
+    // Démo du hero (3 temps, ~5 s) ; sans demo-live, l'état final reste affiché.
     const root = document.documentElement;
     const demo = document.getElementById("demo");
     if (demo && root.classList.contains("demo-live")) {
@@ -99,7 +98,7 @@
         const steps = [...demo.querySelectorAll(".demo-steps li")];
         const caption = demo.querySelector(".demo-caption");
         const replay = demo.querySelector(".demo-replay");
-        // Étape légendée pour chaque état 0 → 5 (null : aucune).
+        // Étape légendée par état 0 → 5.
         const activeStep = [null, 0, 0, 1, 2, null];
         const stepTimesMs = [600, 1500, 2400, 3600, 4700];
         let timers = [];
@@ -129,7 +128,7 @@
             );
         };
         show(0);
-        // Départ quand l'enregistrement source est lisible (mobile : sous la ligne de flottaison).
+        // Départ quand la source est lisible (sous la ligne de flottaison en mobile).
         const start = demo.querySelector(".demo-source") || demo;
         let starter = null;
         if ("IntersectionObserver" in window) {
@@ -161,7 +160,6 @@
             (open ? back : proof).focus({ preventScroll: open });
             if (open && real.getBoundingClientRect().top < 72) real.scrollIntoView({ block: "start" });
         };
-        proof.setAttribute("aria-controls", "demo-real");
         proof.setAttribute("aria-expanded", "false");
         proof.addEventListener("click", (event) => {
             event.preventDefault();
@@ -171,6 +169,14 @@
         real.addEventListener("keydown", (event) => {
             if (event.key === "Escape") toggle(false);
         });
+    }
+
+    // CTA mobile masqué sur #contact : il y couvrait le bouton e-mail.
+    const contact = document.getElementById("contact");
+    if (contact && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+            document.body.classList.toggle("at-contact", entry.isIntersecting);
+        }).observe(contact);
     }
 
     const dialog = document.getElementById("legal-dialog");

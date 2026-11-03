@@ -1547,7 +1547,6 @@
                     column-gap: 0;
                     padding: 48px 0 40px;
                 }
-                .demo { justify-self: start; }
                 .difference-layout,
                 .tco-layout,
                 .ontology-grid,
@@ -2707,6 +2706,14 @@
         /* Le CTA mobile fixe masquerait « Revenir à l'exemple » (WCAG 2.4.11) */
         body:has(.demo-real:not([hidden])) .mobile-cta { display: none; }
 
+        /* Sur #contact, le CTA mobile fixe couvrait le bouton e-mail qu'il annonce */
+        .mobile-cta { transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+        .at-contact .mobile-cta {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+        }
+
         .demo-real img {
             flex: 1 1 0;
             width: 100%;
@@ -2723,7 +2730,7 @@
             justify-content: space-between;
             gap: 6px 12px;
             padding: 8px 12px;
-            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
             background: var(--paper);
         }
 
@@ -2748,7 +2755,10 @@
         .demo-real-close:hover { border-color: var(--accent); color: var(--accent); }
 
         /* Pendant la capture, les étapes et la légende (qui décrivent la démo) s'effacent */
-        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption, .demo-replay) { opacity: .35; }
+        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption) { opacity: .35; }
+        /* La scène, « Revoir » (qui rejouerait derrière le panneau) et la mention
+           « données fictives » ne valent pas pour la capture réelle */
+        .demo:has(.demo-real:not([hidden])) :is(.demo-stage, .demo-replay, .demo-note-text) { visibility: hidden; }
 
 
         /* La maquette renvoie à la capture réelle du même scénario (revue Q3) */
@@ -2770,18 +2780,21 @@
 
         /* Séquence : chaque règle décrit l'état AVANT l'étape qui le lève. Sans la
            classe demo-live (pas de JS, mouvement réduit, filet de sécurité), aucune
-           ne s'applique : la démonstration reste dans son état final. */
-        .demo-live .demo:not(.s1) .demo-progress { width: 0; }
-        .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
-        .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
-        .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
-        .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
-        /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
-        .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
-        .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
-        .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
-        .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
-        .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+           ne s'applique : la démonstration reste dans son état final. Écran
+           seulement : imprimée avant d'avoir joué, la page garde l'état final. */
+        @media screen {
+            .demo-live .demo:not(.s1) .demo-progress { width: 0; }
+            .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
+            .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
+            .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
+            .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
+            /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
+            .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
+            .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
+            .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
+            .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
+            .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+        }
 
         [data-theme="dark"] .demo-btn--ok { background: #7ee7d8; color: #06201d; }
 
@@ -3032,6 +3045,12 @@
         .nav a,
         .language-button { white-space: nowrap; }
 
+        .logo img { flex-shrink: 0; }
+
+        @media (max-width: 360px) {
+            .theme-toggle { display: none; }
+        }
+
         @media (max-width: 1200px) {
             .nav > a:not(.nav-cta) { display: none; }
             .nav-menu { display: block; }
@@ -3203,8 +3222,9 @@
                     <h1 id="hero-title">Vos réunions, structurées en <span class="accent-teal">décisions et actions à relire</span>.</h1>
                     <p class="hero-lead">
                         Après une réunion, l’essentiel se perd : qui a décidé quoi, pour quand, dans quel outil.
-                        Taveni prépare les décisions, actions, responsables et échéances ; <strong>votre équipe
-                        vérifie chaque proposition</strong> avant de la partager ou de l’envoyer vers un autre outil.
+                        Taveni en tire des propositions de décisions et d’actions, avec responsable et échéance
+                        quand la réunion les précise ; <strong>votre équipe vérifie chaque proposition</strong>
+                        avant de la partager ou de l’envoyer vers un autre outil.
                     </p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="#contact">
@@ -3267,11 +3287,11 @@
                     <!-- Capture réelle à la demande, à la place de la scène (même cellule de
                          grille) : hors du role="img" de la scène, car elle contient un bouton. -->
                     <div class="demo-real" id="demo-real" hidden>
-                        <img src="assets/taveni-actions-q3.webp" width="780" height="652" alt="Interface Taveni : actions extraites d’une revue commerciale, avec priorité, niveau de confiance, échéance, extrait source et destination à connecter." loading="lazy" decoding="async">
                         <div class="demo-real-bar">
                             <p class="demo-real-label">Capture réelle · actions de la même revue Q3</p>
                             <button class="demo-real-close" type="button">Revenir à l’exemple</button>
                         </div>
+                        <img src="assets/taveni-actions-q3.webp" width="780" height="652" alt="Interface Taveni : actions extraites d’une revue commerciale, avec priorité, niveau de confiance, échéance, extrait source et destination à connecter." loading="lazy" decoding="async">
                     </div>
                     <button class="demo-replay" type="button">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
@@ -3279,7 +3299,7 @@
                     </button>
                     <figcaption class="demo-note">
                         <span class="demo-note-text">Exemple illustratif · données fictives</span>
-                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle">Voir une capture réelle<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle" aria-controls="demo-real">Voir une capture réelle<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
                     </figcaption>
                 </figure>
 
@@ -3409,7 +3429,7 @@
                         <p class="proof-title">Des actions qualifiées, en attente de votre relecture.</p>
                         <ul class="proof-notes">
                             <li><b>Échéance, priorité, confiance</b><span>Proposées à partir de la réunion, modifiables avant validation.</span></li>
-                            <li><b>Extrait cité</b><span>Chaque action garde la phrase de la réunion dont elle provient.</span></li>
+                            <li><b>Extrait cité</b><span>Chaque action garde l’extrait de la réunion dont elle provient, lorsqu’il est disponible.</span></li>
                             <li><b>Destination à connecter</b><span>Aucun envoi tant que l’action n’est pas approuvée et sa destination connectée.</span></li>
                         </ul>
                     </figcaption>

@@ -1565,7 +1565,6 @@
                     column-gap: 0;
                     padding: 48px 0 40px;
                 }
-                .demo { justify-self: start; }
                 .difference-layout,
                 .tco-layout,
                 .ontology-grid,
@@ -2725,6 +2724,14 @@
         /* Le CTA mobile fixe masquerait « Revenir à l'exemple » (WCAG 2.4.11) */
         body:has(.demo-real:not([hidden])) .mobile-cta { display: none; }
 
+        /* Sur #contact, le CTA mobile fixe couvrait le bouton e-mail qu'il annonce */
+        .mobile-cta { transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+        .at-contact .mobile-cta {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+        }
+
         .demo-real img {
             flex: 1 1 0;
             width: 100%;
@@ -2741,7 +2748,7 @@
             justify-content: space-between;
             gap: 6px 12px;
             padding: 8px 12px;
-            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
             background: var(--paper);
         }
 
@@ -2766,7 +2773,10 @@
         .demo-real-close:hover { border-color: var(--accent); color: var(--accent); }
 
         /* Pendant la capture, les étapes et la légende (qui décrivent la démo) s'effacent */
-        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption, .demo-replay) { opacity: .35; }
+        .demo:has(.demo-real:not([hidden])) :is(.demo-steps, .demo-caption) { opacity: .35; }
+        /* La scène, « Revoir » (qui rejouerait derrière le panneau) et la mention
+           « données fictives » ne valent pas pour la capture réelle */
+        .demo:has(.demo-real:not([hidden])) :is(.demo-stage, .demo-replay, .demo-note-text) { visibility: hidden; }
 
 
         /* La maquette renvoie à la capture réelle du même scénario (revue Q3) */
@@ -2788,18 +2798,21 @@
 
         /* Séquence : chaque règle décrit l'état AVANT l'étape qui le lève. Sans la
            classe demo-live (pas de JS, mouvement réduit, filet de sécurité), aucune
-           ne s'applique : la démonstration reste dans son état final. */
-        .demo-live .demo:not(.s1) .demo-progress { width: 0; }
-        .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
-        .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
-        .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
-        .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
-        /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
-        .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
-        .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
-        .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
-        .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
-        .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+           ne s'applique : la démonstration reste dans son état final. Écran
+           seulement : imprimée avant d'avoir joué, la page garde l'état final. */
+        @media screen {
+            .demo-live .demo:not(.s1) .demo-progress { width: 0; }
+            .demo-live .demo:not(.s2) .demo-mark { background-size: 0% 100%; }
+            .demo-live .demo:not(.s3) .demo-thread { transform: scaleY(0); }
+            .demo-live .demo:not(.s3) .demo-card { opacity: 0; transform: translateY(-10px); }
+            .demo-live .demo:not(.s3) .demo-chip { opacity: 0; transition-delay: 0s; }
+            /* Projecteur : ce qui n'est pas commenté s'estompe le temps de l'étape */
+            .demo-live .demo.s3:not(.s5) .demo-source { opacity: .4; }
+            .demo-live .demo.s4:not(.s5) .demo-card-body { opacity: .45; }
+            .demo-live .demo.s4:not(.s5) .demo-actions::after { border-color: var(--accent); }
+            .demo-live .demo.s4:not(.s5) .demo-gate { color: var(--ink); background: var(--accent-wash); }
+            .demo-live .demo.s4:not(.s5) .demo-gate svg { transform: scale(1.15); }
+        }
 
         [data-theme="dark"] .demo-btn--ok { background: #7ee7d8; color: #06201d; }
 
@@ -3050,6 +3063,12 @@
         .nav a,
         .language-button { white-space: nowrap; }
 
+        .logo img { flex-shrink: 0; }
+
+        @media (max-width: 360px) {
+            .theme-toggle { display: none; }
+        }
+
         @media (max-width: 1200px) {
             .nav > a:not(.nav-cta) { display: none; }
             .nav-menu { display: block; }
@@ -3219,7 +3238,7 @@
                 <div class="hero-copy">
                     <div class="eyebrow">法国软件 · 由 Hyle Labs 研发</div>
                     <h1 id="hero-title">将会议结构化为<span class="accent-teal">待审核的决策与行动</span>。</h1>
-                    <p class="hero-lead">会议结束后，关键信息容易流失：谁决定了什么、期限是什么、在哪个工具中跟进。Taveni 会整理出决策、行动、负责人和截止日期；<strong>您的团队会逐项核对每条建议</strong>，再分享或发送到其他工具。</p>
+                    <p class="hero-lead">会议结束后，关键信息容易流失：谁决定了什么、期限是什么、在哪个工具中跟进。Taveni 会从中提出决策与行动建议，并在会议明确时附上负责人和截止日期；<strong>您的团队会逐项核对每条建议</strong>，再分享或发送到其他工具。</p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="#contact">
                             申请评估
@@ -3254,7 +3273,7 @@
                                 <span class="demo-time">00:42 / 01:28</span>
                                 <span class="demo-track"><span class="demo-progress"></span></span>
                             </div>
-                            <p class="demo-excerpt">……很好。<mark class="demo-mark">我们批准了 18 万欧元的 Q3 预算；我会在周二的委员会上提出。</mark>我的行动项：最迟 7 月 12 日通知财务部门已批准的金额……</p>
+                            <p class="demo-excerpt">……很好。<mark class="demo-mark">我们批准了 18&nbsp;万欧元的 Q3 预算；我会在周二的委员会上提出。</mark>我的行动项：最迟 7 月 12 日通知财务部门已批准的金额……</p>
                         </div>
                         <span class="demo-thread"></span>
                         <div class="demo-card">
@@ -3263,7 +3282,7 @@
                                     <span class="demo-label demo-card-label">建议决策</span>
                                     <span class="demo-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>高置信度</span>
                                 </div>
-                                <p class="demo-card-title">在周二委员会上批准 18 万欧元的 Q3 预算。</p>
+                                <p class="demo-card-title">在周二委员会上批准 18&nbsp;万欧元的 Q3 预算。</p>
                                 <dl class="demo-fields">
                                     <div class="demo-field-owner"><dt>负责人</dt><dd>Karim Benali</dd></div>
                                     <div class="demo-field-due"><dt>截止</dt><dd>周二委员会</dd></div>
@@ -3281,11 +3300,11 @@
                     <!-- Capture réelle à la demande, à la place de la scène (même cellule de
                          grille) : hors du role="img" de la scène, car elle contient un bouton. -->
                     <div class="demo-real" id="demo-real" hidden="">
-                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Taveni 界面：从销售复盘会议中提取的行动项，附优先级、置信度、截止日期、来源片段以及待连接的目标工具。" loading="lazy" decoding="async">
                         <div class="demo-real-bar">
                             <p class="demo-real-label">真实截图 · 同一场 Q3 复盘中的行动项</p>
                             <button class="demo-real-close" type="button">返回示例</button>
                         </div>
+                        <img src="/assets/taveni-actions-q3.webp" width="780" height="652" alt="Taveni 界面：从销售复盘会议中提取的行动项，附优先级、置信度、截止日期、来源片段以及待连接的目标工具。" loading="lazy" decoding="async">
                     </div>
                     <button class="demo-replay" type="button">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
@@ -3293,7 +3312,7 @@
                     </button>
                     <figcaption class="demo-note">
                         <span class="demo-note-text">示例说明 · 虚构数据</span>
-                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle">查看真实截图<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
+                        <a class="demo-proof-link" id="demo-proof" href="#capture-reelle" aria-controls="demo-real">查看真实截图<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
                     </figcaption>
                 </figure>
 
@@ -3409,7 +3428,7 @@
                         <p class="proof-title">已整理的行动项，等待您的复核。</p>
                         <ul class="proof-notes">
                             <li><b>截止日期、优先级、置信度</b><span>根据会议内容提出，确认前均可修改。</span></li>
-                            <li><b>引用片段</b><span>每个行动项都保留其出处的会议原句。</span></li>
+                            <li><b>引用片段</b><span>在有来源片段时，每个行动项都会保留其出处的会议片段。</span></li>
                             <li><b>待连接的目标工具</b><span>行动项获批且目标工具连接之前，不会发送任何内容。</span></li>
                         </ul>
                     </figcaption>
@@ -3666,7 +3685,7 @@
                     <a class="footer-privacy" href="/privacy/#en">隐私政策</a>
                     <button type="button" id="legal-open">法律声明</button>
                 </div>
-                <div class="footer-langs" aria-label="Langues disponibles">
+                <div class="footer-langs" aria-label="可用语言">
                     <a href="/" hreflang="fr" lang="fr">Français</a>
                     <a href="/en/" hreflang="en" lang="en">English</a>
                     <a href="/es/" hreflang="es" lang="es">Español</a>
