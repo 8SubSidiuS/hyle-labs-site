@@ -90,6 +90,89 @@
         sections.forEach((section) => observer.observe(section));
     }
 
+    // Démo du hero : trois temps légendés (~5 s), joués une fois à l'apparition.
+    // Textes lus dans le DOM ; sans demo-live (<head>), l'état final reste affiché.
+    const root = document.documentElement;
+    const demo = document.getElementById("demo");
+    if (demo && root.classList.contains("demo-live")) {
+        root.dataset.demo = "js";
+        const steps = [...demo.querySelectorAll(".demo-steps li")];
+        const caption = demo.querySelector(".demo-caption");
+        const replay = demo.querySelector(".demo-replay");
+        // Étape légendée pour chaque état 0 → 5 (null : aucune).
+        const activeStep = [null, 0, 0, 1, 2, null];
+        const stepTimesMs = [600, 1500, 2400, 3600, 4700];
+        let timers = [];
+        const describe = (index) => {
+            const text = steps[index]?.querySelector(".demo-step-body")?.textContent || "";
+            if (!caption || caption.textContent === text) return;
+            caption.textContent = text;
+            caption.classList.remove("is-fresh");
+            void caption.offsetWidth;
+            caption.classList.add("is-fresh");
+        };
+        const show = (state) => {
+            for (let k = 1; k <= 5; k += 1) demo.classList.toggle(`s${k}`, k <= state);
+            demo.classList.toggle("is-playing", state < 5);
+            const active = activeStep[state];
+            steps.forEach((step, index) => {
+                if (index === active) step.setAttribute("aria-current", "step");
+                else step.removeAttribute("aria-current");
+            });
+            describe(active ?? (state >= 5 ? 2 : 0));
+        };
+        const play = () => {
+            timers.forEach((timer) => window.clearTimeout(timer));
+            show(0);
+            timers = stepTimesMs.map((delay, index) =>
+                window.setTimeout(() => show(index + 1), delay)
+            );
+        };
+        show(0);
+        // Départ quand l'enregistrement source est lisible (mobile : sous la ligne de flottaison).
+        const start = demo.querySelector(".demo-source") || demo;
+        let starter = null;
+        if ("IntersectionObserver" in window) {
+            starter = new IntersectionObserver((entries) => {
+                if (!entries.some((entry) => entry.isIntersecting)) return;
+                starter.disconnect();
+                play();
+            }, { threshold: 0.6 });
+            starter.observe(start);
+        } else {
+            play();
+        }
+        if (replay) {
+            replay.addEventListener("click", () => {
+                starter?.disconnect();
+                play();
+            });
+        }
+    }
+
+    // Capture réelle à la place de la démo (sans JS : le lien descend vers elle).
+    const real = document.getElementById("demo-real");
+    const proof = document.getElementById("demo-proof");
+    if (real && proof) {
+        const back = real.querySelector("button");
+        const toggle = (open) => {
+            real.hidden = !open;
+            proof.setAttribute("aria-expanded", String(open));
+            (open ? back : proof).focus({ preventScroll: open });
+            if (open && real.getBoundingClientRect().top < 72) real.scrollIntoView({ block: "start" });
+        };
+        proof.setAttribute("aria-controls", "demo-real");
+        proof.setAttribute("aria-expanded", "false");
+        proof.addEventListener("click", (event) => {
+            event.preventDefault();
+            toggle(real.hidden);
+        });
+        back.addEventListener("click", () => toggle(false));
+        real.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") toggle(false);
+        });
+    }
+
     const dialog = document.getElementById("legal-dialog");
     const openButton = document.getElementById("legal-open");
     const closeButton = document.getElementById("legal-close");

@@ -585,6 +585,55 @@ B js "document.documentElement.scrollHeight"         # budget hauteur
    au propriétaire).
 4. L'ajout d'un `llms.txt` et le contenu précis de la FAQ pricing.
 
+## 13. Itération du 03/11/2026 — motifs repris de la landing Taveni
+
+Source : worktree `landing-hero-motion` du dépôt Taveni (commits b19cb5020 → 17141b28f,
+« séquence d'entrée du hero », « animations lentes et commentées », « troisième passe »).
+On reprend les **motifs UX/UI**, pas les offres : l'essai gratuit et la page Tarifs de
+taveni.ai ne sont pas en ligne (domaine parqué chez Gandi au 03/11/2026).
+
+**CTA d'évaluation.** Le bouton du hero pointait vers `https://taveni.ai/contact?…` : lien mort
+en production (HTTPS refusé). Tous les CTA « Demander une évaluation » (hero, navigation,
+CTA mobile) mènent désormais à `#contact`, dont le bouton ouvre un e-mail prérempli localisé ;
+l'adresse reste lisible pour qui n'a pas de client mail. Le validateur refuse tout lien vers
+taveni.ai. **Pour réactiver** le formulaire une fois taveni.ai servi : restaurer le helper
+`taveniContact` et la clé `hero.primary.href` d'`assets/i18n.js` ainsi que le contrôle
+d'attribution de `scripts/validate-site.mjs` (commit 7c1f479), puis retirer l'interdiction.
+
+| Motif Taveni | Mise en œuvre Hyle Labs |
+|---|---|
+| Hero : aperçu en trois temps légendés (réunion → proposition → relecture), « Revoir l'animation », mention « Exemple illustratif · données fictives » | `#demo` (HTML/CSS + `site.js`) remplace la capture du hero. La capture réelle reste dans le hero, à la demande : « Voir une capture réelle » l'affiche à la place de la scène (`#demo-real`, même cellule de grille, aucun décalage, image chargée au clic sur mobile, Échap / « Revenir à l'exemple », focus géré) ; sans JS, le lien descend vers `#capture-reelle`. Le HTML porte l'état final ; `demo-live` est posée dans `<head>` si le mouvement est permis (pas de flash), filet de sécurité 4 s si `site.js` manque. Fil rouge corail phrase → pastille de la fiche. Départ quand l'enregistrement source est visible (mobile : sous la ligne de flottaison). |
+| Titre et accroche sans fondu (LCP) | Plus d'animation d'entrée sur `h1` / `.hero-lead`. |
+| Accroche concrète, rassurance mono sous les CTA, « Voir les quatre étapes ↓ », trois garanties à coches | `.hero-lead`, `.hero-note` (= `contact.meta`), `.hero-checks` (une ligne chacune). |
+| Sections en deux colonnes | Problème (`.problem-layout`), « Où commencer » (`.section-head`), FAQ (`.faq-layout`), CTA final (`.contact-layout`). |
+| « Où commencer » juste après le problème | Section `#commencer` ; le tableau quitte la fin du fonctionnement. |
+| Parcours : un résultat par étape, la relecture mise en avant | `.step-out` ; `.step--gate` (panneau teinté + cadenas). Correctif : le rail animé barrait « 01 », « 02 »… (contexte d'empilement des étapes animées). |
+| Preuve produit lisible | Capture « actions » recadrée sur la carte utile (780 × 652, 40 → 22 Ko) et annotée (`.proof`). La capture « décision reliée à sa preuve » rejoint la galerie du dépliable. |
+| Colonne « Avec Taveni » en contraste | En-tête accent, cellules Taveni en encre. |
+| Citation du fondateur en grand + signaux de confiance à coches | Citation alignée sur la version validée côté Taveni ; `.trust-checks` (dont le lien vers `/privacy/`). |
+| FAQ en accordéon à filets, avant le CTA | Section `#questions` ; la page ne se termine plus sur la FAQ. |
+| CTA final + « Ce que mesure une évaluation » (01-04) | `.measures` remplace `.measure-note` de la section sombre. |
+| Apostrophes typographiques en FR | `’` et espaces insécables avant `? ! : ;` / dans « » (texte visible et FAQ JSON-LD). |
+| « Le contexte se remplit avant la validation » | Le JSON de la section Coût IA se dévoile au défilement : masque piloté par une timeline nommée sur `.tco-panel` (un `view()` posé sur le JSON resterait figé, son parent en `overflow: hidden` étant conteneur de défilement). |
+
+Correctifs annexes (préexistants) : liens de navigation repliés dans « Menu » jusqu'à 1 200 px
+(ils cassaient à 1 024 px puis chevauchaient le logo) ; contrastes du thème sombre (sur-titre
+du hero, numéros de la frise, en-têtes de tableaux, JSON, bouton primaire 4,48 → 5,0:1) ;
+en-têtes des tableaux de la section sombre compactés en mobile ; CTA mobile dans `<main>` ;
+lien « Confidentialité » dans le pied de page ; e-mails préremplis EN/ES/ZH encodés `%20`
+(le helper `mailto` produisait des `+`, affichés tels quels par les clients mail).
+
+Mesures (serveur local, Chromium 1243) : axe-core 0 violation sur 7 configurations
+(4 langues, clair/sombre, 1440/390), panneau de capture réelle ouvert ou fermé ; Lighthouse
+desktop 100/100/100/100, mobile 95/100/100/100 contre 94 avant (LCP 3,1 → 2,9 s, CLS 0, sans
+compression en local) ; premier affichage ~79 → ~32 Ko transférés (plus d'image `eager` dans
+le hero). Hauteur mobile (390 px) à contenu enrichi : FR 11 642 → 11 582 px, EN 11 204 →
+11 208, ES 11 738 → 11 523, ZH 9 856 → 9 657 — grâce au compactage mobile (libellés en tête
+de phrase dans le comparatif, qui/quoi/mesure côte à côte, état sur la ligne de la phrase dans
+les tableaux sombres, équipe et réunion type sur une ligne) et à deux redondances retirées
+(paragraphe « déléguer la tâche » répétant le titre de la section 5, accroche du fonctionnement
+resserrée). Desktop : 9 098 → 9 172 px.
+
 ---
 
 ## Annexe — Sources (recherches du 02/07/2026)
