@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f7f8f3">
+    <meta name="theme-color" id="theme-color-meta" content="#f7f8f3">
+    <script>
+        /* Même thème que l'accueil : choix de la session (bascule sur l'accueil), sinon
+           préférence du système. Appliqué avant le premier rendu, sans flash. */
+        (function () {
+            var session = null;
+            try { session = sessionStorage.getItem("theme"); } catch (e) {}
+            var dark = session === "dark" || (session !== "light" &&
+                window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+            document.documentElement.dataset.theme = dark ? "dark" : "light";
+            var meta = document.getElementById("theme-color-meta");
+            if (meta) meta.setAttribute("content", dark ? "#0b1113" : "#f7f8f3");
+        })();
+    </script>
     <title>Politique de confidentialité | Hyle Labs</title>
     <meta name="description" content="Politique de confidentialité de Hyle Labs pour son site, ses échanges professionnels et l'outil interne SNS, notamment son intégration LinkedIn.">
     <meta name="robots" content="index, follow">
@@ -34,6 +47,34 @@
             --line: #d9dfdc;
             --teal: #0f766e;
             --deep: #0d1416;
+        }
+        /* Thème sombre, mêmes teintes que l'accueil. Sans JS, la préférence du système
+           s'applique ; avec JS, data-theme suit aussi la bascule faite sur l'accueil. */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+                --paper: #0b1113;
+                --surface: #121a1d;
+                --ink: #eef2ef;
+                --muted: #9aa6a3;
+                --line: #25302f;
+                --teal: #7ee7d8;
+                --deep: #eef2ef;
+                --th: #0e1517;
+                --english: #34403f;
+            }
+        }
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            --paper: #0b1113;
+            --surface: #121a1d;
+            --ink: #eef2ef;
+            --muted: #9aa6a3;
+            --line: #25302f;
+            --teal: #7ee7d8;
+            --deep: #eef2ef;
+            --th: #0e1517;
+            --english: #34403f;
         }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -99,9 +140,9 @@
         }
         table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: .94rem; }
         th, td { padding: 13px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
-        th { background: #edf2ef; }
+        th { background: var(--th, #edf2ef); }
         code { font-family: ui-monospace, monospace; font-size: .9em; }
-        .english { border-color: #bfcaca; }
+        .english { border-color: var(--english, #bfcaca); }
         footer { padding: 28px 0 48px; color: var(--muted); font-size: .9rem; }
         @media (max-width: 680px) {
             .header-inner { align-items: flex-start; flex-direction: column; padding: 18px 0; }
