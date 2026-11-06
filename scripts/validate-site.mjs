@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -355,7 +356,18 @@ const forbiddenClaims = [
     ["response SLA", /reply within 48\s*h|réponse sous 48\s*h|respuesta en 48\s*h|48\s*小时内回复/i]
 ];
 const publicSurfaceSource = `${Object.values(pages).map(({ html }) => html).join("\n")}\n${i18nSource}`;
-assert(!/Gérard Neyrin|Chaponost|69630/i.test(publicSurfaceSource), "Founder personal address must never be public");
+// Termes personnels du fondateur (anciens éléments d'adresse) : ce script est servi tel quel par
+// GitHub Pages, donc les termes ne sont jamais écrits ici en clair. On compare les empreintes
+// SHA-256 des mots de la surface publique (minuscules, NFC) à celles des termes bloqués.
+const blockedPersonalTermDigests = new Set([
+    "a573aead03ca9c80224d59048c1138bceba8f36257cc9512cff113b119a553d3",
+    "654a511e46681a6774d000f5ee588acf2d4d8e9895797be9318c63a4a6a5e19c",
+    "4a0ebae5437954150baf4688727b36560cdb7813a875f1adadf88a67cd6e8aee"
+]);
+const wordDigest = (word) => createHash("sha256").update(word.normalize("NFC").toLowerCase()).digest("hex");
+for (const word of new Set(publicSurfaceSource.match(/[\p{L}\p{N}]+/gu) ?? [])) {
+    assert(!blockedPersonalTermDigests.has(wordDigest(word)), "Founder personal address must never be public");
+}
 for (const [label, pattern] of forbiddenClaims) {
     assert(!pattern.test(publicSurfaceSource), `Blocked public claim found: ${label}`);
 }
